@@ -35,7 +35,6 @@ class HomePageViewController: UIViewController {
         let servingNumber = Double(field2.text ?? "") ?? 0
         let userPrice = Double(field1.text ?? "") ?? 0
         for i in 0..<Data.RecipeList.count {
-            print("PENIS")
             let price  = Data.priceRecipe(recNum: i)
             print(price)
             let serving = Double(Data.RecipeList[i].Serving)
