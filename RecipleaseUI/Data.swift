@@ -45,11 +45,11 @@ public class Data{
             print(prodDesc)
             print(Data.Ingredients)
             for i in 0..<Ingredients.count{
-                print("HELLOSP")
+         
                 if prodDesc == Ingredients[i].name{
                     
                     RelationTable.append((RecipeNum, i))
-                    print("FouNdYACU")
+                   
                 }
             }
         }
@@ -70,11 +70,9 @@ public class Data{
     public static func priceRecipe(recNum: Int) -> Double{
         var price = 0.0
         var recInd = 0
-        print("PENIS")
         for i in 0..<RelationTable.count{
             print("")
             if(RelationTable[i].rec > recNum){
-                print("looking")
                 return price
             }
             if(RelationTable[i].rec == recNum && recInd<2){
