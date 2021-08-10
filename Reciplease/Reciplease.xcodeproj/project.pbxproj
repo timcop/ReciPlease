@@ -15,17 +15,17 @@
 		1206CA3026662618002024B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1206CA2E26662618002024B5 /* LaunchScreen.storyboard */; };
 		1206CA3B26662618002024B5 /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206CA3A26662618002024B5 /* RecipleaseTests.swift */; };
 		1206CA4626662618002024B5 /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206CA4526662618002024B5 /* RecipleaseUITests.swift */; };
-		722F892026C275A70073B885 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891526C275A70073B885 /* Item.swift */; };
-		722F892126C275A70073B885 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891626C275A70073B885 /* Data.swift */; };
-		722F892226C275A70073B885 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891726C275A70073B885 /* RecipeViewController.swift */; };
-		722F892326C275A70073B885 /* 2ndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891826C275A70073B885 /* 2ndViewController.swift */; };
-		722F892426C275A70073B885 /* ThirdRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891926C275A70073B885 /* ThirdRecipe.swift */; };
-		722F892526C275A70073B885 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891A26C275A70073B885 /* HomePageViewController.swift */; };
-		722F892626C275A70073B885 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891B26C275A70073B885 /* RecipeView.swift */; };
-		722F892726C275A70073B885 /* SecondRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891C26C275A70073B885 /* SecondRecipe.swift */; };
-		722F892826C275A70073B885 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891D26C275A70073B885 /* LoadScreenViewController.swift */; };
-		722F892926C275A70073B885 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891E26C275A70073B885 /* ViewController.swift */; };
-		722F892A26C275A70073B885 /* FirstRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F891F26C275A70073B885 /* FirstRecipe.swift */; };
+		7284F4D626C2854600990428 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4D326C2854600990428 /* ViewController.swift */; };
+		7284F4D726C2854600990428 /* 2ndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4D126C2854600990428 /* 2ndViewController.swift */; };
+		7284F4D826C2854600990428 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4D526C2854600990428 /* LoadScreenViewController.swift */; };
+		7284F4D926C2854600990428 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4D426C2854600990428 /* RecipeView.swift */; };
+		7284F4DA26C2854600990428 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4D026C2854600990428 /* RecipeViewController.swift */; };
+		7284F4DB26C2854600990428 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4D226C2854600990428 /* HomePageViewController.swift */; };
+		7284F4E126C2859D00990428 /* FirstRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4DE26C2859D00990428 /* FirstRecipe.swift */; };
+		7284F4E226C2859D00990428 /* SecondRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4DF26C2859D00990428 /* SecondRecipe.swift */; };
+		7284F4E326C2859D00990428 /* ThirdRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4E026C2859D00990428 /* ThirdRecipe.swift */; };
+		7284F4E726C285BF00990428 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4E526C285BF00990428 /* Item.swift */; };
+		7284F4E826C285BF00990428 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7284F4E626C285BF00990428 /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,20 +60,17 @@
 		1206CA4126662618002024B5 /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1206CA4526662618002024B5 /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		1206CA4726662618002024B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		126605172668EFD0009B9F40 /* recipes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = recipes; sourceTree = "<group>"; };
-		127CB0FA2667429C004B50EC /* views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = views; sourceTree = "<group>"; };
-		12CCCD46266853C2004C6D14 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
-		722F891526C275A70073B885 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Item.swift; path = Reciplease/resources/Item.swift; sourceTree = "<group>"; };
-		722F891626C275A70073B885 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Data.swift; path = Reciplease/resources/Data.swift; sourceTree = "<group>"; };
-		722F891726C275A70073B885 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeViewController.swift; path = Reciplease/views/RecipeViewController.swift; sourceTree = "<group>"; };
-		722F891826C275A70073B885 /* 2ndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = 2ndViewController.swift; path = Reciplease/views/2ndViewController.swift; sourceTree = "<group>"; };
-		722F891926C275A70073B885 /* ThirdRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThirdRecipe.swift; path = Reciplease/recipes/ThirdRecipe.swift; sourceTree = "<group>"; };
-		722F891A26C275A70073B885 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomePageViewController.swift; path = Reciplease/views/HomePageViewController.swift; sourceTree = "<group>"; };
-		722F891B26C275A70073B885 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeView.swift; path = Reciplease/views/RecipeView.swift; sourceTree = "<group>"; };
-		722F891C26C275A70073B885 /* SecondRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondRecipe.swift; path = Reciplease/recipes/SecondRecipe.swift; sourceTree = "<group>"; };
-		722F891D26C275A70073B885 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadScreenViewController.swift; path = Reciplease/views/LoadScreenViewController.swift; sourceTree = "<group>"; };
-		722F891E26C275A70073B885 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Reciplease/views/ViewController.swift; sourceTree = "<group>"; };
-		722F891F26C275A70073B885 /* FirstRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirstRecipe.swift; path = Reciplease/recipes/FirstRecipe.swift; sourceTree = "<group>"; };
+		7284F4D026C2854600990428 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		7284F4D126C2854600990428 /* 2ndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2ndViewController.swift; sourceTree = "<group>"; };
+		7284F4D226C2854600990428 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		7284F4D326C2854600990428 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7284F4D426C2854600990428 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		7284F4D526C2854600990428 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadScreenViewController.swift; sourceTree = "<group>"; };
+		7284F4DE26C2859D00990428 /* FirstRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRecipe.swift; sourceTree = "<group>"; };
+		7284F4DF26C2859D00990428 /* SecondRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRecipe.swift; sourceTree = "<group>"; };
+		7284F4E026C2859D00990428 /* ThirdRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdRecipe.swift; sourceTree = "<group>"; };
+		7284F4E526C285BF00990428 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		7284F4E626C285BF00990428 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,17 +101,6 @@
 		1206CA142666260B002024B5 = {
 			isa = PBXGroup;
 			children = (
-				722F891826C275A70073B885 /* 2ndViewController.swift */,
-				722F891626C275A70073B885 /* Data.swift */,
-				722F891F26C275A70073B885 /* FirstRecipe.swift */,
-				722F891A26C275A70073B885 /* HomePageViewController.swift */,
-				722F891526C275A70073B885 /* Item.swift */,
-				722F891D26C275A70073B885 /* LoadScreenViewController.swift */,
-				722F891B26C275A70073B885 /* RecipeView.swift */,
-				722F891726C275A70073B885 /* RecipeViewController.swift */,
-				722F891C26C275A70073B885 /* SecondRecipe.swift */,
-				722F891926C275A70073B885 /* ThirdRecipe.swift */,
-				722F891E26C275A70073B885 /* ViewController.swift */,
 				1206CA1F2666260B002024B5 /* Reciplease */,
 				1206CA3926662618002024B5 /* RecipleaseTests */,
 				1206CA4426662618002024B5 /* RecipleaseUITests */,
@@ -135,14 +121,14 @@
 		1206CA1F2666260B002024B5 /* Reciplease */ = {
 			isa = PBXGroup;
 			children = (
+				7284F4DD26C2857E00990428 /* Views */,
 				1206CA202666260B002024B5 /* AppDelegate.swift */,
-				127CB0FA2667429C004B50EC /* views */,
-				126605172668EFD0009B9F40 /* recipes */,
+				7284F4E426C285AB00990428 /* Recipes */,
 				1206CA222666260B002024B5 /* SceneDelegate.swift */,
 				1206CA2E26662618002024B5 /* LaunchScreen.storyboard */,
 				1206CA2C26662617002024B5 /* Assets.xcassets */,
 				1206CA262666260B002024B5 /* Main.storyboard */,
-				12CCCD46266853C2004C6D14 /* resources */,
+				7284F4E926C285C900990428 /* Resources */,
 				1206CA3126662618002024B5 /* Info.plist */,
 				1206CA292666260C002024B5 /* Reciplease.xcdatamodeld */,
 			);
@@ -165,6 +151,38 @@
 				1206CA4726662618002024B5 /* Info.plist */,
 			);
 			path = RecipleaseUITests;
+			sourceTree = "<group>";
+		};
+		7284F4DD26C2857E00990428 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7284F4D126C2854600990428 /* 2ndViewController.swift */,
+				7284F4D226C2854600990428 /* HomePageViewController.swift */,
+				7284F4D526C2854600990428 /* LoadScreenViewController.swift */,
+				7284F4D426C2854600990428 /* RecipeView.swift */,
+				7284F4D026C2854600990428 /* RecipeViewController.swift */,
+				7284F4D326C2854600990428 /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7284F4E426C285AB00990428 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				7284F4DE26C2859D00990428 /* FirstRecipe.swift */,
+				7284F4DF26C2859D00990428 /* SecondRecipe.swift */,
+				7284F4E026C2859D00990428 /* ThirdRecipe.swift */,
+			);
+			path = Recipes;
+			sourceTree = "<group>";
+		};
+		7284F4E926C285C900990428 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7284F4E626C285BF00990428 /* Data.swift */,
+				7284F4E526C285BF00990428 /* Item.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,19 +316,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				722F892026C275A70073B885 /* Item.swift in Sources */,
-				722F892126C275A70073B885 /* Data.swift in Sources */,
-				722F892226C275A70073B885 /* RecipeViewController.swift in Sources */,
-				722F892326C275A70073B885 /* 2ndViewController.swift in Sources */,
-				722F892426C275A70073B885 /* ThirdRecipe.swift in Sources */,
-				722F892526C275A70073B885 /* HomePageViewController.swift in Sources */,
-				722F892626C275A70073B885 /* RecipeView.swift in Sources */,
-				722F892726C275A70073B885 /* SecondRecipe.swift in Sources */,
-				722F892826C275A70073B885 /* LoadScreenViewController.swift in Sources */,
-				722F892926C275A70073B885 /* ViewController.swift in Sources */,
-				722F892A26C275A70073B885 /* FirstRecipe.swift in Sources */,
+				7284F4E126C2859D00990428 /* FirstRecipe.swift in Sources */,
 				1206CA2B2666260C002024B5 /* Reciplease.xcdatamodeld in Sources */,
 				1206CA212666260B002024B5 /* AppDelegate.swift in Sources */,
+				7284F4DB26C2854600990428 /* HomePageViewController.swift in Sources */,
+				7284F4D726C2854600990428 /* 2ndViewController.swift in Sources */,
+				7284F4D926C2854600990428 /* RecipeView.swift in Sources */,
+				7284F4DA26C2854600990428 /* RecipeViewController.swift in Sources */,
+				7284F4E826C285BF00990428 /* Data.swift in Sources */,
+				7284F4E726C285BF00990428 /* Item.swift in Sources */,
+				7284F4E326C2859D00990428 /* ThirdRecipe.swift in Sources */,
+				7284F4E226C2859D00990428 /* SecondRecipe.swift in Sources */,
+				7284F4D626C2854600990428 /* ViewController.swift in Sources */,
+				7284F4D826C2854600990428 /* LoadScreenViewController.swift in Sources */,
 				1206CA232666260B002024B5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
