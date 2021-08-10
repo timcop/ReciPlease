@@ -15,4 +15,7 @@ Currently there are no actual recipes loaded into the app as we have no persista
 
 **App creators**
 
-Sam Royal, Baxter Robb, Connor Spear, Mathew Shields
+Sam Royal, Baxter Robb, Connor Spear, Mathew Shields, Tim Copland, Ethan Fraser
+
+TRELLO BOARD: https://trello.com/b/HkWtvpoM/reciplease
+
