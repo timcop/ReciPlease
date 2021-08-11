@@ -17,10 +17,11 @@ jobs:
           module-name: Reciplease
           format: html
           output: docs
-          
-      - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-          path: "Documentation"
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+      - name: Commit changes
+        run: |
+          git config --global user.email "documentation@githubaction.xyz"
+          git config --global user.name "Documentation Action"
+          git add -f docs
+          git diff-index --quiet HEAD || git commit -m "Auto update docs"
+      - name: Push documentation
+        run: git push -u origin main
