@@ -1,0 +1,14 @@
+name: Test
+
+on: [push]
+
+  jobs:
+    build:
+      name: Build
+      runs-on: macOS-latest
+      uses: sersoft-gmbh/xcodebuild-action@v1
+      with:
+        project: Reciplease/Reciplease.xcodeproj
+        scheme: Reciplease
+        destination: platform=macOS
+        action: test
