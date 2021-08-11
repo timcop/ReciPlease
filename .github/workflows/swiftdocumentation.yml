@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
-      run: xcodebuild build test -scheme ReciPlease -project ReciPlease.xcodeproj -destination 'platform=iOS Simulator,OS=14.4,name=iPhone 8'
+      run: xcodebuild build test -scheme Reciplease -project Reciplease.xcodeproj -destination 'platform=iOS Simulator,OS=14.4,name=iPhone 8'
 
   DocumentatonJob:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
     - name: Extract Documentation
       uses: SwiftDocOrg/swift-doc@master
       with:
-         inputs: "ReciPlease"
+         inputs: "Reciplease"
          module-name: MyLibrary
          output: "Documentation"
     - name: Upload Documentation to Wiki
