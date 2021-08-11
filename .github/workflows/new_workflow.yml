@@ -1,13 +1,12 @@
-name: Test
-
+name: Example
 on: [push]
 jobs:
   build:
     name: Build
-    runs-on: macOS-latest
+    runs-on: macos-latest
     uses: sersoft-gmbh/xcodebuild-action@v1
     with:
       project: Reciplease/Reciplease.xcodeproj
-      scheme: Reciplease
+      scheme: Reciplease/Reciplease
       destination: platform=macOS
       action: test
