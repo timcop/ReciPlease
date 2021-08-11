@@ -18,4 +18,5 @@ Currently there are no actual recipes loaded into the app as we have no persista
 Sam Royal, Baxter Robb, Connor Spear, Mathew Shields, Tim Copland, Ethan Fraser
 
 TRELLO BOARD: https://trello.com/b/HkWtvpoM/reciplease
+CODACY: https://app.codacy.com/gh/COSC345-Otago/ReciPlease/dashboard?branch=main
 
