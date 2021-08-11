@@ -9,6 +9,7 @@ jobs:
       SCHEME: "Actions"
       DEVICE: "iPhone 11"
       DERIVED_DATA_PATH: "DerivedData"
+      PROJECT = Reciplease/Reciplease.xcodeproj
     runs-on: macOS-latest
     steps:
     - name: Checkout project
