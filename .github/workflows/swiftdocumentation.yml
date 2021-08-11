@@ -7,14 +7,19 @@ on:
     branches: [ main ]
 
 jobs:
-  BuildJob:
+  Build:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
-      run: xcodebuild build test -project Reciplease.xcodeproj -destination 'platform=iOS Simulator,OS=14.4,name=iPhone 8'
+      uses: sersoft-gmbh/xcodebuild-action@v1
+      with:
+        project: Reciplease.xcodeproj
+        destination: "platform=iOS Simulator,name=iPhone 11"
+        scheme: Reciplease
+        action: build
 
-  DocumentatonJob:
+  Documentaton:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
