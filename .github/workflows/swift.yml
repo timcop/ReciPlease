@@ -1,15 +1,23 @@
-name: Swift
+name: Feature pipeline
 
 on: [push]
 
-jobs: 
+jobs:
   build:
-
-    runs-on: macos-latest
-
+    name: Build
+    env:
+      SCHEME: "Actions"
+      DEVICE: "iPhone 11"
+      DERIVED_DATA_PATH: "DerivedData"
+    runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build 
-    - name: Run tests
-      run: swift test
+    - name: Checkout project
+      uses: actions/checkout@v1
+    - name: Build application
+      run: |
+        set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
+    - name: Upload products
+      uses: actions/upload-artifact@v1
+      with:
+        name: Products
+        path: DerivedData/Build/Products
