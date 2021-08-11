@@ -16,3 +16,4 @@ jobs:
           inputs: Reciplease
           module-name: Reciplease
           format: html
+          output: docs
