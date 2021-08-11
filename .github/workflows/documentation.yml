@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - name: Generate Documentation
@@ -22,6 +21,6 @@ jobs:
           git config --global user.email "documentation@githubaction.xyz"
           git config --global user.name "Documentation Action"
           git add -f docs
-          git diff-index --quiet HEAD || git commit -m "Auto update docs"
+          git diff-index --quiet HEAD || git commit -m "auto update docs"
       - name: Push documentation
         run: git push -u origin main
