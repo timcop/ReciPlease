@@ -160,7 +160,7 @@ struct Price: Codable{
 }
 
 /**
- swift-doc test comment
+ updated swift-doc test comment
  */
 public class Reci{
     public struct Recipe{
