@@ -23,4 +23,6 @@ jobs:
           git add -f docs
           git diff-index --quiet HEAD || git commit -m "auto update docs"
       - name: Push documentation
-        run: git push -u origin main
+        run: |
+          git remote add origin https://github.com/COSC345-Otago/ReciPlease
+          git push -u origin main
