@@ -29,5 +29,6 @@ jobs:
         with:
           project: Reciplease/Reciplease.xcodeproj
           destination: platform=macOS
+          scheme: Reciplease
           action: test
 
