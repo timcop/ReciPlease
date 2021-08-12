@@ -1,3 +1,5 @@
+[![Build/Documentation](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml/badge.svg?branch=main)](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml)
+
 # COSC345---ReciPlease
 COSC 345 - Software engineering, app creation project.
 
