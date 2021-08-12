@@ -15,7 +15,7 @@ jobs:
       uses: sersoft-gmbh/xcodebuild-action@v1
       with:
         project: Reciplease.xcodeproj
-        destination: "platform=iOS Simulator,name=iPhone 11"
+        destination: "platform=iOS Simulator,name=iPhone 8"
         scheme: Reciplease
         action: build
 
