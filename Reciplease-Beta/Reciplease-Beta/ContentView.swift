@@ -19,8 +19,10 @@ struct ContentView: View {
                 VStack{
                     VStack{
                         Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
+                            .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
                         Text("You currently have 24 Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
                             .padding(15)
+                            .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
                         NavigationLink(destination: AddRecipeView()){
                             AddRecipeButton()
                             .scaledToFit()

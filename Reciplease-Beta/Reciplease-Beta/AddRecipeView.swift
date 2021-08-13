@@ -22,7 +22,7 @@ struct AddRecipeView: View {
                    
                     TextField("Title",text: $title)
                         .multilineTextAlignment(TextAlignment.center)
-                        .frame(width: 245,height:40)
+                        .frame(width: UIScreen.main.bounds.width-170,height:40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                         .clipShape(RoundedRectangle(cornerRadius: 12, style:
                         .continuous))
