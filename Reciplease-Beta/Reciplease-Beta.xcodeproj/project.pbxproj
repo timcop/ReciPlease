@@ -17,6 +17,7 @@
 		122B273A26C60587004AE1CD /* Reciplease_BetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B273926C60587004AE1CD /* Reciplease_BetaTests.swift */; };
 		122B274526C60587004AE1CD /* Reciplease_BetaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B274426C60587004AE1CD /* Reciplease_BetaUITests.swift */; };
 		122B275326C605A7004AE1CD /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B275226C605A7004AE1CD /* Buttons.swift */; };
+		122B275B26C60BE9004AE1CD /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 122B275A26C60BE9004AE1CD /* BebasNeue-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		122B274426C60587004AE1CD /* Reciplease_BetaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_BetaUITests.swift; sourceTree = "<group>"; };
 		122B274626C60587004AE1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		122B275226C605A7004AE1CD /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		122B275A26C60BE9004AE1CD /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Regular.ttf"; path = "../../../../Desktop/bebas_neue/BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		122B271326C60586004AE1CD = {
 			isa = PBXGroup;
 			children = (
+				122B275A26C60BE9004AE1CD /* BebasNeue-Regular.ttf */,
 				122B271E26C60586004AE1CD /* Reciplease-Beta */,
 				122B273826C60587004AE1CD /* Reciplease-BetaTests */,
 				122B274326C60587004AE1CD /* Reciplease-BetaUITests */,
@@ -248,6 +251,7 @@
 			files = (
 				122B272F26C60586004AE1CD /* LaunchScreen.storyboard in Resources */,
 				122B272C26C60586004AE1CD /* Preview Assets.xcassets in Resources */,
+				122B275B26C60BE9004AE1CD /* BebasNeue-Regular.ttf in Resources */,
 				122B272926C60586004AE1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
