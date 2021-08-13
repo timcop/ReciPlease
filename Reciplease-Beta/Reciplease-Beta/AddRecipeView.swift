@@ -8,26 +8,57 @@
 
 import SwiftUI
 
+
 struct AddRecipeView: View {
     @State var title = ""
+    @State var searchText = ""
+    @State var method = "Method"
     var body: some View {
         VStack{
             VStack{
+                Spacer()
+                    .frame(height:30)
                 HStack{
+                   
                     TextField("Title",text: $title)
-                        .padding(20)
+                        .multilineTextAlignment(TextAlignment.center)
+                        .frame(width: 245,height:40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style:
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style:
                         .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     ImageButton()
-                    
-                    
                 }
+                .frame(width: UIScreen.main.bounds.width - 20)
+                HStack{
+                    SearchBar(text: $searchText)
+                        .frame(width: UIScreen.main.bounds.width - 75)
+                        
+                    
+                   // List(LISTNAME.filter({ searchText.isEmpty ? true : $0.name.contains(searchText) })) { item in
+                  //      Text(item.name)
+                   // }
+                    AddButton()
+                }
+                
+                Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
+                    .padding(15)
+                    .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
+                    .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
+                .frame(width: UIScreen.main.bounds.width - 20)
+                Spacer()
+                
+                
+                MultilineTextView(text:$method)
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .frame(width: UIScreen.main.bounds.width - 40,height: 200)
+                    .padding(10)
+                FinalAddRecipeButton()
+                    
                 
                 
             }
-            .frame(height: UIScreen.main.bounds.height - 150,alignment: .top)
+            .frame(height: UIScreen.main.bounds.height - 170,alignment: .top)
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -42,3 +73,27 @@ struct AddRecipeView_Previews: PreviewProvider {
         AddRecipeView()
     }
 }
+
+
+struct MultilineTextView: UIViewRepresentable {
+    @Binding var text: String
+
+    func makeUIView(context: Context) -> UITextView {
+        let view = UITextView()
+        view.isScrollEnabled = true
+        view.isEditable = true
+        view.isUserInteractionEnabled = true
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        view.clipsToBounds = true;
+        view.layer.cornerRadius = 5
+        view.font = .systemFont(ofSize: 15)
+        return view
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+    }
+}
+
+
