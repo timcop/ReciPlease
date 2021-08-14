@@ -24,23 +24,23 @@ struct AddRecipeView: View {
     
     
     
-
+    
     
     var body: some View {
         ZStack{
             VStack{
                 Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
-                                           .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                    .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                 Spacer()
                     .frame(height:53)
                 HStack{
-                   
+                    
                     TextField("Title",text: $title)
                         .multilineTextAlignment(TextAlignment.center)
                         .frame(width: UIScreen.main.bounds.width-170,height:40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                         .clipShape(RoundedRectangle(cornerRadius: 12, style:
-                        .continuous))
+                            .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     ImageButton()
                 }
@@ -56,39 +56,37 @@ struct AddRecipeView: View {
                     TextField("Serving Size",text: $servingSize)
                         .keyboardType(.numberPad)
                         .onReceive(Just(servingSize)) { newValue in
-                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                if filtered != newValue {
-                                    self.servingSize = filtered
-                                }
-                        }
-                        .multilineTextAlignment(TextAlignment.center)
-                        .frame(width: UIScreen.main.bounds.width-250,height:40)
-                        .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style:
-                            .continuous))
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.servingSize = filtered
+                            }
+                    }
+                    .multilineTextAlignment(TextAlignment.center)
+                    .frame(width: UIScreen.main.bounds.width-250,height:40)
+                    .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style:
+                        .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                 }
                 HStack{
                     VStack{
-                        SearchBar(text: $searchText, placeholder: "Ingredients")
-                            Picker(selection: self.$ingredientList, label: Text("")){
-                                    .frame(width: UIScreen.main.bounds.width - 75)
-                                ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.contains(searchText.lowercased()) }), id: \.name) { item in
-                                    Text(item.name)
-                                    
-                                }
+                        Form{
+                            SearchBar(text: $searchText,placeholder: "Ingredients...")
+                                .frame(width: UIScreen.main.bounds.width - 75)
+                            List(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) { item in
+                                Text(item.name)
                             }
-                        
+                        }
                     }
+
                     AddButton()
-                    
                 }
                 
                 Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
                     .padding(15)
                     .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                     .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
-                .frame(width: UIScreen.main.bounds.width - 20)
+                    .frame(width: UIScreen.main.bounds.width - 20)
                 Spacer()
                 
                 
@@ -97,7 +95,7 @@ struct AddRecipeView: View {
                     .frame(width: UIScreen.main.bounds.width - 40,height: 200)
                     .padding(10)
                 FinalAddRecipeButton()
-                    
+                
                 
                 
             }
@@ -107,8 +105,8 @@ struct AddRecipeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
-        }
-        
+    }
+    
 }
 
 struct AddRecipeView_Previews: PreviewProvider {
@@ -120,7 +118,7 @@ struct AddRecipeView_Previews: PreviewProvider {
 
 struct MultilineTextView: UIViewRepresentable {
     @Binding var text: String
-
+    
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
         view.isScrollEnabled = true
@@ -133,7 +131,7 @@ struct MultilineTextView: UIViewRepresentable {
         view.font = .systemFont(ofSize: 15)
         return view
     }
-
+    
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
     }

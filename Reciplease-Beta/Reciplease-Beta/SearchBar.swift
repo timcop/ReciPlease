@@ -44,3 +44,9 @@ struct SearchBar: UIViewRepresentable {
         }
     }
 }
+
+struct SearchBar_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchBar(text: .constant(""),placeholder: "jeff")
+    }
+}

@@ -134,7 +134,7 @@ struct BrowseRecipesButton: View{
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                     self.tap=false
                 }
-        
+                
         }
     }
 }
@@ -176,10 +176,12 @@ struct AddButton: View{
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                     self.tap=false
                 }
-        
+                
         }
     }
 }
+
+
 
 struct ImageButton: View{
     @State var tap = false
