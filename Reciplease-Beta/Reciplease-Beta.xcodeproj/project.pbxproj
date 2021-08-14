@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120EE73D26C793AD002072D9 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */; };
 		122B272026C60586004AE1CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B271F26C60586004AE1CD /* AppDelegate.swift */; };
 		122B272226C60586004AE1CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B272126C60586004AE1CD /* SceneDelegate.swift */; };
 		122B272526C60586004AE1CD /* Reciplease_Beta.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 122B272326C60586004AE1CD /* Reciplease_Beta.xcdatamodeld */; };
@@ -41,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Regular.ttf"; path = "Reciplease-Beta/BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
+		120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		122B271C26C60586004AE1CD /* Reciplease-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reciplease-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		122B271F26C60586004AE1CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		122B272126C60586004AE1CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		122B271326C60586004AE1CD = {
 			isa = PBXGroup;
 			children = (
-				120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */,
 				122B271E26C60586004AE1CD /* Reciplease-Beta */,
 				122B273826C60587004AE1CD /* Reciplease-BetaTests */,
 				122B274326C60587004AE1CD /* Reciplease-BetaUITests */,
@@ -113,6 +113,7 @@
 		122B271E26C60586004AE1CD /* Reciplease-Beta */ = {
 			isa = PBXGroup;
 			children = (
+				120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */,
 				122B271F26C60586004AE1CD /* AppDelegate.swift */,
 				122B275C26C62EDC004AE1CD /* AddRecipeView.swift */,
 				122B276C26C649D8004AE1CD /* SearchBar.swift */,
@@ -262,6 +263,7 @@
 			files = (
 				122B272C26C60586004AE1CD /* Preview Assets.xcassets in Resources */,
 				12D766CF26C75C3600C302D8 /* LaunchScreen.storyboard in Resources */,
+				120EE73D26C793AD002072D9 /* BebasNeue-Regular.ttf in Resources */,
 				122B272926C60586004AE1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
