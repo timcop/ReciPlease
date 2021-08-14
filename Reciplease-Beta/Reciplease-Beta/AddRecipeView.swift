@@ -17,6 +17,7 @@ struct AddRecipeView: View {
     @State var description = ""
     @State var servingSize = ""
     @State var ingredientList: [String] = []
+    var count: Int = 0
     init(){
         UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
         UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
@@ -71,12 +72,12 @@ struct AddRecipeView: View {
                 HStack{
                     VStack{
                         SearchBar(text: $searchText,placeholder: "Ingredients...")
-                        .frame(width: UIScreen.main.bounds.width - 75)
+                            .frame(width: UIScreen.main.bounds.width - 75)
                         Form{
-                            List(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) { item in
-                                Text(item.name)
+                                ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
+                                    Text(item.name)
+                                }
                             }
-                        }
                     }
                     
                     AddButton()
