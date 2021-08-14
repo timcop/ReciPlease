@@ -73,11 +73,12 @@ struct AddRecipeView: View {
                     VStack{
                         SearchBar(text: $searchText,placeholder: "Ingredients...")
                             .frame(width: UIScreen.main.bounds.width - 75)
-                        Form{
+                            Picker("",selection: $ingredientList){
                                 ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
                                     Text(item.name)
                                 }
-                            }
+                            
+                        }
                     }
                     
                     AddButton()
