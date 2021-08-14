@@ -7,19 +7,30 @@
 //
 
 import SwiftUI
+import Combine
 
 
 struct AddRecipeView: View {
     @State var title = ""
     @State var searchText = ""
     @State var method = "Method"
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State var description = ""
+    @State var servingSize = ""
+    var ingredientList: [String] = []
+    init(){
+        UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
+        UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
+    }
+    
+    
+    
+
+    
     var body: some View {
         ZStack{
             VStack{
                 Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                                            .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-            
                 Spacer()
                     .frame(height:53)
                 HStack{
@@ -35,13 +46,42 @@ struct AddRecipeView: View {
                 }
                 .frame(width: UIScreen.main.bounds.width - 20)
                 HStack{
+                    TextField("Description",text: $description)
+                        .multilineTextAlignment(TextAlignment.center)
+                        .frame(width: UIScreen.main.bounds.width-170,height:40)
+                        .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style:
+                            .continuous))
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                    TextField("Serving Size",text: $servingSize)
+                        .keyboardType(.numberPad)
+                        .onReceive(Just(servingSize)) { newValue in
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                if filtered != newValue {
+                                    self.servingSize = filtered
+                                }
+                        }
+                        .multilineTextAlignment(TextAlignment.center)
+                        .frame(width: UIScreen.main.bounds.width-250,height:40)
+                        .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style:
+                            .continuous))
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                }
+                HStack{
+                    VStack{
                     SearchBar(text: $searchText)
                         .frame(width: UIScreen.main.bounds.width - 75)
                         
-                    
-                   // List(LISTNAME.filter({ searchText.isEmpty ? true : $0.name.contains(searchText) })) { item in
-                  //      Text(item.name)
-                   // }
+                   
+            
+                        List(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.contains(searchText.lowercased()) }), id: \.name) { item in
+                            Text(item.name)
+                            .
+                            
+                        }
+                    }
+                        
                     AddButton()
                 }
                 

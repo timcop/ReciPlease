@@ -13,6 +13,9 @@ struct ContentView: View {
     @State var numCooking = ""
     @State var budget = ""
     @State var tap = false
+    init(){
+        Startup()
+    }
     
     var body: some View {
         NavigationView{
@@ -86,4 +89,10 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+
+func Startup(){
+    Data.fillProds()
+    sleep(3)
 }

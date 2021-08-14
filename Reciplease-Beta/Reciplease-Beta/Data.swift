@@ -76,7 +76,7 @@ public class Data{
         
     }
     
-    //for lookinging upup items when adding recipes
+    //for lookinging up items when adding recipes
     public static func searchItem(input: String) -> [Int]{
         var out: [Int] = []
         for i in 0..<Ingredients.count{

@@ -226,6 +226,17 @@ struct ImageButton: View{
 struct FinalAddRecipeButton: View{
     @State var tap = false
     
+    var title = ""
+    var searchText = ""
+    var method = ""
+    var description = ""
+    var servingSize = 0
+    var ingredients: [String] = []
+    var quantsofIngredients: [Double] = []
+    var ingredientsAlreadyHave: [String] = []
+    var quantsofIAH: [Int] = []
+    var staplesPPP: [Int] = []
+    
     var body: some View{
         Text("Add Recipe")
             .font(Font.custom("BebasNeue-Regular",size: 20))
@@ -260,6 +271,7 @@ struct FinalAddRecipeButton: View{
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                     self.tap=false
                 }
+                Data.addRecipe(n: self.title, method: self.method, description: self.description, Ing: self.ingredients, Quants: self.quantsofIngredients, Serving: self.servingSize, Image: "", staples: self.ingredientsAlreadyHave, staplesQuant: self.quantsofIAH, staplesPPP: self.staplesPPP)
         
         }
     }
