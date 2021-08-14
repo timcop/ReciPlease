@@ -70,18 +70,19 @@ struct AddRecipeView: View {
                 }
                 HStack{
                     VStack{
-                        
-                        SearchBar(text: $searchText)
-                            .frame(width: UIScreen.main.bounds.width - 75)
-                         Picker(selection: self.$ingredientList, label: Text("")){
+                        SearchBar(text: $searchText, placeholder: "Ingredients")
+                            Picker(selection: self.$ingredientList, label: Text("")){
+                                    .frame(width: UIScreen.main.bounds.width - 75)
                                 ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.contains(searchText.lowercased()) }), id: \.name) { item in
-                                        Text(item.name)
-                                
+                                    Text(item.name)
+                                    
+                                }
                             }
-                        }
-                    
-                    AddButton()
+                        
                     }
+                    AddButton()
+                    
+                }
                 
                 Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
                     .padding(15)

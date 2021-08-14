@@ -8,44 +8,39 @@
 
 import SwiftUI
 
-struct SearchBar: View {
-    
-    @Binding var text: String
-    
-    @State private var isEditing = false
-    
-    var body: some View {
-        HStack {
-            
-            TextField("Ingredients...", text: $text)
-                .padding(7)
-                .padding(.horizontal, 25)
-                .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                .cornerRadius(12)
-                .padding(.horizontal, 10)
-                .onTapGesture {
-                    self.isEditing = true
-            }
-            
-            if isEditing {
-                Button(action: {
-                    self.isEditing = false
-                    self.text = ""
-                    
-                }) {
-                    Text("Cancel")
-                        .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
-                }
-                .padding(.trailing, 10)
-                .transition(.move(edge: .trailing))
-                .animation(.default)
-            }
-        }
-    }
-}
+struct SearchBar: UIViewRepresentable {
 
-struct SearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBar(text: .constant(""))
+    @Binding var text: String
+    var placeholder: String
+
+    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.delegate = context.coordinator
+
+        searchBar.placeholder = placeholder
+        searchBar.autocapitalizationType = .none
+        searchBar.searchBarStyle = .minimal
+        return searchBar
+    }
+
+    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
+        uiView.text = text
+    }
+
+    func makeCoordinator() -> SearchBar.Coordinator {
+        return Coordinator(text: $text)
+    }
+
+    class Coordinator: NSObject, UISearchBarDelegate {
+
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            _text = text
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text = searchText
+        }
     }
 }
