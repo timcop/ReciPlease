@@ -16,6 +16,7 @@ struct AddRecipeView: View {
     @State var method = "Method"
     @State var description = ""
     @State var servingSize = ""
+    @State var ingredient = ""
     @State var ingredientList: [String] = []
     var count: Int = 0
     init(){
@@ -43,7 +44,7 @@ struct AddRecipeView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12, style:
                             .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                    ImageButton()
+                    Buttons1.ImageButton()
                 }
                 .frame(width: UIScreen.main.bounds.width - 20)
                 HStack{
@@ -81,7 +82,7 @@ struct AddRecipeView: View {
                         }
                     }
                     
-                    AddButton()
+                    Buttons1.AddButton(ingredient: ingredient)
                 }
                 
                 Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
@@ -89,6 +90,7 @@ struct AddRecipeView: View {
                     .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                     .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
                     .frame(width: UIScreen.main.bounds.width - 20)
+                
                 Spacer()
                 
                 
@@ -96,7 +98,7 @@ struct AddRecipeView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                     .frame(width: UIScreen.main.bounds.width - 40,height: 200)
                     .padding(10)
-                FinalAddRecipeButton()
+                Buttons1.FinalAddRecipeButton()
                 
                 
                 
