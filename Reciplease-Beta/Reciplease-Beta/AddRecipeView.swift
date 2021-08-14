@@ -13,11 +13,15 @@ struct AddRecipeView: View {
     @State var title = ""
     @State var searchText = ""
     @State var method = "Method"
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
-        VStack{
+        ZStack{
             VStack{
+                Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
+                                           .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+            
                 Spacer()
-                    .frame(height:30)
+                    .frame(height:53)
                 HStack{
                    
                     TextField("Title",text: $title)
@@ -58,7 +62,7 @@ struct AddRecipeView: View {
                 
                 
             }
-            .frame(height: UIScreen.main.bounds.height - 170,alignment: .top)
+            .frame(height: UIScreen.main.bounds.height - 50,alignment: .top)
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

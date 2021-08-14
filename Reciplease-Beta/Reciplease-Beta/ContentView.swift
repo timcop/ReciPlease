@@ -16,10 +16,10 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-                VStack{
+                ZStack{
                     VStack{
                         Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
-                            .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
+                            .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         Text("You currently have 24 Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
                             .padding(15)
                             .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
@@ -29,8 +29,8 @@ struct ContentView: View {
                             .padding()
                         }
                         .buttonStyle(PlainButtonStyle())
+                       
                         
-
                         Spacer()
                         
                         TextField("Number of people you are cooking for",text: $numCooking)
@@ -78,7 +78,7 @@ struct ContentView: View {
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
         
-        }
+        }.accentColor(.black)
     }
 }
 
