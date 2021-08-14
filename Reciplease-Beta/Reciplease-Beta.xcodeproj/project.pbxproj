@@ -16,7 +16,6 @@
 		122B273A26C60587004AE1CD /* Reciplease_BetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B273926C60587004AE1CD /* Reciplease_BetaTests.swift */; };
 		122B274526C60587004AE1CD /* Reciplease_BetaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B274426C60587004AE1CD /* Reciplease_BetaUITests.swift */; };
 		122B275326C605A7004AE1CD /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B275226C605A7004AE1CD /* Buttons.swift */; };
-		122B275B26C60BE9004AE1CD /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 122B275A26C60BE9004AE1CD /* BebasNeue-Regular.ttf */; };
 		122B275D26C62EDC004AE1CD /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B275C26C62EDC004AE1CD /* AddRecipeView.swift */; };
 		122B276D26C649D8004AE1CD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B276C26C649D8004AE1CD /* SearchBar.swift */; };
 		12D766C626C7430500C302D8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D766C526C7430500C302D8 /* Item.swift */; };
@@ -42,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Regular.ttf"; path = "Reciplease-Beta/BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		122B271C26C60586004AE1CD /* Reciplease-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reciplease-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		122B271F26C60586004AE1CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		122B272126C60586004AE1CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,7 +57,6 @@
 		122B274426C60587004AE1CD /* Reciplease_BetaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_BetaUITests.swift; sourceTree = "<group>"; };
 		122B274626C60587004AE1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		122B275226C605A7004AE1CD /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
-		122B275A26C60BE9004AE1CD /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Regular.ttf"; path = "../../../../Desktop/bebas_neue/BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		122B275C26C62EDC004AE1CD /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		122B276C26C649D8004AE1CD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		12D766C526C7430500C302D8 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -93,7 +92,7 @@
 		122B271326C60586004AE1CD = {
 			isa = PBXGroup;
 			children = (
-				122B275A26C60BE9004AE1CD /* BebasNeue-Regular.ttf */,
+				120EE73B26C7926A002072D9 /* BebasNeue-Regular.ttf */,
 				122B271E26C60586004AE1CD /* Reciplease-Beta */,
 				122B273826C60587004AE1CD /* Reciplease-BetaTests */,
 				122B274326C60587004AE1CD /* Reciplease-BetaUITests */,
@@ -263,7 +262,6 @@
 			files = (
 				122B272C26C60586004AE1CD /* Preview Assets.xcassets in Resources */,
 				12D766CF26C75C3600C302D8 /* LaunchScreen.storyboard in Resources */,
-				122B275B26C60BE9004AE1CD /* BebasNeue-Regular.ttf in Resources */,
 				122B272926C60586004AE1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
