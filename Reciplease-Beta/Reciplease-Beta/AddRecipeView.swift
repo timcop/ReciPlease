@@ -16,7 +16,7 @@ struct AddRecipeView: View {
     @State var method = "Method"
     @State var description = ""
     @State var servingSize = ""
-    var ingredientList: [String] = []
+    @State var ingredientList: [String] = []
     init(){
         UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
         UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
@@ -70,20 +70,18 @@ struct AddRecipeView: View {
                 }
                 HStack{
                     VStack{
-                    SearchBar(text: $searchText)
-                        .frame(width: UIScreen.main.bounds.width - 75)
                         
-                   
-            
-                        List(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.contains(searchText.lowercased()) }), id: \.name) { item in
-                            Text(item.name)
-                            .
-                            
+                        SearchBar(text: $searchText)
+                            .frame(width: UIScreen.main.bounds.width - 75)
+                         Picker(selection: self.$ingredientList, label: Text("")){
+                                ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.contains(searchText.lowercased()) }), id: \.name) { item in
+                                        Text(item.name)
+                                
+                            }
                         }
-                    }
-                        
+                    
                     AddButton()
-                }
+                    }
                 
                 Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
                     .padding(15)
@@ -108,7 +106,7 @@ struct AddRecipeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
-    }
+        }
         
 }
 
