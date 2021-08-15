@@ -47,9 +47,9 @@ struct RecipeListView: View {
         List(Data.RecipeList.indices, id: \.self){ index in
             NavigationLink(destination: DetailView(Title: Data.RecipeList[index].name, description: Data.RecipeList[index].description, method: Data.RecipeList[index].method, ingredients: Data.RecipeList[index].Ingredients)){
                 Text(Data.RecipeList[index].name).listRowBackground(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
-                Text("$" + String(Data.priceRecipe(recNum: index)) ).listRowBackground(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
+                Text("$" + String(Data.priceRecipe(recNum: index))).listRowBackground(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 }
-            }
+        }
         
     }
 }
