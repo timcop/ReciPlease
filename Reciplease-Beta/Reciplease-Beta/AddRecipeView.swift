@@ -9,6 +9,9 @@
 import SwiftUI
 import Combine
 
+class AddRecipe: ObservableObject{
+    @Published var ingredient = ""
+}
 
 struct AddRecipeView: View {
     @State var title = ""
@@ -16,7 +19,9 @@ struct AddRecipeView: View {
     @State var method = "Method"
     @State var description = ""
     @State var servingSize = ""
-    @State var ingredient = ""
+    @ObservedObject var addRecipeIngredient = AddRecipe()
+    
+    
     @State var ingredientList: [String] = []
     var count: Int = 0
     init(){
@@ -74,15 +79,17 @@ struct AddRecipeView: View {
                     VStack{
                         SearchBar(text: $searchText,placeholder: "Ingredients...")
                             .frame(width: UIScreen.main.bounds.width - 75)
-                            Picker("",selection: $ingredientList){
-                                ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
-                                    Text(item.name)
-                                }
+                        Picker("",selection: $addRecipeIngredient.ingredient){
+                            
+                            ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
+                                Text(item.name + self.addRecipeIngredient.ingredient).font(.system(size: 10))
+                                
+                            }
                             
                         }
                     }
                     
-                    Buttons1.AddButton(ingredient: ingredient)
+                    Buttons1.AddButton()
                 }
                 
                 Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
@@ -90,6 +97,7 @@ struct AddRecipeView: View {
                     .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                     .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
                     .frame(width: UIScreen.main.bounds.width - 20)
+                Text(returnArrayinStringForm(array: Buttons1.ingredients))
                 
                 Spacer()
                 
@@ -98,6 +106,8 @@ struct AddRecipeView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                     .frame(width: UIScreen.main.bounds.width - 40,height: 200)
                     .padding(10)
+                
+                
                 Buttons1.FinalAddRecipeButton()
                 
                 
@@ -142,3 +152,19 @@ struct MultilineTextView: UIViewRepresentable {
 }
 
 
+func returnArrayinStringForm(array: [String]) ->String{
+    var s = ""
+    for i in 0..<array.count{
+        s = s + array[i]+"\n"
+    }
+    return(s)
+    
+}
+
+
+extension View {
+    func Print(_ vars: Any...) -> some View {
+        for v in vars { print(v) }
+        return EmptyView()
+    }
+}

@@ -140,20 +140,12 @@ public class Buttons1{
                     .continuous))
                 .shadow(color: Color(#colorLiteral(red: 0.8402299285, green: 0.6806161404, blue: 0.5036028624, alpha: 1)), radius: 20, x: 20, y: 20)
                 .shadow(color: Color(#colorLiteral(red: 1, green: 0.9313164949, blue: 0.8165345788, alpha: 1)), radius: 20, x: -20, y: -20)
-                .scaleEffect(tap ? 1.02:1)
-                .onTapGesture {
-                    self.tap = true
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                        self.tap=false
-                    }
-                    
-            }
         }
     }
     
     struct AddButton: View{
         @State var tap = false
-        @State var ingredient = ""
+       // @StateObject var ingredient = AddRecipe()
         var body: some View{
             Text("+")
                 .font(Font.custom("BebasNeue-Regular",size: 20))
@@ -184,8 +176,10 @@ public class Buttons1{
                 .shadow(color: Color(#colorLiteral(red: 1, green: 0.9313164949, blue: 0.8165345788, alpha: 1)), radius: 20, x: -20, y: -20)
                 .scaleEffect(tap ? 1.02:1)
                 .onTapGesture {
-                    self.tap = true
-                    ingredients.append(self.ingredient)
+                   // self.tap = true
+                   // Buttons1.ingredients.append(self.ingredient.ingredient)
+                   // print(ingredients)
+                    //print(self.ingredient)
                     DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                         self.tap=false
                     }
