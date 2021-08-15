@@ -1,5 +1,7 @@
 [![Build/Documentation](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml/badge.svg?branch=main)](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f12061adf5649febb633a2762dee81f)](https://www.codacy.com/gh/timcop/ReciPlease/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=timcop/ReciPlease&amp;utm_campaign=Badge_Grade)
+
 # COSC345---ReciPlease
 COSC 345 - Software engineering, app creation project.
 
@@ -20,5 +22,7 @@ Currently there are no actual recipes loaded into the app as we have no persista
 Sam Royal, Baxter Robb, Connor Spear, Mathew Shields, Tim Copland, Ethan Fraser
 
 TRELLO BOARD: https://trello.com/b/HkWtvpoM/reciplease
-CODACY: https://app.codacy.com/gh/COSC345-Otago/ReciPlease/dashboard?branch=main
+
+
+
 
