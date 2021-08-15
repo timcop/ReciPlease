@@ -103,7 +103,7 @@ struct Price: Codable{
 public class Reci: Codable{
     
     
-    public struct Recipe: Codable{
+    public struct Recipe: Codable,Hashable{
         let name: String
         let method: String
         let description: String
