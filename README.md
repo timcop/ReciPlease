@@ -1,6 +1,6 @@
-[![Build/Documentation](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml/badge.svg?branch=main)](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml)
+[![Build/Documentation](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml/badge.svg?branch=main)](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f12061adf5649febb633a2762dee81f)](https://www.codacy.com/gh/timcop/ReciPlease/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=timcop/ReciPlease&amp;utm_campaign=Badge_Grade)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f12061adf5649febb633a2762dee81f)](https://www.codacy.com/gh/timcop/ReciPlease/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=timcop/ReciPlease&amp;utm_campaign=Badge_Grade)
+
 
 # COSC345---ReciPlease
 COSC 345 - Software engineering, app creation project.
