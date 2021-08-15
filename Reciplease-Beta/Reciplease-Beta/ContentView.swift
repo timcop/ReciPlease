@@ -13,18 +13,25 @@ struct ContentView: View {
     @State var numCooking = ""
     @State var budget = ""
     @State var tap = false
+    @State private var isLoading = false
+    @State var recipeCount = String(Data.RecipeList.count)
+    var count = 0
     
     init(){
-        Startup()
+  
     }
     
     var body: some View {
+        
+    
+        
         NavigationView{
                 ZStack{
                     VStack{
                         Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                        Text("You currently have " + String(Data.RecipeList.count) + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
+                            Text("You currently have " + recipeCount + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
+                        
                             .padding(15)
                             .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
                         NavigationLink(destination: AddRecipeView()){
@@ -80,14 +87,25 @@ struct ContentView: View {
                     }
                     .frame(height: UIScreen.main.bounds.height - 50,alignment: .top)
                     
+                  
 
                 }
+                .onAppear{ self.webScrape()}
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
         
         }.accentColor(.black)
+            
     }
+    func webScrape(){
+        isLoading = true
+        Data.fillProds()
+        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+            self.isLoading=false
+        }
+    }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -103,3 +121,21 @@ func Startup(){
     Data.addRecipe(n: "Vegetable Lasagne", method: "To prepare the veggies: In a large skillet over medium heat, warm the olive oil. Once shimmering, add the carrots, bell pepper, zucchini, yellow onion, and salt. Cook, stirring every couple of minutes, until the veggies are golden on the edges, about 8 to 12 minutes. This is just random text please dont take this as what is going to go in our recipe app thank you verymcuh for your kind words _________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
                    description: "Lovely Vegetable Lasagne", Ing: ["meadows mushrooms shiitake","fresh produce rockmelon whole","taylor farms salad kit buffalo ranch with dressing"], Quants: [1,1,2], Serving: 4,Image: "Lasagne",staples: ["jeff, Cheese, penis"], staplesQuant: [1,2,1000], staplesPPP: [10,3,1])
 }
+
+//struct LoadingView: View{
+//    var body: some view{
+//        let jeremyGif = UIImage.gifImageWithName("funny")
+//        let imageView = UIImageView(image: jeremyGif)
+//        imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: 150.0)
+//        view.addSubview(imageView)
+//
+//    }
+//}
+
+
+
+
+
+
+
+
