@@ -13,6 +13,7 @@ struct ContentView: View {
     @State var numCooking = ""
     @State var budget = ""
     @State var tap = false
+    
     init(){
         Startup()
     }
@@ -23,7 +24,7 @@ struct ContentView: View {
                     VStack{
                         Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                        Text("You currently have 24 Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
+                        Text("You currently have " + String(Data.RecipeList.count) + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
                             .padding(15)
                             .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
                         NavigationLink(destination: AddRecipeView()){

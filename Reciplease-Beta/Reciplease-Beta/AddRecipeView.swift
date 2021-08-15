@@ -9,9 +9,6 @@
 import SwiftUI
 import Combine
 
-class AddRecipe: ObservableObject{
-    @Published var ingredient = ""
-}
 
 struct AddRecipeView: View {
     @State var title = ""
@@ -19,10 +16,17 @@ struct AddRecipeView: View {
     @State var method = "Method"
     @State var description = ""
     @State var servingSize = ""
-    @ObservedObject var addRecipeIngredient = AddRecipe()
+    @State var ingredient = ""
+    @State var ingredients: [String] = []
+    @State var tap = false
+    var quantsofIngredients: [Double] = []
+    var ingredientsAlreadyHave: [String] = []
+    var quantsofIAH: [Int] = []
+    var staplesPPP: [Int] = []
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     
-    @State var ingredientList: [String] = []
+    
     var count: Int = 0
     init(){
         UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
@@ -79,10 +83,10 @@ struct AddRecipeView: View {
                     VStack{
                         SearchBar(text: $searchText,placeholder: "Ingredients...")
                             .frame(width: UIScreen.main.bounds.width - 75)
-                        Picker("",selection: $addRecipeIngredient.ingredient){
+                        Picker("",selection: $ingredient){
                             
                             ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
-                                Text(item.name + self.addRecipeIngredient.ingredient).font(.system(size: 10))
+                                Text(item.name).font(.system(size: 10))
                                 
                             }
                             
@@ -90,6 +94,15 @@ struct AddRecipeView: View {
                     }
                     
                     Buttons1.AddButton()
+                        .scaleEffect(tap ? 1.02:1)
+                        .onTapGesture {
+                        print(self.ingredient)
+                        self.ingredients.append(self.ingredient)
+                        self.tap = true
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
+                            self.tap=false
+                        }
+                    }
                 }
                 
                 Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
@@ -97,7 +110,7 @@ struct AddRecipeView: View {
                     .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                     .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
                     .frame(width: UIScreen.main.bounds.width - 20)
-                Text(returnArrayinStringForm(array: Buttons1.ingredients))
+                Text(returnArrayinStringForm(array: ingredients))
                 
                 Spacer()
                 
@@ -107,10 +120,17 @@ struct AddRecipeView: View {
                     .frame(width: UIScreen.main.bounds.width - 40,height: 200)
                     .padding(10)
                 
+                NavigationLink(destination: ContentView()){
+                    Buttons1.FinalAddRecipeButton()
+                        .scaleEffect(tap ? 1.02:1)
+                        .onTapGesture {
+                            
+                            Data.addRecipe(n: self.title, method: self.method, description: self.description, Ing: self.ingredients, Quants: self.quantsofIngredients, Serving: Int(self.servingSize) ?? 0, Image: "", staples: self.ingredientsAlreadyHave, staplesQuant: self.quantsofIAH, staplesPPP: self.staplesPPP)
+                                self.mode.wrappedValue.dismiss()
+                    }
                 
-                Buttons1.FinalAddRecipeButton()
-                
-                
+                     
+                }
                 
             }
             .frame(height: UIScreen.main.bounds.height - 50,alignment: .top)

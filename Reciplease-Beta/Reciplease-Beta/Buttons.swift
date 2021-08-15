@@ -22,16 +22,7 @@ struct Buttons_Previews: PreviewProvider {
 }
 
 public class Buttons1{
-    public static var title = ""
-    public static var searchText = ""
-    public static var method = ""
-    public static var description = ""
-    public static var servingSize = 0
-    public static var ingredients: [String] = []
-    public static var quantsofIngredients: [Double] = []
-    public static var ingredientsAlreadyHave: [String] = []
-    public static var quantsofIAH: [Int] = []
-    public static var staplesPPP: [Int] = []
+   
     
     struct AddRecipeButton: View{
         
@@ -174,17 +165,7 @@ public class Buttons1{
                     .continuous))
                 .shadow(color: Color(#colorLiteral(red: 0.8402299285, green: 0.6806161404, blue: 0.5036028624, alpha: 1)), radius: 20, x: 20, y: 20)
                 .shadow(color: Color(#colorLiteral(red: 1, green: 0.9313164949, blue: 0.8165345788, alpha: 1)), radius: 20, x: -20, y: -20)
-                .scaleEffect(tap ? 1.02:1)
-                .onTapGesture {
-                   // self.tap = true
-                   // Buttons1.ingredients.append(self.ingredient.ingredient)
-                   // print(ingredients)
-                    //print(self.ingredient)
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                        self.tap=false
-                    }
-                    
-            }
+                
         }
     }
     
@@ -265,15 +246,7 @@ public class Buttons1{
                     .continuous))
                 .shadow(color: Color(#colorLiteral(red: 0.8402299285, green: 0.6806161404, blue: 0.5036028624, alpha: 1)), radius: 20, x: 20, y: 20)
                 .shadow(color: Color(#colorLiteral(red: 1, green: 0.9313164949, blue: 0.8165345788, alpha: 1)), radius: 20, x: -20, y: -20)
-                .scaleEffect(tap ? 1.02:1)
-                .onTapGesture {
-                    self.tap = true
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                        self.tap=false
-                    }
-                    Data.addRecipe(n: title, method: method, description: description, Ing: ingredients, Quants: quantsofIngredients, Serving: servingSize, Image: "", staples: ingredientsAlreadyHave, staplesQuant: quantsofIAH, staplesPPP: staplesPPP)
-                    
-            }
+               
         }
     }
 }
