@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cbe320ad84b74459bb1ca6638cc0c8de)](https://app.codacy.com/gh/timcop/ReciPlease?utm_source=github.com&utm_medium=referral&utm_content=timcop/ReciPlease&utm_campaign=Badge_Grade_Settings)
 [![Build/Documentation](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml/badge.svg?branch=main)](https://github.com/timcop/ReciPlease/actions/workflows/swiftdocumentation.yml)
 
 # COSC345---ReciPlease
