@@ -14,9 +14,9 @@ jobs:
     - name: Run tests
       uses: sersoft-gmbh/xcodebuild-action@v1
       with:
-        project: Reciplease.xcodeproj
+        project: Reciplease-Beta/Reciplease-Beta.xcodeproj
         destination: "platform=iOS Simulator,name=iPhone 11"
-        scheme: Reciplease
+        scheme: Reciplease-Beta
         action: build
 
   Documentaton:
