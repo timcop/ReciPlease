@@ -36,8 +36,10 @@ struct AddRecipeView: View {
     
     
     var body: some View {
+        
         ZStack{
             VStack{
+                ScrollView{
                 Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                     .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                 Spacer()
@@ -86,7 +88,7 @@ struct AddRecipeView: View {
                         Picker("",selection: $ingredient){
                             
                             ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
-                                Text(item.name).font(.system(size: 10))
+                                Text(item.unit + " " + item.name).font(.system(size: 10))
                             }
                         }.offset(y:50)
                         Spacer()
@@ -123,17 +125,19 @@ struct AddRecipeView: View {
                         .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                         .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
                         .frame(width: UIScreen.main.bounds.width - 20)
-                    Text(returnArrayinStringForm2(array: ingredients)).font(Font.custom("BebasNeue-Regular",size: 13))
+                    Text(returnArrayinStringForm2(array:self.ingredients)).font(Font.custom("BebasNeue-Regular",size: 13))
                     
+                    
+                
                     Spacer()
-                        .frame(height: 120  )
+                        .frame(height: UIScreen.main.bounds.height - 900)
                     
                     Text("Method").font(Font.custom("BebasNeue-Regular",size: 20))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     // TextEditor(text: $method)
                     //   .foregroundColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
                     Spacer()
-                        .frame(height: 150)
+                        .frame(height: UIScreen.main.bounds.height - 700)
                     
                     NavigationLink(destination: ContentView()){
                         Buttons1.FinalAddRecipeButton()
@@ -158,7 +162,7 @@ struct AddRecipeView: View {
         .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
     }
-    
+    }
 }
 
 struct AddRecipeView_Previews: PreviewProvider {
@@ -181,7 +185,7 @@ extension View {
 func returnArrayinStringForm2(array: [String]) ->String{
     var s = ""
     for i in 0..<array.count{
-        s = s + array[i]+"\n"
+        s += array[i]+"\n"
     }
     return(s)
     

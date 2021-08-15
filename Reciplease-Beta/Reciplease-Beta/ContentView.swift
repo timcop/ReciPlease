@@ -18,7 +18,7 @@ struct ContentView: View {
     var count = 0
     
     init(){
-  
+    UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     }
     
     var body: some View {
