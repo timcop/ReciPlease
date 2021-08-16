@@ -15,7 +15,6 @@ struct DetailView: View {
     var ingredients: [String]
     @State var count = 0
     
-    
     var body: some View{
             NavigationView{
                 
@@ -60,11 +59,6 @@ struct RecipeListView: View {
     }
 }
 
-struct RecipeListView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeListView()
-    }
-}
 
 func returnArrayinStringForm(array: [String]) ->String{
     var s = ""

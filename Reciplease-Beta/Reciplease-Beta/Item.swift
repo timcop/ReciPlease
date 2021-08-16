@@ -16,8 +16,7 @@ public class prodRequest{
         request.httpMethod = "GET"
         request.setValue("OnlineShopping.WebApp", forHTTPHeaderField: "x-requested-with")
         
-        
-        
+    
         let task = URLSession.shared.dataTask(with: request, completionHandler: {data,repsonse,error in
             
             guard let data = data, error == nil else{
@@ -100,7 +99,6 @@ public class Prod{
     
 }
 
-
 public class Reci: Codable{
     
     
@@ -117,15 +115,3 @@ public class Reci: Codable{
         let staplesPPP: [Int]
     }
 }
-
-/*
- public class List: Codable{
- public struct RecList: Codable{
- var recipelist: [Reci.Recipe]
- }
- init() {
- RecList.init(recipelist: [])
- }
- }
- */
-

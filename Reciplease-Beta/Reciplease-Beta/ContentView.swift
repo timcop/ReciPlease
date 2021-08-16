@@ -9,8 +9,6 @@
 import SwiftUI
 import Combine
 
-
-
 struct ContentView: View {
     @State var numCooking = ""
     @State var budget = ""
@@ -124,11 +122,6 @@ struct ContentView: View {
 
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 
 struct LoadingView: View{
     @State private var isLoading = false

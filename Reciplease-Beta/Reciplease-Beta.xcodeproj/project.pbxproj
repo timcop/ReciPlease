@@ -17,7 +17,6 @@
 		122B275326C605A7004AE1CD /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B275226C605A7004AE1CD /* Buttons.swift */; };
 		122B275D26C62EDC004AE1CD /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B275C26C62EDC004AE1CD /* AddRecipeView.swift */; };
 		122B276D26C649D8004AE1CD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122B276C26C649D8004AE1CD /* SearchBar.swift */; };
-		12786FDF26C9DB8500B1AC66 /* BorderingDEBUG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12786FDE26C9DB8500B1AC66 /* BorderingDEBUG.swift */; };
 		12AB38D926CA1EE500B4F264 /* Reciplease_BetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AB38D826CA1EE500B4F264 /* Reciplease_BetaTests.swift */; };
 		12C203D526C89311008DA085 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C203D426C89311008DA085 /* RecipeListView.swift */; };
 		12C203DA26C8EC27008DA085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C203D826C8EC27008DA085 /* LaunchScreen.storyboard */; };
@@ -56,7 +55,6 @@
 		122B275226C605A7004AE1CD /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		122B275C26C62EDC004AE1CD /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		122B276C26C649D8004AE1CD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		12786FDE26C9DB8500B1AC66 /* BorderingDEBUG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderingDEBUG.swift; sourceTree = "<group>"; };
 		12AB38D626CA1EE500B4F264 /* Reciplease-BetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reciplease-BetaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		12AB38D826CA1EE500B4F264 /* Reciplease_BetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_BetaTests.swift; sourceTree = "<group>"; };
 		12AB38DA26CA1EE500B4F264 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				122B275226C605A7004AE1CD /* Buttons.swift */,
 				12C203D426C89311008DA085 /* RecipeListView.swift */,
 				122B272126C60586004AE1CD /* SceneDelegate.swift */,
-				12786FDE26C9DB8500B1AC66 /* BorderingDEBUG.swift */,
 				122B272626C60586004AE1CD /* ContentView.swift */,
 				122B272826C60586004AE1CD /* Assets.xcassets */,
 				12C203D826C8EC27008DA085 /* LaunchScreen.storyboard */,
@@ -299,7 +296,6 @@
 				122B275326C605A7004AE1CD /* Buttons.swift in Sources */,
 				12C203D526C89311008DA085 /* RecipeListView.swift in Sources */,
 				122B272026C60586004AE1CD /* AppDelegate.swift in Sources */,
-				12786FDF26C9DB8500B1AC66 /* BorderingDEBUG.swift in Sources */,
 				122B275D26C62EDC004AE1CD /* AddRecipeView.swift in Sources */,
 				12D766C626C7430500C302D8 /* Item.swift in Sources */,
 				122B272226C60586004AE1CD /* SceneDelegate.swift in Sources */,
