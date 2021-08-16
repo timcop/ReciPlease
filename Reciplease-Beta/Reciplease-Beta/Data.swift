@@ -30,7 +30,6 @@ public class Data{
         return urls
     }
     
-    //format looks like [[recipe number, missing ing num,...,missing ing num],[recip....]]
     public static func fillProds(){
         let URLList = setUrls()
         Ingredients = []

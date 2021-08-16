@@ -25,9 +25,6 @@ struct ContentView: View {
     }
     
     var body: some View {
-        
-    
-        
         NavigationView{
                 ZStack{
                     VStack{
@@ -133,28 +130,17 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-
-func Startup(){
-    Data.fillProds()
-    sleep(3)
-    Data.addRecipe(n: "Vegetable Lasagne", method: "To prepare the veggies: In a large skillet over medium heat, warm the olive oil. Once shimmering, add the carrots, bell pepper, zucchini, yellow onion, and salt. Cook, stirring every couple of minutes, until the veggies are golden on the edges, about 8 to 12 minutes. This is just random text please dont take this as what is going to go in our recipe app thank you verymcuh for your kind words _________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------_________________________________________________________________________________________________--________________________------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",
-                   description: "Lovely Vegetable Lasagne", Ing: ["meadows mushrooms shiitake","fresh produce rockmelon whole","taylor farms salad kit buffalo ranch with dressing"], Quants: [1,1,2], Serving: 4,Image: "Lasagne",staples: ["jeff, Cheese, penis"], staplesQuant: [1,2,1000], staplesPPP: [10,3,1])
-}
-
 struct LoadingView: View{
     @State private var isLoading = false
     var body: some View{
         ZStack {
-            
             Text("Cooking up your Recipes")
                 .font(.system(.body, design: .rounded))
                 .bold()
                 .offset(x: 0, y: -25)
-            
             RoundedRectangle(cornerRadius: 3)
                 .stroke(Color(.systemGray5), lineWidth: 3)
                 .frame(width: 250, height: 3)
-            
             RoundedRectangle(cornerRadius: 3)
                 .stroke(Color.orange, lineWidth: 3)
                 .frame(width: 30, height: 3)

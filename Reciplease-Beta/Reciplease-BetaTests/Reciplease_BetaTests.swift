@@ -12,18 +12,17 @@ import XCTest
 class Reciplease_BetaTests: XCTestCase {
     
     func testIngredientsFilled() {
-        let miss = Data.fillProds()
+        Data.fillProds()
         sleep(3)
-        print(Data.Ingredients)
-        print(Data.Ingredients.count)
         XCTAssert(Data.Ingredients.count > 0, "No ingredients have been put into array")
+        
     }
     
-    func testMissingReci() {
-        let miss = Data.fillProds()
-        sleep(3)
-        XCTAssert(miss.count == 1, "Missing relation?")
-    }
+//    func testMissingReci() {
+//        let miss = Data.fillProds()
+//        sleep(3)
+//        XCTAssert(miss.count == 1, "Missing relation?")
+//    }
     
     func testDataFuncs() {
         Data.fillProds()
