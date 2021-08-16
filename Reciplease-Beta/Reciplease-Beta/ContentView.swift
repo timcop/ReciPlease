@@ -41,7 +41,7 @@ struct ContentView: View {
                        
                         Spacer()
                         
-                        TextField("Number of people you are cooking for",text: $numCooking)
+                        TextField("Number of people you are cooking for", text: $numCooking)
                             .keyboardType(.numberPad)
                             .onReceive(Just(numCooking)) { newValue in
                                     let filtered = newValue.filter { "0123456789".contains($0) }
@@ -56,7 +56,7 @@ struct ContentView: View {
                             .continuous))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         
-                        TextField("Budget",text: $budget)
+                        TextField("Budget", text: $budget)
                             .keyboardType(.numberPad)
                             .onReceive(Just(budget)) { newValue in
                                     let filtered = newValue.filter { "0123456789".contains($0) }
@@ -70,13 +70,12 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 16, style:
                             .continuous))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                        
                         if Data.RecipeList.count > 0 {
-                            let i = Int.random(in: 0..<Data.RecipeList.count)
-                            NavigationLink(destination: DetailView(title: Data.RecipeList[i].name,
-                                                                   description: Data.RecipeList[i].description,
-                                                                   method: Data.RecipeList[i].method,
-                                                                   ingredients: Data.RecipeList[i].Ingredients)){
+                            let index = Int.random(in: 0..<Data.RecipeList.count)
+                            NavigationLink(destination: DetailView(title: Data.RecipeList[index].name,
+                                                                   description: Data.RecipeList[index].description,
+                                                                   method: Data.RecipeList[index].method,
+                                                                   ingredients: Data.RecipeList[index].Ingredients)) {
                                 Buttons1.RecipeFinderButton()
                                     .padding(10)
                             }
@@ -85,7 +84,7 @@ struct ContentView: View {
                                 .padding(10)
                         }
                             Spacer()
-                                .frame(height:100)
+                                .frame(height: 100)
                         NavigationLink(destination: RecipeListView()){
                             Buttons1.BrowseRecipesButton()
                             .scaledToFit()
@@ -93,12 +92,12 @@ struct ContentView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                    .frame(height: UIScreen.main.bounds.height - 50,alignment: .top)
-                    if isLoading{
-                                   LoadingView()
+                    .frame(height: UIScreen.main.bounds.height - 50, alignment: .top)
+                    if isLoading {
+                        LoadingView()
                     }
                 }
-                .onAppear{ self.webScrape()}
+                .onAppear {self.webScrape()}
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
@@ -135,7 +134,7 @@ struct LoadingView: View {
                 .offset(x: isLoading ? 110 : -110, y: 0)
                 .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
         }
-        .onAppear() {
+        .onAppear {
             self.isLoading = true
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
