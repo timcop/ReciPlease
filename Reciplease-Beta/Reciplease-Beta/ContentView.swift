@@ -38,9 +38,7 @@ struct ContentView: View {
                             .padding()
                         }
                         .buttonStyle(PlainButtonStyle())
-                       
                         Spacer()
-                        
                         TextField("Number of people you are cooking for", text: $numCooking)
                             .keyboardType(.numberPad)
                             .onReceive(Just(numCooking)) { newValue in
@@ -85,7 +83,7 @@ struct ContentView: View {
                         }
                             Spacer()
                                 .frame(height: 100)
-                        NavigationLink(destination: RecipeListView()){
+                        NavigationLink(destination: RecipeListView()) {
                             Buttons1.BrowseRecipesButton()
                             .scaledToFit()
                             .padding()
@@ -142,11 +140,3 @@ struct LoadingView: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-
-
-
-
-
-
