@@ -9,6 +9,9 @@
 import SwiftUI
 import Combine
 
+/**
+ Home Screen
+ */
 struct ContentView: View {
     @State var numCooking = ""
     @State var budget = ""
@@ -123,7 +126,9 @@ struct ContentView: View {
 
 }
 
-
+/**
+ Loading Screen
+ */
 struct LoadingView: View{
     @State private var isLoading = false
     var body: some View{
