@@ -5,7 +5,6 @@
 //
 import Foundation
 
-public class Data {
 /**
  Data storage and methods for updating/accessing stored data
  Contains storage for recipes, ingredient, and a relation table.
@@ -19,8 +18,6 @@ public class Data {
     public static var RecipeNum = 0
     public static var badUrlCount = 0
     public static var baseUrl = "https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page="
-    static var URLList: [String] = []
-    public static func setUrls() -> [String] {
     static var URLList: [String] = []
     
     /**
@@ -103,7 +100,7 @@ public class Data {
         }
         print(price)
         return price
-
+        
     }
     
     /**
@@ -162,3 +159,4 @@ public class Data {
         }
     }
 }
+
