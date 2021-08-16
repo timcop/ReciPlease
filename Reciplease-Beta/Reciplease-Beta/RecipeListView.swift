@@ -30,7 +30,6 @@ struct DetailView: View {
                         .frame(alignment: .leading)
                     Text(method).font(Font.custom("BebasNeue-Regular", size: 15))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                    
                     }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
@@ -47,7 +46,7 @@ struct RecipeListView: View {
             NavigationLink(destination: DetailView(title: Data.RecipeList[index].name,
                                                    description: Data.RecipeList[index].description,
                                                    method: Data.RecipeList[index].method,
-                                                   ingredients: Data.RecipeList[index].Ingredients)){
+                                                   ingredients: Data.RecipeList[index].Ingredients)) {
                 Text(Data.RecipeList[index].name).listRowBackground(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 Text("$" + String(Data.priceRecipe(recNum: index))).listRowBackground(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 }
@@ -57,8 +56,8 @@ struct RecipeListView: View {
 
 func returnArrayinStringForm(array: [String]) -> String {
     var str = ""
-    for i in 0..<array.count{
-        str += array[i] + "\n"
+    for index in 0..<array.count {
+        str += array[index] + "\n"
     }
     return(str)
 }

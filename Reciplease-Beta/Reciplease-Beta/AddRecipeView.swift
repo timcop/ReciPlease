@@ -214,8 +214,8 @@ struct AddRecipeView: View {
 
 func returnArrayinStringForm2(array: [String]) -> String {
     var str = ""
-    for i in 0..<array.count {
-        str += array[i]+"\n"
+    for index in 0..<array.count {
+        str += array[index] + "\n"
     }
     return(str)
 }
