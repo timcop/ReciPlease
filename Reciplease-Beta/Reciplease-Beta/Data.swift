@@ -5,7 +5,10 @@
 //
 import Foundation
 
-
+/**
+ Data storage and methods for updating/accessing stored data
+ Contains storage for recipes, ingredient, and a relation table.
+ */
 public class Data{
     
     public static var recipesUnderPrice: [Int] = []
@@ -16,10 +19,13 @@ public class Data{
     public static var badUrlCount = 0
     public static var baseUrl = "https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page="
     
-//    static var URLList: [String] = ["\(baseUrl)2", "\(baseUrl)3", "\(baseUrl)4"]
-//
     static var URLList: [String] = []
     var count = 2
+    
+    /**
+     Takes the base of the URL and appends the page numbers
+     -Returns: a string array of completed URLs
+     */
     public static func setUrls()->[String]{
         var urls: [String] = []
         var count = 2
@@ -30,6 +36,10 @@ public class Data{
         return urls
     }
     
+    /**
+     'fillProds'  iterates through the URLs and fills the ingredients list with ingredients from countdown.
+     Iterates through the list of recipes and updates the relation table.
+     */
     public static func fillProds(){
         let URLList = setUrls()
         Ingredients = []
@@ -56,16 +66,24 @@ public class Data{
         }
     }
     
-    // Needs reworking
+    /**
+     'addRecipe' adds a recipe to the database
+     Takes parameters required to fill recipe data structure
+     Also has parameters for staples which are for final release
+     */
     public static func addRecipe(n: String, method: String, description: String, Ing: [String],Quants: [Double],Serving: Int,Image: String,staples: [String],staplesQuant: [Int], staplesPPP: [Int]){
         let reci: Reci.Recipe = Reci.Recipe.init(name: n, method: method, description: description, Ingredients: Ing, Quants: Quants,Serving: Serving, Image: Image, staples: staples, staplesQuant: staplesQuant, staplesPPP: staplesPPP)
         
         RecipeList.append(reci)
         //RecipeNum += 1
-        
+        storeRecList()
     }
     
-    //returns price of recipe for specified serving size (needs scaling)
+    /**
+     'priceRecipe' finds the price per serve of a given recipe
+     -Parameter recNum: the position of the recipe in the recipe list
+     -Returns: Price per serving
+     */
     public static func priceRecipe(recNum: Int) -> Double{
         var price = 0.0
         var recInd = 1
