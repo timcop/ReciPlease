@@ -1,4 +1,4 @@
-name: Codecov
+name: Build+Test & Documentation
 
 # Controls when the workflow will run
 on:
@@ -22,3 +22,20 @@ jobs:
               -destination 'platform=iOS Simulator,name=iPhone 11' -enableCodeCoverage YES build test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1.2.1
+  
+  Documentaton:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Extract Documentation
+        uses: SwiftDocOrg/swift-doc@master
+        with:
+           inputs: "Reciplease"
+           module-name: MyLibrary
+           output: "Documentation"
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+           path: "Documentation"
+        env:
+           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
