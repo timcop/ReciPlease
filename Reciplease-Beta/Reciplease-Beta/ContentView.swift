@@ -17,29 +17,27 @@ struct ContentView: View {
 
     var count = 0
     
-    init(){
+    init() {
     UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     }
     
     var body: some View {
-        NavigationView{
-                ZStack{
-                    VStack{
+        NavigationView {
+                ZStack {
+                    VStack {
                         Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                             Text("You currently have " + String(Data.RecipeList.count) + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
-                        
                             .padding(15)
                             .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
-                        NavigationLink(destination: AddRecipeView()){
+                        NavigationLink(destination: AddRecipeView()) {
                             Buttons1.AddRecipeButton()
                             .scaledToFit()
                             .padding()
                         }
                         .buttonStyle(PlainButtonStyle())
                        
-                        
                         Spacer()
                         
                         TextField("Number of people you are cooking for",text: $numCooking)
@@ -56,7 +54,7 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 16, style:
                             .continuous))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                                
+                        
                         TextField("Budget",text: $budget)
                             .keyboardType(.numberPad)
                             .onReceive(Just(budget)) { newValue in
@@ -98,34 +96,27 @@ struct ContentView: View {
                     if isLoading{
                                    LoadingView()
                     }
-                  
-
                 }
                 .onAppear{ self.webScrape()}
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
-            
-           
-            
-        
         }.accentColor(.black)
-            
     }
-    func webScrape(){
+    
+    func webScrape() {
         isLoading = true
         Data.fillProds()
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             self.isLoading=false
         }
     }
-
 }
 
 
-struct LoadingView: View{
+struct LoadingView: View {
     @State private var isLoading = false
-    var body: some View{
+    var body: some View {
         ZStack {
             Text("Cooking up your Recipes")
                 .font(.system(.body, design: .rounded))
