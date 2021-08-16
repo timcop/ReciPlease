@@ -5,7 +5,7 @@ COSC 345 - Software engineering, app creation project.
 
 Generate and choose from recipes based on your budget and number of people you are cooking for.
 
-### How to run the application:
+## How to run the application
 
 Copy the RecipleaseUI folder to your computer and open the file on Xcode.
 
@@ -15,7 +15,7 @@ Using Xcode, start the iPhone simulator, ideally using the iPhone 11 pro max, an
 
 Currently there are no actual recipes loaded into the app as we have no persistant memory, but this will be changed in the beta release. We will also be adding more products and a mechanism to add your own recipes to the app through a product search.
 
-### App creators
+## App creators
 
 Sam Royal, Baxter Robb, Connor Spear, Mathew Shields, Tim Copland, Ethan Fraser
 
