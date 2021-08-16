@@ -18,6 +18,7 @@ struct DetailView: View {
     
     var body: some View{
             NavigationView{
+                
                 VStack{
                     ScrollView{
                     Spacer()
@@ -37,11 +38,13 @@ struct DetailView: View {
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         .randomBorder()
                     
-                }
+                        }
+                
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
             }
+                .frame(alignment: .top)
         }
     }
 }
