@@ -180,7 +180,7 @@ struct AddRecipeView: View {
                                 
                                 Data.addRecipe(n: self.title, method: self.method, description: self.description, Ing: self.ingredients, Quants: self.quantsofIngredients, Serving: Int(self.servingSize) ?? 0, Image: "", staples: self.ingredientsAlreadyHave, staplesQuant: self.quantsofIAH, staplesPPP: self.staplesPPP)
                                 sleep(1)
-                                
+                                Print(Data.RecipeList.count)
                                 self.mode.wrappedValue.dismiss()
                         }
                         

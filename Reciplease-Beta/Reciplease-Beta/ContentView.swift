@@ -31,7 +31,7 @@ struct ContentView: View {
                     VStack{
                         Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                            Text("You currently have " + recipeCount + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
+                        Text("You currently have " + String(Data.RecipeList.count) + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
                         
                             .padding(15)
                             .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
@@ -75,8 +75,19 @@ struct ContentView: View {
                             .continuous))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         
-                        Buttons1.RecipeFinderButton()
-                            .padding(10)
+                        if Data.RecipeList.count > 0 {
+                            let i = Int.random(in: 0..<Data.RecipeList.count)
+                            NavigationLink(destination: DetailView(Title: Data.RecipeList[i].name,
+                                                                   description: Data.RecipeList[i].description,
+                                                                   method: Data.RecipeList[i].method,
+                                                                   ingredients: Data.RecipeList[i].Ingredients)){
+                                Buttons1.RecipeFinderButton()
+                                    .padding(10)
+                            }
+                        } else {
+                            Buttons1.RecipeFinderButton()
+                                .padding(10)
+                        }
                             Spacer()
                                 .frame(height:100)
                         NavigationLink(destination: RecipeListView()){
