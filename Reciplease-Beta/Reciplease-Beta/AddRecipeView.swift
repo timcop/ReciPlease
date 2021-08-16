@@ -175,7 +175,7 @@ struct MultilineTextView: UIViewRepresentable {
 func returnArrayinStringForm(array: [String]) ->String{
     var s = ""
     for i in 0..<array.count{
-        s = s + array[i]+"\n"
+        s += array[i]+"\n"
     }
     return(s)
     

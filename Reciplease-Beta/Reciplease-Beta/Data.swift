@@ -16,19 +16,19 @@ public class Data{
     public static var badUrlCount = 0
     public static var baseUrl = "https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page="
     
-    static var URLList: [String] = ["\(baseUrl)&page=2", "\(baseUrl)&page=3", "\(baseUrl)&page=4", "\(baseUrl)&page=5", "\(baseUrl)&page=6", "\(baseUrl)&page=7", "\(baseUrl)&page=8", "\(baseUrl)&page=9", "\(baseUrl)&page=10", "\(baseUrl)&page=11", "\(baseUrl)&page=12", "\(baseUrl)&page=13", "\(baseUrl)&page=14", "\(baseUrl)&page=15", "\(baseUrl)&page=120"]
+//    static var URLList: [String] = ["\(baseUrl)2", "\(baseUrl)3", "\(baseUrl)4"]
 //
-//    static var URLList: [String] = []
-//    var count = 2
-//    public static func setUrls()->[String]{
-//        var urls: [String] = []
-//        var count = 2
-//        while (count <= 120) {
-//            urls.append("\(Data.baseUrl)\(count)")
-//            count+=1
-//        }
-//        return urls
-//    }
+    static var URLList: [String] = []
+    var count = 2
+    public static func setUrls()->[String]{
+        var urls: [String] = []
+        var count = 2
+        while (count <= 13) {
+            urls.append("\(Data.baseUrl)\(count)")
+            count+=1
+        }
+        return urls
+    }
     
 //    while (count <= 120) {
 //        URLList.append("\(baseUrl)")
@@ -39,9 +39,9 @@ public class Data{
     
     //format looks like [[recipe number, missing ing num,...,missing ing num],[recip....]]
     public static func fillProds()-> [[Int]]{
-//        let URLList = setUrls()
+        let URLList = setUrls()
 //        let URLList = ["https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page=2"]
-//        print(URLList)
+        print(URLList)
         Ingredients = []
         RelationTable = []
         
@@ -80,6 +80,7 @@ public class Data{
                     
     }
     
+    // Needs reworking
     public static func addRecipe(n: String, method: String, description: String, Ing: [String],Quants: [Double],Serving: Int,Image: String,staples: [String],staplesQuant: [Int], staplesPPP: [Int]){
         let reci: Reci.Recipe = Reci.Recipe.init(name: n, method: method, description: description, Ingredients: Ing, Quants: Quants,Serving: Serving, Image: Image, staples: staples, staplesQuant: staplesQuant, staplesPPP: staplesPPP)
         

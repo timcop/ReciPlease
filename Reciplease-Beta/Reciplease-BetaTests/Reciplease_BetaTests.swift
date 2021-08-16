@@ -14,7 +14,9 @@ class Reciplease_BetaTests: XCTestCase {
     func testIngredientsFilled() {
         let miss = Data.fillProds()
         sleep(3)
-        print(miss)
+//        print(miss)
+        print(Data.Ingredients)
+        print(Data.Ingredients.count)
         XCTAssert(Data.Ingredients.count > 0, "No ingredients have been put into array")
     }
     
