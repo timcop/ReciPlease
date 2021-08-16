@@ -26,7 +26,7 @@ class Reciplease_BetaUITests: XCTestCase {
         app.buttons["Add Recipe"].tap()
         let elementsQuery = app.scrollViews.otherElements
         elementsQuery.textFields["Title"].tap()
-        elementsQuery.buttons["Add Recipe"].tap()
-        app.buttons["Browse your Recipes"].tap()
+//        elementsQuery.buttons["Add Recipe"].tap()
+//        app.buttons["Browse your Recipes"].tap()
     }
 }
