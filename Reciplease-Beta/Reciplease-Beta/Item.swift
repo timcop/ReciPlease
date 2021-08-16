@@ -6,10 +6,17 @@
 //
 import Foundation
 
+/**
+ Contains method to scrape products from the Countdown API
+ */
 public class prodRequest{
     public static var badUrl = false
+    /**
+     'getProducts' scrapes from the Countdown API'
+     -Parameter input: the URL to scrape products from
+     */
     public static func getProducts(from input: String) {
-        
+    
         guard let url = URL(string: input) else {return}
         
         var request = URLRequest(url:url)
@@ -44,9 +51,7 @@ public class prodRequest{
                 return
             }
             
-            //print(json.products)
-            print("hey")
-            //Data.Ingredients.append(json.products.items[1])
+
             return
             
         })
@@ -57,6 +62,10 @@ public class prodRequest{
     
 }
 
+/**
+ Data structure for an ingredient
+ Emulates the structure of the JSON for a product used by the Countdown API
+ */
 public class Prod{
     
     
@@ -99,6 +108,9 @@ public class Prod{
     
 }
 
+/**
+ Data Stucture for a recipe
+ */
 public class Reci: Codable{
     
     

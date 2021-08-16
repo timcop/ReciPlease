@@ -6,6 +6,11 @@
 import Foundation
 
 public class Data {
+/**
+ Data storage and methods for updating/accessing stored data
+ Contains storage for recipes, ingredient, and a relation table.
+ */
+public class Data {
     
     public static var recipesUnderPrice: [Int] = []
     public static var Ingredients: [Prod.Food] = []
@@ -15,8 +20,14 @@ public class Data {
     public static var badUrlCount = 0
     public static var baseUrl = "https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page="
     static var URLList: [String] = []
-    
     public static func setUrls() -> [String] {
+    static var URLList: [String] = []
+    
+    /**
+     Takes the base of the URL and appends the page numbers
+     -Returns: a string array of completed URLs
+     */
+    public static func setUrls()->[String]{
         var urls: [String] = []
         var count = 2
         while (count <= 13) {
@@ -26,6 +37,10 @@ public class Data {
         return urls
     }
     
+    /**
+     'fillProds'  iterates through the URLs and fills the ingredients list with ingredients from countdown.
+     Iterates through the list of recipes and updates the relation table.
+     */
     public static func fillProds(){
         let URLList = setUrls()
         Ingredients = []
@@ -52,22 +67,29 @@ public class Data {
         }
     }
     
-    // Needs reworking
+    /**
+     'addRecipe' adds a recipe to the database
+     Takes parameters required to fill recipe data structure
+     Also has parameters for staples which are for final release
+     */
     public static func addRecipe(n: String, method: String, description: String, Ing: [String],Quants: [Double],Serving: Int,Image: String,staples: [String],staplesQuant: [Int], staplesPPP: [Int]){
         let reci: Reci.Recipe = Reci.Recipe.init(name: n, method: method, description: description, Ingredients: Ing, Quants: Quants,Serving: Serving, Image: Image, staples: staples, staplesQuant: staplesQuant, staplesPPP: staplesPPP)
         
         RecipeList.append(reci)
         //RecipeNum += 1
-        
+        storeRecList()
     }
     
-    //returns price of recipe for specified serving size (needs scaling)
+    /**
+     'priceRecipe' finds the price per serve of a given recipe
+     -Parameter recNum: the position of the recipe in the recipe list
+     -Returns: Price per serving
+     */
     public static func priceRecipe(recNum: Int) -> Double{
         var price = 0.0
         var recInd = 1
         print(RelationTable.count)
         for i in 0..<RelationTable.count{
-            print("PENIS")
             if(RelationTable[i].rec > recNum){
                 return price
             }
@@ -84,6 +106,10 @@ public class Data {
 
     }
     
+    /**
+     method to get the recipe list stored in files on device
+     Gets the recipe list in JSON format and decodes into array of type Recipe
+     */
     public static func getRecList(){
         let manager = FileManager.default
         
@@ -92,7 +118,6 @@ public class Data {
         }
         
         print(url.path)
-        print("HEEEYHEEEY")
         
         let recFolder = url.appendingPathComponent("Recipes")
         let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
@@ -101,7 +126,6 @@ public class Data {
             let tempRecList = manager.contents(atPath: recipeList.path)
             let result = try JSONDecoder().decode([Reci.Recipe].self, from: tempRecList!)
             print(result)
-            print("LDONEG")
             RecipeList = result
             
         }
@@ -110,6 +134,9 @@ public class Data {
         }
     }
     
+    /**
+     stores the recipe list in a JSON format in files on device
+     */
     public static func storeRecList(){
         
         let manager = FileManager.default
@@ -119,7 +146,6 @@ public class Data {
         }
         
         print(url.path)
-        print("HEEEYHEEEY")
         
         let encoder = JSONEncoder()
         let recFolder = url.appendingPathComponent("Recipes")
@@ -130,7 +156,6 @@ public class Data {
             let data = try encoder.encode(RecipeList)
             try manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
             try manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
-            print("HEYEYEYEYEYE")
         }
         catch{
             print(error)
