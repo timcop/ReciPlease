@@ -106,6 +106,10 @@ public class Data{
 
     }
     
+    /**
+     method to get the recipe list stored in files on device
+     Gets the recipe list in JSON format and decodes into array of type Recipe
+     */
     public static func getRecList(){
         let manager = FileManager.default
         
@@ -132,6 +136,9 @@ public class Data{
         }
     }
     
+    /**
+     stores the recipe list in a JSON format in files on device
+     */
     public static func storeRecList(){
         
         let manager = FileManager.default
