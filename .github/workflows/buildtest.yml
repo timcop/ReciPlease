@@ -30,7 +30,7 @@ jobs:
       - name: Extract Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
-           inputs: "Reciplease"
+           inputs: "Reciplease-Beta/Reciplease-Beta"
            module-name: MyLibrary
            output: "Documentation"
       - name: Upload Documentation to Wiki
