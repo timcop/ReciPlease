@@ -30,6 +30,7 @@ struct AddRecipeView: View {
     
     var count: Int = 0
     init(){
+        UITextView.appearance().backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     }
     
     
@@ -130,16 +131,14 @@ struct AddRecipeView: View {
                     
                 }
                 
-    
-                Spacer()
-                    .frame(height: 100)
+                Spacer().frame(height: 100)
+                    
                 VStack{
                     Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 20))
                         //.randomBorder()
                         .padding(15)
                         .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                         .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
-                        .frame(width: UIScreen.main.bounds.width - 20)
                     HStack {
                         Text(returnArrayinStringForm2(array:self.ingredients))
                         .font(Font.custom("BebasNeue-Regular",size: 13))
@@ -156,23 +155,17 @@ struct AddRecipeView: View {
                                        }
                                    }
                     }
-                           
-                        Print(returnArrayinStringForm2(array:self.ingredients))
-                        
-
-                    
-                    
-                
-                    Spacer()
-                        .frame(height: UIScreen.main.bounds.height - 900)
                     
                     Text("Method").font(Font.custom("BebasNeue-Regular",size: 20))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                   // TextEditor(text: $method)
-                    //  .foregroundColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
+                        .frame(width: UIScreen.main.bounds.width-20, alignment: .leading)
+                    TextEditor(text: $method)
+                      .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                        .frame(width: UIScreen.main.bounds.width-20, height: 200)
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style:
+                            .continuous))
                     Spacer()
-                        .frame(height: UIScreen.main.bounds.height - 700)
-                    
+                        .frame(height: 50)
                     NavigationLink(destination: ContentView()){
                         Buttons1.FinalAddRecipeButton()
                             .scaleEffect(tap ? 1.02:1)
@@ -180,7 +173,6 @@ struct AddRecipeView: View {
                                 
                                 Data.addRecipe(n: self.title, method: self.method, description: self.description, Ing: self.ingredients, Quants: self.quantsofIngredients, Serving: Int(self.servingSize) ?? 0, Image: "", staples: self.ingredientsAlreadyHave, staplesQuant: self.quantsofIAH, staplesPPP: self.staplesPPP)
                                 sleep(1)
-                                Print(Data.RecipeList.count)
                                 self.mode.wrappedValue.dismiss()
                         }
                         
