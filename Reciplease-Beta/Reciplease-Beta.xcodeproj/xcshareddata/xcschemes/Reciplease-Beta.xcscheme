@@ -33,9 +33,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72E0257026C8F9EC006D82FA"
+               BlueprintIdentifier = "12AB38D526CA1EE500B4F264"
                BuildableName = "Reciplease-BetaTests.xctest"
                BlueprintName = "Reciplease-BetaTests"
+               ReferencedContainer = "container:Reciplease-Beta.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "323E7B1126CA21DB008D685C"
+               BuildableName = "Reciplease-BetaUITests.xctest"
+               BlueprintName = "Reciplease-BetaUITests"
                ReferencedContainer = "container:Reciplease-Beta.xcodeproj">
             </BuildableReference>
          </TestableReference>
