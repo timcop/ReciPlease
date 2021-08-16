@@ -16,7 +16,6 @@ struct DetailView: View {
     @State var count = 0
     var body: some View {
             NavigationView {
-                
                 VStack {
                     ScrollView {
                     Spacer()
