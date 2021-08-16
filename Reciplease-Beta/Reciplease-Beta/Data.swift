@@ -5,8 +5,7 @@
 //
 import Foundation
 
-
-public class Data{
+public class Data {
     
     public static var recipesUnderPrice: [Int] = []
     public static var Ingredients: [Prod.Food] = []
@@ -15,12 +14,9 @@ public class Data{
     public static var RecipeNum = 0
     public static var badUrlCount = 0
     public static var baseUrl = "https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page="
-    
-//    static var URLList: [String] = ["\(baseUrl)2", "\(baseUrl)3", "\(baseUrl)4"]
-//
     static var URLList: [String] = []
-    var count = 2
-    public static func setUrls()->[String]{
+    
+    public static func setUrls() -> [String] {
         var urls: [String] = []
         var count = 2
         while (count <= 13) {
