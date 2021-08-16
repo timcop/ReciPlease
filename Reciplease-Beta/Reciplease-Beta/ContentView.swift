@@ -115,6 +115,7 @@ struct ContentView: View {
     func webScrape(){
         isLoading = true
         Data.fillProds()
+        Data.getRecList()
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             self.isLoading=false
         }
