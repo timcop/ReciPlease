@@ -37,32 +37,42 @@ public class Data{
 //        print(URLList)
         Ingredients = []
         RelationTable = []
+        RecipeNum = 0
         
         var missing: [[Int]] = [[]]
         for url in URLList{
             prodRequest.getProducts(from: url)
         }
+        sleep(2)
         
+        
+        
+        print(RecipeList.count)
         for i in 0..<RecipeList.count{
             var missingForRec: [Int] = [i]
             var hasMissing: Bool = false
             let reci = RecipeList[i]
+            print("penis")
             for j in 0..<reci.Ingredients.count{
                 var found: Bool = false
                 let prodDesc = reci.Ingredients[j]
-                for i in 0..<Ingredients.count{
-                    if prodDesc == Ingredients[i].name{
-                        
-                        RelationTable.append((RecipeNum, i))
+                print("PENIS")
+                for k in 0..<Ingredients.count{
+                    print("p")
+                    if prodDesc.lowercased() == Ingredients[k].name.lowercased(){
+                        RelationTable.append((RecipeNum, k))
                         found = true
                         break
                     }
+                    
                 }
                 if !found{
                     missingForRec.append(j)
                     hasMissing = true
                 }
             }
+            RecipeNum += 1
+            
             if hasMissing{
                 missing.append(missingForRec)
             }
@@ -78,7 +88,7 @@ public class Data{
         let reci: Reci.Recipe = Reci.Recipe.init(name: n, method: method, description: description, Ingredients: Ing, Quants: Quants,Serving: Serving, Image: Image, staples: staples, staplesQuant: staplesQuant, staplesPPP: staplesPPP)
         
         RecipeList.append(reci)
-        RecipeNum += 1
+        //RecipeNum += 1
         
     }
     
@@ -97,10 +107,11 @@ public class Data{
     public static func priceRecipe(recNum: Int) -> Double{
         var price = 0.0
         var recInd = 0
+        print(RelationTable.count)
         for i in 0..<RelationTable.count{
-            print("")
+            print("PENIS")
             if(RelationTable[i].rec > recNum){
-                break
+                return price
             }
             if(RelationTable[i].rec == recNum && recInd<2){
                 price += Ingredients[RelationTable[i].ingr].price.salePrice * RecipeList[recNum].Quants[recInd]
@@ -110,6 +121,7 @@ public class Data{
         for i in 0..<RecipeList[recNum].staplesPPP.count{
             price += Double(RecipeList[recNum].staplesPPP[i]*RecipeList[recNum].Serving)
         }
+        print(price)
         return price
 
     }
