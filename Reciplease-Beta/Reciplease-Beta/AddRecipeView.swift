@@ -30,7 +30,6 @@ struct AddRecipeView: View {
     init() {
         UITextView.appearance().backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     }
-    
     var body: some View {
         
         ZStack {
