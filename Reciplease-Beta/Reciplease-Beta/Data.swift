@@ -46,7 +46,7 @@ public class Data {
         for url in URLList {
             prodRequest.getProducts(from: url)
         }
-        sleep(2)
+        sleep(3)
         
         for i in 0..<RecipeList.count {
             let reci = RecipeList[i]
@@ -126,12 +126,14 @@ public class Data {
         let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
         
         do {
-            let tempRecList = manager.contents(atPath: recipeList.path)
-            let result = try JSONDecoder().decode([Reci.Recipe].self, from: tempRecList!)
-            print(result)
-            RecipeList = result
+            let tempRecList = try manager.contents(atPath: recipeList.path)
+            if tempRecList != nil {
+                let result = try JSONDecoder().decode([Reci.Recipe].self, from: tempRecList!)
+                print(result)
+                RecipeList = result
+            }
         }
-        catch{
+        catch {
             print(error)
         }
     }

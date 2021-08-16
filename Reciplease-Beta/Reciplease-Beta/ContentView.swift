@@ -73,7 +73,7 @@ struct ContentView: View {
                             NavigationLink(destination: DetailView(title: Data.RecipeList[index].name,
                                                                    description: Data.RecipeList[index].description,
                                                                    method: Data.RecipeList[index].method,
-                                                                   ingredients: Data.RecipeList[index].Ingredients)) {
+                                                                   ingredients: Data.RecipeList[index].Ingredients, quantities: Data.RecipeList[index].Quants)) {
                                 Buttons1.RecipeFinderButton()
                                     .padding(10)
                             }

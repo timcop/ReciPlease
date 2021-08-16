@@ -90,7 +90,7 @@ struct AddRecipeView: View {
                                 }
                                 .frame(height: 200)
                                 .clipped()
-                                .offset(x: -48, y: 50)
+                                .offset(y: 50)
                                 SearchBar(text: $searchText,placeholder: "Ingredients...")
                                     .frame(width: UIScreen.main.bounds.width-75)
                                 //.randomBorder()
@@ -176,28 +176,17 @@ struct AddRecipeView: View {
                                        .foregroundColor(.secondary)
                                     .frame(alignment: .bottom)
                                 }
-                            }) {
-                                if self.ingredients.count > 1{
-                                    Image(systemName: "multiply.circle.fill")
-                                        .foregroundColor(.secondary)
-                                        .frame(alignment: .bottom)
-                                }
                             }
                         }
-                        
-                     
-                        
-                        
-                        
                         
                         Text("Method").font(Font.custom("BebasNeue-Regular",size: 20))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                             .frame(width: UIScreen.main.bounds.width-40, alignment: .leading)
-//                        TextEditor(text: $method)
-//                            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-//                            .frame(width: UIScreen.main.bounds.width-20, height: 200)
-//                            .clipShape(RoundedRectangle(cornerRadius: 12, style:
-//                                .continuous))
+                        TextEditor(text: $method)
+                            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                            .frame(width: UIScreen.main.bounds.width-20, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 12, style:
+                                .continuous))
                         Spacer()
                             .frame(height: 50)
                         NavigationLink(destination: ContentView()){
@@ -207,7 +196,6 @@ struct AddRecipeView: View {
                                     sleep(1)
                                     self.mode.wrappedValue.dismiss()
                             }
-                            
                             
                         }
                     }
@@ -223,11 +211,10 @@ struct AddRecipeView: View {
     }
 }
 
-
 func returnArrayinStringForm2(array: [String]) ->String{
-    var s = ""
+    var str = ""
     for i in 0..<array.count{
-        s += array[i]+"\n"
+        str += array[i]+"\n"
     }
     return(str)
 }
