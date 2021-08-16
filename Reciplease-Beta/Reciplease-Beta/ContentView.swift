@@ -17,21 +17,19 @@ struct ContentView: View {
     @State var budget = ""
     @State var tap = false
     @State private var isLoading = false
-
     var count = 0
-    
     init() {
     UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     }
-    
     var body: some View {
         NavigationView {
                 ZStack {
                     VStack {
-                        Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
+                        Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular", size: 50))
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                            Text("You currently have " + String(Data.RecipeList.count) + " Recipe's stored").font(Font.custom("BebasNeue-Regular",size: 23))
+                            Text("You currently have " + String(Data.RecipeList.count) + " Recipe's stored")
+                                .font(Font.custom("BebasNeue-Regular", size: 23))
                             .padding(15)
                             .foregroundColor(Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)))
                         NavigationLink(destination: AddRecipeView()) {
@@ -75,7 +73,7 @@ struct ContentView: View {
                         
                         if Data.RecipeList.count > 0 {
                             let i = Int.random(in: 0..<Data.RecipeList.count)
-                            NavigationLink(destination: DetailView(Title: Data.RecipeList[i].name,
+                            NavigationLink(destination: DetailView(title: Data.RecipeList[i].name,
                                                                    description: Data.RecipeList[i].description,
                                                                    method: Data.RecipeList[i].method,
                                                                    ingredients: Data.RecipeList[i].Ingredients)){
