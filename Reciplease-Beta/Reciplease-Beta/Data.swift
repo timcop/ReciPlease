@@ -93,15 +93,6 @@ public class Data{
     }
     
     //for lookinging up items when adding recipes
-    public static func searchItem(input: String) -> [Int]{
-        var out: [Int] = []
-        for i in 0..<Ingredients.count{
-            if (Ingredients[i].name.lowercased().contains(input.lowercased())){
-                out.append(i)
-            }
-        }
-        return out
-    }
     
     //returns price of recipe for specified serving size (needs scaling)
     public static func priceRecipe(recNum: Int) -> Double{

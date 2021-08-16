@@ -28,7 +28,9 @@ class Reciplease_BetaTests: XCTestCase {
     func testDataFuncs() {
         Data.fillProds()
         sleep(3)
-        print(Data.Ingredients)
+        var ingreds = print(Data.Ingredients)
+        var searched = Data.searchItem("")
+        print(searched)
         
     }
 }
