@@ -41,7 +41,7 @@ public class Data{
     public static func fillProds()-> [[Int]]{
         let URLList = setUrls()
 //        let URLList = ["https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page=2"]
-        print(URLList)
+//        print(URLList)
         Ingredients = []
         RelationTable = []
         
