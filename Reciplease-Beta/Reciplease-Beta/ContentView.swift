@@ -75,17 +75,17 @@ struct ContentView: View {
                             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         
                         if Data.RecipeList.count > 0 {
-                            let i = Int.random(in: 0..<Data.RecipeList.count)
-                            NavigationLink(destination: DetailView(Title: Data.RecipeList[i].name,
-                                                                   description: Data.RecipeList[i].description,
-                                                                   method: Data.RecipeList[i].method,
-                                                                   ingredients: Data.RecipeList[i].Ingredients)){
-                                Buttons1.RecipeFinderButton()
-                                    .padding(10)
-                            }
-                        } else {
-                            Buttons1.RecipeFinderButton()
-                                .padding(10)
+//                         //   let i = Int.random(in: 0..<Data.RecipeList.count)
+//                            NavigationLink(destination: DetailView(Title: Data.RecipeList[i].name,
+//                                                                   description: Data.RecipeList[i].description,
+//                                                                   method: Data.RecipeList[i].method,
+//                                                                   ingredients: Data.RecipeList[i].Ingredients)){
+//                                Buttons1.RecipeFinderButton()
+//                                    .padding(10)
+//                            }
+//                        } else {
+//                            Buttons1.RecipeFinderButton()
+//                                .padding(10)
                         }
                             Spacer()
                                 .frame(height:100)
