@@ -7,6 +7,9 @@
 //
 
 import SwiftUI
+/**
+ The Search bar object that appears on the add recipe screen
+ */
 
 struct SearchBar: UIViewRepresentable {
 

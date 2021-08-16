@@ -13,6 +13,9 @@ struct Buttons: View {
         Buttons()
     }
 }
+/**
+ Class containing all the custom buttons used in the UI. Every name of each button corresponds to its use in the UI.
+ */
 
 public class Buttons1 {
    

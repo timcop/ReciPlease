@@ -8,7 +8,9 @@
 
 import SwiftUI
 import Combine
-
+/**
+ The Add Recipe page
+ */
 struct AddRecipeView: View {
     @State var title = ""
     @State var searchText = ""
@@ -206,6 +208,9 @@ struct AddRecipeView: View {
         }
     }
 }
+/**
+ Returns a line seperated string from a string array
+ */
 
 func returnArrayinStringForm2(array: [String]) -> String {
     var str = ""

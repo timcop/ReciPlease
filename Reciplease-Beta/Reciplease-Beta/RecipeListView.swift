@@ -7,6 +7,9 @@
 //
 
 import SwiftUI
+/**
+ Individual detail view for each of the recipes. This navigated to the browse recipes, and also with the random finder button
+ */
 
 struct DetailView: View {
     var title: String
@@ -71,6 +74,9 @@ struct RecipeListView_Previews: PreviewProvider {
         RecipeListView()
     }
 }
+/**
+ Returns an array of strings in a single line seperated string.
+ */
 
 func returnArrayinStringForm(array: [String]) ->String{
     var str = ""
