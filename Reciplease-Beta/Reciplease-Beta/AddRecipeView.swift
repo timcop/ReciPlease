@@ -55,14 +55,14 @@ struct AddRecipeView: View {
                             .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     Buttons1.ImageButton()
-                    .randomBorder()
+                   // .randomBorder()
                 }
                 .frame(width: UIScreen.main.bounds.width - 20)
                     
                     
                 HStack{
                     TextField("Description",text: $description)
-                        .randomBorder()
+                       // .randomBorder()
                         .multilineTextAlignment(TextAlignment.center)
                         .frame(width: UIScreen.main.bounds.width-170,height:40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
@@ -70,7 +70,7 @@ struct AddRecipeView: View {
                             .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     TextField("Serving Size",text: $servingSize)
-                        .randomBorder()
+                        //.randomBorder()
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(TextAlignment.center)
                         .frame(width: UIScreen.main.bounds.width-290,height:40)
@@ -89,16 +89,14 @@ struct AddRecipeView: View {
                 
                
                 HStack{
-                    Spacer()
-                        .frame(height: 20)
                     ZStack{
                         Picker("",selection: $ingredient){
                             
                             ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
-                                Text(item.unit + " " + item.name).font(.system(size: 10))                            }
+                                Text(item.name + "| Unit: " + item.unit).font(.system(size: 10))                            }
                         }
                         .offset(y:50)
-                        .randomBorder()
+                        //.randomBorder()
                         .padding(.top,20)
                         .frame(height: 200)
                         .clipped()
@@ -106,8 +104,8 @@ struct AddRecipeView: View {
                         .frame(height: 5)
                         SearchBar(text: $searchText,placeholder: "Ingredients...")
                             .frame(width: UIScreen.main.bounds.width-75)
-                            .offset(x: -7)
-                            .randomBorder()
+                            .offset(x: 3)
+                            //.randomBorder()
                            
                     }
                     .frame(height: 20)
@@ -117,11 +115,13 @@ struct AddRecipeView: View {
                     
                     
                     Buttons1.AddButton()
-                        .randomBorder()
-                        .offset(x:-10)
+                        //.randomBorder()
+                        .offset(x:-15)
                         .scaleEffect(tap ? 1.02:1)
                         .onTapGesture {
+                            if !self.ingredients.contains(self.ingredient){
                             self.ingredients.append(self.ingredient)
+                                }
                             self.tap = true
                             DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
                                 self.tap=false
@@ -135,14 +135,28 @@ struct AddRecipeView: View {
                     .frame(height: 100)
                 VStack{
                     Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 20))
-                        .randomBorder()
+                        //.randomBorder()
                         .padding(15)
                         .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                         .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
                         .frame(width: UIScreen.main.bounds.width - 20)
+                    HStack {
                         Text(returnArrayinStringForm2(array:self.ingredients))
                         .font(Font.custom("BebasNeue-Regular",size: 13))
-                            .modifier(ClearButton(text: self.ingredients[self.ingredients.count-1]))
+                            .frame(width: UIScreen.main.bounds.width-70, alignment: .leading)
+                            Button(action: {
+                                if self.ingredients.count > 1 {
+                                    self.ingredients.remove(at:  self.ingredients.firstIndex(of: self.ingredients[self.ingredients.count-1]) ?? 0)
+                                }
+                                       }) {
+                                        if self.ingredients.count > 1{
+                                           Image(systemName: "multiply.circle.fill")
+                                               .foregroundColor(.secondary)
+                                            .frame(alignment: .bottom)
+                                       }
+                                   }
+                    }
+                           
                         Print(returnArrayinStringForm2(array:self.ingredients))
                         
 
@@ -154,8 +168,8 @@ struct AddRecipeView: View {
                     
                     Text("Method").font(Font.custom("BebasNeue-Regular",size: 20))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                    TextEditor(text: $method)
-                      .foregroundColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
+                   // TextEditor(text: $method)
+                    //  .foregroundColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
                     Spacer()
                         .frame(height: UIScreen.main.bounds.height - 700)
                     
@@ -211,19 +225,4 @@ func returnArrayinStringForm2(array: [String]) ->String{
     
 }
 
-struct ClearButton: ViewModifier {
-    @State var text: String
-   
-    public func body(content: Content) -> some View {
-        HStack {
-            content
-            Button(action: {
-                self.text = ""
-                AddRecipeView().ingredients.remove(at:  AddRecipeView().ingredients.firstIndex(of: self.text) ?? 0)
-            }) {
-                Image(systemName: "multiply.circle.fill")
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-}
+
