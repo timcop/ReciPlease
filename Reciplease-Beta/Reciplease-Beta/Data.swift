@@ -68,14 +68,14 @@ public class Data{
     //returns price of recipe for specified serving size (needs scaling)
     public static func priceRecipe(recNum: Int) -> Double{
         var price = 0.0
-        var recInd = 0
+        var recInd = 1
         print(RelationTable.count)
         for i in 0..<RelationTable.count{
             print("PENIS")
             if(RelationTable[i].rec > recNum){
                 return price
             }
-            if(RelationTable[i].rec == recNum && recInd<2){
+            if(RelationTable[i].rec == recNum){
                 price += Ingredients[RelationTable[i].ingr].price.salePrice * RecipeList[recNum].Quants[recInd]
                 recInd += 1
             }
