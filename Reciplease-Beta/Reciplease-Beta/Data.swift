@@ -10,7 +10,6 @@ import Foundation
  Contains storage for recipes, ingredient, and a relation table.
  */
 public class Data {
-    
     public static var recipesUnderPrice: [Int] = []
     public static var Ingredients: [Prod.Food] = []
     public static var RecipeList: [Reci.Recipe] = []
@@ -27,7 +26,7 @@ public class Data {
     public static func setUrls() -> [String] {
         var urls: [String] = []
         var count = 2
-        while (count <= 13) {
+        while count <= 13 {
             urls.append("\(Data.baseUrl)\(count)")
             count+=1
         }
@@ -44,17 +43,17 @@ public class Data {
         RelationTable = []
         RecipeNum = 0
         
-        for url in URLList{
+        for url in URLList {
             prodRequest.getProducts(from: url)
         }
         sleep(2)
         
-        for i in 0..<RecipeList.count{
+        for i in 0..<RecipeList.count {
             let reci = RecipeList[i]
-            for j in 0..<reci.Ingredients.count{
+            for j in 0..<reci.Ingredients.count {
                 let prodDesc = reci.Ingredients[j]
-                for k in 0..<Ingredients.count{
-                    if prodDesc.lowercased() == Ingredients[k].name.lowercased(){
+                for k in 0..<Ingredients.count {
+                    if prodDesc.lowercased() == Ingredients[k].name.lowercased() {
                         RelationTable.append((RecipeNum, k))
                         break
                     }
@@ -69,10 +68,19 @@ public class Data {
      Takes parameters required to fill recipe data structure
      Also has parameters for staples which are for final release
      */
-    public static func addRecipe(n: String, method: String, description: String, Ing: [String],Quants: [Double],Serving: Int,Image: String,staples: [String],staplesQuant: [Int], staplesPPP: [Int]) {
+    public static func addRecipe(n: String, method: String,
+                                 description: String, Ing: [String],
+                                 Quants: [Double],Serving: Int,
+                                 Image: String,staples: [String],
+                                 staplesQuant: [Int], staplesPPP: [Int]) {
         
-        let reci: Reci.Recipe = Reci.Recipe.init(name: n, method: method, description: description, Ingredients: Ing, Quants: Quants,Serving: Serving, Image: Image, staples: staples, staplesQuant: staplesQuant, staplesPPP: staplesPPP)
-        
+        let reci: Reci.Recipe =
+            Reci.Recipe.init(name: n, method: method,
+                             description: description, Ingredients: Ing,
+                             Quants: Quants,Serving: Serving, Image: Image,
+                             staples: staples, staplesQuant: staplesQuant,
+                             staplesPPP: staplesPPP)
+
         RecipeList.append(reci)
         storeRecList()
     }
