@@ -26,7 +26,6 @@ struct AddRecipeView: View {
     var quantsofIAH: [Int] = []
     var staplesPPP: [Int] = []
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
     var count: Int = 0
     init() {
         UITextView.appearance().backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -42,7 +41,6 @@ struct AddRecipeView: View {
                 Spacer()
                     .frame(height: 53)
                 HStack {
-                    
                     TextField("Title", text: $title)
                         .multilineTextAlignment(TextAlignment.center)
                         .frame(width: UIScreen.main.bounds.width-170, height: 40)
@@ -54,11 +52,10 @@ struct AddRecipeView: View {
                 }
                 .frame(width: UIScreen.main.bounds.width - 20)
                     
-                    
                 HStack {
                     TextField("Description", text: $description)
                         .multilineTextAlignment(TextAlignment.center)
-                        .frame(width: UIScreen.main.bounds.width-170,height:40)
+                        .frame(width: UIScreen.main.bounds.width-170, height: 40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                         .clipShape(RoundedRectangle(cornerRadius: 12, style:
                             .continuous))
@@ -66,7 +63,7 @@ struct AddRecipeView: View {
                     TextField("Serving Size", text: $servingSize)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(TextAlignment.center)
-                        .frame(width: UIScreen.main.bounds.width-290,height:40)
+                        .frame(width: UIScreen.main.bounds.width-290, height: 40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                         .clipShape(RoundedRectangle(cornerRadius: 12, style:
                             .continuous))
@@ -77,7 +74,6 @@ struct AddRecipeView: View {
                                 self.servingSize = filtered
                             }
                     }
-                    
                 }
                 
             VStack {
@@ -104,7 +100,7 @@ struct AddRecipeView: View {
                     .frame(height: 20)
                     
                     Buttons1.AddButton()
-                        .offset(x:-15)
+                        .offset(x: -15)
                         .scaleEffect(tap ? 1.02:1)
                         .onTapGesture {
                         if Double(self.quant) != nil {
@@ -124,7 +120,7 @@ struct AddRecipeView: View {
                 TextField("Quantity", text: $quant)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(TextAlignment.center)
-                    .frame(width: UIScreen.main.bounds.width-360,height:40, alignment: .leading)
+                    .frame(width: UIScreen.main.bounds.width-360, height: 40, alignment: .leading)
                     .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                     .clipShape(RoundedRectangle(cornerRadius: 12, style:
                         .continuous))
@@ -140,16 +136,16 @@ struct AddRecipeView: View {
                 
                 Spacer().frame(height: 100)
                     
-                VStack{
+                VStack {
                     Text("Ingredient List").font(Font.custom("BebasNeue-Regular", size: 20))
                         .padding(15)
                         .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
                         .frame(width: UIScreen.main.bounds.width - 15, alignment: .leading)
                     HStack {
                         Text(returnArrayinStringForm(array: self.quantsofIngredients))
-                            .font(Font.custom("BebasNeue-Regular",size: 13))
+                            .font(Font.custom("BebasNeue-Regular", size: 13))
                         Text(returnArrayinStringForm2(array: self.ingredients))
-                        .font(Font.custom("BebasNeue-Regular",size: 13))
+                        .font(Font.custom("BebasNeue-Regular", size: 13))
                             .frame(width: UIScreen.main.bounds.width-70, alignment: .leading)
                             Button(action: {
                                 if self.ingredients.count > 1 {
@@ -167,8 +163,7 @@ struct AddRecipeView: View {
                                         at: self.quantities.firstIndex(of: self.quantities[self.quantities.count-1]
                                         ) ?? 0)
                                 }
-                            })
-                            {
+                            }) {
                                 if self.ingredients.count > 1 {
                                    Image(systemName: "multiply.circle.fill")
                                        .foregroundColor(.secondary)
@@ -218,30 +213,10 @@ struct AddRecipeView: View {
     }
 }
 
-struct AddRecipeView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddRecipeView()
-    }
-}
-
-
-
-
-extension View {
-    func Print(_ vars: Any...) -> some View {
-        for v in vars { print(v) }
-        return EmptyView()
-    }
-}
-
-
 func returnArrayinStringForm2(array: [String]) ->String{
     var s = ""
     for i in 0..<array.count{
         s += array[i]+"\n"
     }
     return(s)
-    
 }
-
-
