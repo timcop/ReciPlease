@@ -25,17 +25,17 @@ struct DetailView: View {
                     Text(Title).font(Font.custom("BebasNeue-Regular",size: 25))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         .padding(10)
-                        .randomBorder()
+//                        .randomBorder()
                     Text(description).font(Font.custom("BebasNeue-Regular",size: 20))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                        .randomBorder()
+//                        .randomBorder()
                     Text(returnArrayinStringForm(array: ingredients)).font(Font.custom("BebasNeue-Regular",size: 15))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         .frame(alignment: .leading)
-                        .randomBorder()
+//                        .randomBorder()
                     Text(method).font(Font.custom("BebasNeue-Regular",size: 15))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-                        .randomBorder()
+//                        .randomBorder()
                     
                         }
                 
