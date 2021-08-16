@@ -36,9 +36,7 @@ public class prodRequest{
                 let result = try JSONDecoder().decode(Prod.Products.self, from: data)
                 for i in 0..<result.products.items.count{
                     Data.Ingredients.append(result.products.items[i])
-                    // print(result.products.items[i])
                 }
-                //print(result.products)
             }
             catch{
                 print("failed to convert: \(error.localizedDescription)")
@@ -46,11 +44,6 @@ public class prodRequest{
                 print(input)
                 badUrl = true
             }
-            
-            guard let json = result else{
-                return
-            }
-            
 
             return
             

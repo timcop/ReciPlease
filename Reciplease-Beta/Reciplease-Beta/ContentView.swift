@@ -9,6 +9,9 @@
 import SwiftUI
 import Combine
 
+/**
+ Home Screen
+ */
 struct ContentView: View {
     @State var numCooking = ""
     @State var budget = ""
@@ -107,13 +110,16 @@ struct ContentView: View {
     func webScrape() {
         isLoading = true
         Data.fillProds()
+        Data.getRecList()
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             self.isLoading=false
         }
     }
 }
 
-
+/**
+ Loading Screen
+ */
 struct LoadingView: View {
     @State private var isLoading = false
     var body: some View {
