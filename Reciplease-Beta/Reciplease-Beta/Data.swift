@@ -24,7 +24,7 @@ public class Data {
      Takes the base of the URL and appends the page numbers
      -Returns: a string array of completed URLs
      */
-    public static func setUrls()->[String]{
+    public static func setUrls() -> [String] {
         var urls: [String] = []
         var count = 2
         while (count <= 13) {
@@ -38,7 +38,7 @@ public class Data {
      'fillProds'  iterates through the URLs and fills the ingredients list with ingredients from countdown.
      Iterates through the list of recipes and updates the relation table.
      */
-    public static func fillProds(){
+    public static func fillProds() {
         let URLList = setUrls()
         Ingredients = []
         RelationTable = []
@@ -69,11 +69,11 @@ public class Data {
      Takes parameters required to fill recipe data structure
      Also has parameters for staples which are for final release
      */
-    public static func addRecipe(n: String, method: String, description: String, Ing: [String],Quants: [Double],Serving: Int,Image: String,staples: [String],staplesQuant: [Int], staplesPPP: [Int]){
+    public static func addRecipe(n: String, method: String, description: String, Ing: [String],Quants: [Double],Serving: Int,Image: String,staples: [String],staplesQuant: [Int], staplesPPP: [Int]) {
+        
         let reci: Reci.Recipe = Reci.Recipe.init(name: n, method: method, description: description, Ingredients: Ing, Quants: Quants,Serving: Serving, Image: Image, staples: staples, staplesQuant: staplesQuant, staplesPPP: staplesPPP)
         
         RecipeList.append(reci)
-        //RecipeNum += 1
         storeRecList()
     }
     
@@ -82,32 +82,30 @@ public class Data {
      -Parameter recNum: the position of the recipe in the recipe list
      -Returns: Price per serving
      */
-    public static func priceRecipe(recNum: Int) -> Double{
+    public static func priceRecipe(recNum: Int) -> Double {
         var price = 0.0
         var recInd = 1
-        print(RelationTable.count)
         for i in 0..<RelationTable.count{
-            if(RelationTable[i].rec > recNum){
+            if (RelationTable[i].rec > recNum) {
                 return price
             }
-            if(RelationTable[i].rec == recNum){
+            if (RelationTable[i].rec == recNum) {
                 price += Ingredients[RelationTable[i].ingr].price.salePrice * RecipeList[recNum].Quants[recInd]
                 recInd += 1
             }
         }
-        for i in 0..<RecipeList[recNum].staplesPPP.count{
+        for i in 0..<RecipeList[recNum].staplesPPP.count {
             price += Double(RecipeList[recNum].staplesPPP[i]*RecipeList[recNum].Serving)
         }
         print(price)
         return price
-        
     }
     
     /**
      method to get the recipe list stored in files on device
      Gets the recipe list in JSON format and decodes into array of type Recipe
      */
-    public static func getRecList(){
+    public static func getRecList() {
         let manager = FileManager.default
         
         guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else{
@@ -124,7 +122,6 @@ public class Data {
             let result = try JSONDecoder().decode([Reci.Recipe].self, from: tempRecList!)
             print(result)
             RecipeList = result
-            
         }
         catch{
             print(error)
@@ -134,11 +131,11 @@ public class Data {
     /**
      stores the recipe list in a JSON format in files on device
      */
-    public static func storeRecList(){
+    public static func storeRecList() {
         
         let manager = FileManager.default
         
-        guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else{
+        guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return
         }
         
@@ -149,12 +146,11 @@ public class Data {
         let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
         
         do {
-            
             let data = try encoder.encode(RecipeList)
             try manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
-            try manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
+            manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
         }
-        catch{
+        catch {
             print(error)
         }
     }
