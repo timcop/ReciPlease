@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Reciplease_Beta
 
 class Reciplease_BetaUITests: XCTestCase {
     
@@ -17,5 +18,15 @@ class Reciplease_BetaUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
+    }
+    
+    func testUI5() {
+        
+        let app = XCUIApplication()
+        app.buttons["Add Recipe"].tap()
+        let elementsQuery = app.scrollViews.otherElements
+        elementsQuery.textFields["Title"].tap()
+        elementsQuery.buttons["Add Recipe"].tap()
+        app.buttons["Browse your Recipes"].tap()
     }
 }

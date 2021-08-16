@@ -54,7 +54,6 @@ struct RecipeListView: View {
                 Text("$" + String(Data.priceRecipe(recNum: index))).listRowBackground(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 }
         }
-        
     }
 }
 
