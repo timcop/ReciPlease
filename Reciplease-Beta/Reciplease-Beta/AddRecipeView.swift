@@ -213,10 +213,10 @@ struct AddRecipeView: View {
     }
 }
 
-func returnArrayinStringForm2(array: [String]) ->String{
-    var s = ""
-    for i in 0..<array.count{
-        s += array[i]+"\n"
+func returnArrayinStringForm2(array: [String]) -> String {
+    var str = ""
+    for i in 0..<array.count {
+        str += array[i]+"\n"
     }
-    return(s)
+    return(str)
 }
