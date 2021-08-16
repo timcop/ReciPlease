@@ -31,56 +31,30 @@ public class Data{
     }
     
     //format looks like [[recipe number, missing ing num,...,missing ing num],[recip....]]
-    public static func fillProds()-> [[Int]]{
+    public static func fillProds(){
         let URLList = setUrls()
-//        let URLList = ["https://shop.countdown.co.nz/api/v1/products?dasFilter=Department%3B%3Bfruit-veg%3Bfalse&target=browse&page=2"]
-//        print(URLList)
         Ingredients = []
         RelationTable = []
         RecipeNum = 0
         
-        var missing: [[Int]] = [[]]
         for url in URLList{
             prodRequest.getProducts(from: url)
         }
         sleep(2)
         
-        
-        
-        print(RecipeList.count)
         for i in 0..<RecipeList.count{
-            var missingForRec: [Int] = [i]
-            var hasMissing: Bool = false
             let reci = RecipeList[i]
-            print("penis")
             for j in 0..<reci.Ingredients.count{
-                var found: Bool = false
                 let prodDesc = reci.Ingredients[j]
-                print("PENIS")
                 for k in 0..<Ingredients.count{
-                    print("p")
                     if prodDesc.lowercased() == Ingredients[k].name.lowercased(){
                         RelationTable.append((RecipeNum, k))
-                        found = true
                         break
                     }
-                    
-                }
-                if !found{
-                    missingForRec.append(j)
-                    hasMissing = true
                 }
             }
             RecipeNum += 1
-            
-            if hasMissing{
-                missing.append(missingForRec)
-            }
-            
-            
         }
-        return missing
-                    
     }
     
     // Needs reworking
@@ -91,8 +65,6 @@ public class Data{
         //RecipeNum += 1
         
     }
-    
-    //for lookinging up items when adding recipes
     
     //returns price of recipe for specified serving size (needs scaling)
     public static func priceRecipe(recNum: Int) -> Double{
