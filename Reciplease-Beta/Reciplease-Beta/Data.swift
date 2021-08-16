@@ -89,7 +89,6 @@ public class Data{
         var recInd = 1
         print(RelationTable.count)
         for i in 0..<RelationTable.count{
-            print("PENIS")
             if(RelationTable[i].rec > recNum){
                 return price
             }
@@ -118,7 +117,6 @@ public class Data{
         }
         
         print(url.path)
-        print("HEEEYHEEEY")
         
         let recFolder = url.appendingPathComponent("Recipes")
         let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
@@ -127,7 +125,6 @@ public class Data{
             let tempRecList = manager.contents(atPath: recipeList.path)
             let result = try JSONDecoder().decode([Reci.Recipe].self, from: tempRecList!)
             print(result)
-            print("LDONEG")
             RecipeList = result
             
         }
@@ -148,7 +145,6 @@ public class Data{
         }
         
         print(url.path)
-        print("HEEEYHEEEY")
         
         let encoder = JSONEncoder()
         let recFolder = url.appendingPathComponent("Recipes")
@@ -159,7 +155,6 @@ public class Data{
             let data = try encoder.encode(RecipeList)
             try manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
             try manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
-            print("HEYEYEYEYEYE")
         }
         catch{
             print(error)
