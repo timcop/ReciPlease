@@ -30,13 +30,6 @@ public class Data{
         return urls
     }
     
-//    while (count <= 120) {
-//        URLList.append("\(baseUrl)")
-//    }
-    init(){
-        
-    }
-    
     //format looks like [[recipe number, missing ing num,...,missing ing num],[recip....]]
     public static func fillProds()-> [[Int]]{
         let URLList = setUrls()

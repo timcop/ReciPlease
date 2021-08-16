@@ -9,7 +9,6 @@
 import XCTest
 @testable import Reciplease_Beta
 
-
 class Reciplease_BetaTests: XCTestCase {
     
     func testIngredientsFilled() {
@@ -24,6 +23,13 @@ class Reciplease_BetaTests: XCTestCase {
         let miss = Data.fillProds()
         sleep(3)
         XCTAssert(miss.count == 1, "Missing relation?")
+    }
+    
+    func testDataFuncs() {
+        Data.fillProds()
+        sleep(3)
+        print(Data.Ingredients)
+        
     }
 }
 
