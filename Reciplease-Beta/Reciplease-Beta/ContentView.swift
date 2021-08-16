@@ -18,7 +18,8 @@ struct ContentView: View {
     var count = 0
     
     init(){
-  
+    UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
+    UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     }
     
     var body: some View {
@@ -86,7 +87,9 @@ struct ContentView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     .frame(height: UIScreen.main.bounds.height - 50,alignment: .top)
-                    
+                    if isLoading{
+                                   LoadingView()
+                    }
                   
 
                 }
@@ -94,6 +97,9 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
                 .edgesIgnoringSafeArea(.all)
+            
+           
+            
         
         }.accentColor(.black)
             
@@ -101,7 +107,7 @@ struct ContentView: View {
     func webScrape(){
         isLoading = true
         Data.fillProds()
-        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             self.isLoading=false
         }
     }
@@ -122,15 +128,34 @@ func Startup(){
                    description: "Lovely Vegetable Lasagne", Ing: ["meadows mushrooms shiitake","fresh produce rockmelon whole","taylor farms salad kit buffalo ranch with dressing"], Quants: [1,1,2], Serving: 4,Image: "Lasagne",staples: ["jeff, Cheese, penis"], staplesQuant: [1,2,1000], staplesPPP: [10,3,1])
 }
 
-//struct LoadingView: View{
-//    var body: some view{
-//        let jeremyGif = UIImage.gifImageWithName("funny")
-//        let imageView = UIImageView(image: jeremyGif)
-//        imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: 150.0)
-//        view.addSubview(imageView)
-//
-//    }
-//}
+struct LoadingView: View{
+    @State private var isLoading = false
+    var body: some View{
+        ZStack {
+            
+            Text("Cooking up your Recipes")
+                .font(.system(.body, design: .rounded))
+                .bold()
+                .offset(x: 0, y: -25)
+            
+            RoundedRectangle(cornerRadius: 3)
+                .stroke(Color(.systemGray5), lineWidth: 3)
+                .frame(width: 250, height: 3)
+            
+            RoundedRectangle(cornerRadius: 3)
+                .stroke(Color.orange, lineWidth: 3)
+                .frame(width: 30, height: 3)
+                .offset(x: isLoading ? 110 : -110, y: 0)
+                .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+        }
+        .onAppear() {
+            self.isLoading = true
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
+        .edgesIgnoringSafeArea(.all)
+    }
+}
 
 
 

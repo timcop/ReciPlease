@@ -17,8 +17,9 @@ struct AddRecipeView: View {
     @State var description = ""
     @State var servingSize = ""
     @State var ingredient = ""
-    @State var ingredients: [String] = []
+    @State var ingredients: [String] = [""]
     @State var tap = false
+    @State var placeheolder = ""
     var quantsofIngredients: [Double] = []
     var ingredientsAlreadyHave: [String] = []
     var quantsofIAH: [Int] = []
@@ -29,8 +30,6 @@ struct AddRecipeView: View {
     
     var count: Int = 0
     init(){
-        UITableViewCell.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
-        UITableView.appearance().backgroundColor = #colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)
     }
     
     
@@ -38,8 +37,10 @@ struct AddRecipeView: View {
     
     
     var body: some View {
+        
         ZStack{
             VStack{
+                ScrollView{
                 Text("RECIPLEASE").font(Font.custom("BebasNeue-Regular",size: 50))
                     .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                 Spacer()
@@ -54,10 +55,14 @@ struct AddRecipeView: View {
                             .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     Buttons1.ImageButton()
+                   // .randomBorder()
                 }
                 .frame(width: UIScreen.main.bounds.width - 20)
+                    
+                    
                 HStack{
                     TextField("Description",text: $description)
+                       // .randomBorder()
                         .multilineTextAlignment(TextAlignment.center)
                         .frame(width: UIScreen.main.bounds.width-170,height:40)
                         .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
@@ -65,71 +70,122 @@ struct AddRecipeView: View {
                             .continuous))
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                     TextField("Serving Size",text: $servingSize)
+                        //.randomBorder()
                         .keyboardType(.numberPad)
+                        .multilineTextAlignment(TextAlignment.center)
+                        .frame(width: UIScreen.main.bounds.width-290,height:40)
+                        .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style:
+                            .continuous))
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         .onReceive(Just(servingSize)) { newValue in
                             let filtered = newValue.filter { "0123456789".contains($0) }
                             if filtered != newValue {
                                 self.servingSize = filtered
                             }
                     }
-                    .multilineTextAlignment(TextAlignment.center)
-                    .frame(width: UIScreen.main.bounds.width-250,height:40)
-                    .background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style:
-                        .continuous))
-                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                    
                 }
+                
+               
                 HStack{
-                    VStack{
-                        SearchBar(text: $searchText,placeholder: "Ingredients...")
-                            .frame(width: UIScreen.main.bounds.width - 75)
+                    ZStack{
                         Picker("",selection: $ingredient){
                             
                             ForEach(Data.Ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) }), id: \.name) {item in
-                                Text(item.name).font(.system(size: 10))
-                                
-                            }
-                            
+                                Text(item.name + "| Unit: " + item.unit).font(.system(size: 10))                            }
                         }
+                        .offset(y:50)
+                        //.randomBorder()
+                        .padding(.top,20)
+                        .frame(height: 200)
+                        .clipped()
+                        Spacer()
+                        .frame(height: 5)
+                        SearchBar(text: $searchText,placeholder: "Ingredients...")
+                            .frame(width: UIScreen.main.bounds.width-75)
+                            .offset(x: 3)
+                            //.randomBorder()
+                           
                     }
+                    .frame(height: 20)
+                    
+                    
+                    
+                    
                     
                     Buttons1.AddButton()
+                        //.randomBorder()
+                        .offset(x:-15)
                         .scaleEffect(tap ? 1.02:1)
                         .onTapGesture {
-                        print(self.ingredient)
-                        self.ingredients.append(self.ingredient)
-                        self.tap = true
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
-                            self.tap=false
-                        }
+                            if !self.ingredients.contains(self.ingredient){
+                            self.ingredients.append(self.ingredient)
+                                }
+                            self.tap = true
+                            DispatchQueue.main.asyncAfter(deadline: .now()+0.1){
+                                self.tap=false
+                            }
                     }
+                    
                 }
                 
-                Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 23))
-                    .padding(15)
-                    .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
-                    .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
-                    .frame(width: UIScreen.main.bounds.width - 20)
-                Text(returnArrayinStringForm(array: ingredients))
-                
+    
                 Spacer()
-                
-                
-                MultilineTextView(text:$method)
-                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                    .frame(width: UIScreen.main.bounds.width - 40,height: 200)
-                    .padding(10)
-                
-                NavigationLink(destination: ContentView()){
-                    Buttons1.FinalAddRecipeButton()
-                        .scaleEffect(tap ? 1.02:1)
-                        .onTapGesture {
-                            
-                            Data.addRecipe(n: self.title, method: self.method, description: self.description, Ing: self.ingredients, Quants: self.quantsofIngredients, Serving: Int(self.servingSize) ?? 0, Image: "", staples: self.ingredientsAlreadyHave, staplesQuant: self.quantsofIAH, staplesPPP: self.staplesPPP)
-                                self.mode.wrappedValue.dismiss()
+                    .frame(height: 100)
+                VStack{
+                    Text("Ingredient List").font(Font.custom("BebasNeue-Regular",size: 20))
+                        //.randomBorder()
+                        .padding(15)
+                        .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
+                        .frame(width: UIScreen.main.bounds.width - 15,alignment: .leading)
+                        .frame(width: UIScreen.main.bounds.width - 20)
+                    HStack {
+                        Text(returnArrayinStringForm2(array:self.ingredients))
+                        .font(Font.custom("BebasNeue-Regular",size: 13))
+                            .frame(width: UIScreen.main.bounds.width-70, alignment: .leading)
+                            Button(action: {
+                                if self.ingredients.count > 1 {
+                                    self.ingredients.remove(at:  self.ingredients.firstIndex(of: self.ingredients[self.ingredients.count-1]) ?? 0)
+                                }
+                                       }) {
+                                        if self.ingredients.count > 1{
+                                           Image(systemName: "multiply.circle.fill")
+                                               .foregroundColor(.secondary)
+                                            .frame(alignment: .bottom)
+                                       }
+                                   }
                     }
+                           
+                        Print(returnArrayinStringForm2(array:self.ingredients))
+                        
+
+                    
+                    
                 
-                     
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height - 900)
+                    
+                    Text("Method").font(Font.custom("BebasNeue-Regular",size: 20))
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                   // TextEditor(text: $method)
+                    //  .foregroundColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height - 700)
+                    
+                    NavigationLink(destination: ContentView()){
+                        Buttons1.FinalAddRecipeButton()
+                            .scaleEffect(tap ? 1.02:1)
+                            .onTapGesture {
+                                
+                                Data.addRecipe(n: self.title, method: self.method, description: self.description, Ing: self.ingredients, Quants: self.quantsofIngredients, Serving: Int(self.servingSize) ?? 0, Image: "", staples: self.ingredientsAlreadyHave, staplesQuant: self.quantsofIAH, staplesPPP: self.staplesPPP)
+                                sleep(1)
+                                
+                                self.mode.wrappedValue.dismiss()
+                        }
+                        
+                        
+                    }
                 }
                 
             }
@@ -140,7 +196,7 @@ struct AddRecipeView: View {
         .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
     }
-    
+    }
 }
 
 struct AddRecipeView_Previews: PreviewProvider {
@@ -150,29 +206,17 @@ struct AddRecipeView_Previews: PreviewProvider {
 }
 
 
-struct MultilineTextView: UIViewRepresentable {
-    @Binding var text: String
-    
-    func makeUIView(context: Context) -> UITextView {
-        let view = UITextView()
-        view.isScrollEnabled = true
-        view.isEditable = true
-        view.isUserInteractionEnabled = true
-        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        view.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        view.clipsToBounds = true;
-        view.layer.cornerRadius = 5
-        view.font = .systemFont(ofSize: 15)
-        return view
-    }
-    
-    func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
+
+
+extension View {
+    func Print(_ vars: Any...) -> some View {
+        for v in vars { print(v) }
+        return EmptyView()
     }
 }
 
 
-func returnArrayinStringForm(array: [String]) ->String{
+func returnArrayinStringForm2(array: [String]) ->String{
     var s = ""
     for i in 0..<array.count{
         s += array[i]+"\n"
@@ -182,9 +226,3 @@ func returnArrayinStringForm(array: [String]) ->String{
 }
 
 
-extension View {
-    func Print(_ vars: Any...) -> some View {
-        for v in vars { print(v) }
-        return EmptyView()
-    }
-}
