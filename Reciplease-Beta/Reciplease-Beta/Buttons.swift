@@ -11,7 +11,6 @@ import SwiftUI
 struct Buttons: View {
     var body: some View {
         Buttons()
-        
     }
 }
 
