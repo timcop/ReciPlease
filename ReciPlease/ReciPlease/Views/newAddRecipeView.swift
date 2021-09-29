@@ -57,6 +57,14 @@ struct newAddRecipeView: View {
                         MethodListView(method: currentRecipe.method)
                         // steps list
                     }
+                    HStack {
+                        Spacer()
+                        Button("Submit Recipe") {
+                            recipeModel.recipes.append(currentRecipe)
+                            self.presentation.wrappedValue.dismiss()
+                        }
+                        Spacer()
+                    }.padding()
                 }
             }
             if addingIngredient {

@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var recipeModel = RecipeModel()
     @State var test: String = ""
+    @State var searchText: String = ""
     var body: some View {
         NavigationView {
             VStack {
@@ -37,9 +38,11 @@ struct ContentView: View {
                 Spacer()
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 50) {
-                        ForEach(0..<10) { index in
+                        ForEach(recipeModel.recipes) { recipe in
                             GeometryReader { geometry in
-                                HomeRecipeCardView(label: "\(index)")
+                                NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
+                                    HomeRecipeCardView(recipe: recipe)
+                                }
                                 .rotation3DEffect(Angle(degrees:
                                     Double(geometry.frame(in: .global).minX) / -20
                                        ), axis: (x: 0, y: 10.0, z: 0))
@@ -50,6 +53,7 @@ struct ContentView: View {
                     .padding()
                 }
                 .frame(height:100)
+                .searchable(text: $searchText)
                 Spacer()
 
             }
@@ -60,10 +64,10 @@ struct ContentView: View {
 }
 
 struct HomeRecipeCardView: View {
-    @State var label: String
+    @State var recipe: Recipe
     var body: some View {
         ZStack {
-            Image("stirFry")
+            Image(recipe.imgName)
                 .resizable()
                 .cornerRadius(15)
                 .frame(width:300, height:300)
