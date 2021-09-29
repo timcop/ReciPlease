@@ -18,7 +18,7 @@ struct ContentView: View {
                 Text(test)
                 
                 HStack {
-                    NavigationLink(destination: AddRecipeView()) {
+                    NavigationLink(destination: newAddRecipeView()) {
                         Text("Add a recipe!").padding()
                     }
                     Spacer()
@@ -26,19 +26,50 @@ struct ContentView: View {
                         Text("View Recipes").padding()
                     }
                 }
-                List(recipeModel.recipes) { recipe in
-                    NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
-                        Text(recipe.name)
-                    }
+//                List(recipeModel.recipes) { recipe in
+//                    NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
+//                        Text(recipe.name)
+//                    }
 //                    .simultaneousGesture(TapGesture().onEnded {
 //                        recipeModel.selectedRecipe = recipe
 //                    })
+//                  }
+                Spacer()
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 50) {
+                        ForEach(0..<10) { index in
+                            GeometryReader { geometry in
+                                HomeRecipeCardView(label: "\(index)")
+                                .rotation3DEffect(Angle(degrees:
+                                    Double(geometry.frame(in: .global).minX) / -20
+                                       ), axis: (x: 0, y: 10.0, z: 0))
+                            }
+                            .frame(width:246, height: 350)
+                        }
+                    }
+                    .padding()
                 }
+                .frame(height:100)
                 Spacer()
 
             }
+            Divider()
         }
         .environmentObject(recipeModel)
+    }
+}
+
+struct HomeRecipeCardView: View {
+    @State var label: String
+    var body: some View {
+        ZStack {
+            Image("stirFry")
+                .resizable()
+                .cornerRadius(15)
+                .frame(width:300, height:300)
+                .shadow(color: .gray, radius: 5, x:0, y: 3)
+//            Text(label)
+        }
     }
 }
                 

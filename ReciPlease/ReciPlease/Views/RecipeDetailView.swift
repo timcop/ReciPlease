@@ -11,11 +11,6 @@ struct RecipeDetailView: View {
 //    let recipe: Recipe
     @EnvironmentObject var recipeModel: RecipeModel
     @ObservedObject var selectedRecipe: Recipe
-    
-    var title: String = "Greek stir-fry with chopped penis"
-    var time = "10 min"
-    var ingCount = "20 ingredients"
-    var methods = ["Step 1", "Step 2", "Step 3"]
     @State var isIngredient = true
     
     var body: some View {
@@ -24,14 +19,14 @@ struct RecipeDetailView: View {
                 PictureView(imgName: selectedRecipe.imgName)
                 Group {
                     // title
-                    Text(title).font(.system(size: 22, weight: .bold))
+                    Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
                     
                     //info view
                     HStack(spacing: 32) {
                         HStack(spacing: 12) {
                             Image(systemName: "clock")
                                 .foregroundColor(.green)
-        
+                            
                             Text(selectedRecipe.cookTime)
                             Image(systemName:"pencil")
                                 .foregroundColor(.green)
@@ -41,7 +36,6 @@ struct RecipeDetailView: View {
                     .padding(.vertical)
                 }
                 .padding(.horizontal)
-                
                 // ingredient/step toggle view
                 Toggle(isOn: $isIngredient, label: {})
                     .toggleStyle(IngredientMethodToggleStyle())
@@ -105,9 +99,13 @@ struct IngredientListView: View {
     var body: some View {
         VStack {
             ForEach(ingredients) { ing in
-                Text(ing.name)
-                    .padding(.horizontal)
-                    .padding(.vertical, 4.0)
+                HStack{
+                    Text(ing.name)
+                        .padding(.horizontal)
+                        .padding(.vertical, 4.0)
+                    Spacer()
+                }
+                Divider()
             }
         }
     }
