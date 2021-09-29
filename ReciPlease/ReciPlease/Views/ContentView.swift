@@ -11,34 +11,16 @@ struct ContentView: View {
     @StateObject var recipeModel = RecipeModel()
     @State var test: String = ""
     @State var searchText: String = ""
+    @State var searching = false
+    
     var body: some View {
         NavigationView {
             VStack {
-                Text("Home Screen").font(.largeTitle)
-                TextField("Test", text: $test).padding()
-                Text(test)
-                
-                HStack {
-                    NavigationLink(destination: newAddRecipeView()) {
-                        Text("Add a recipe!").padding()
-                    }
-                    Spacer()
-                    NavigationLink(destination: RecipesView()) {
-                        Text("View Recipes").padding()
-                    }
-                }
-//                List(recipeModel.recipes) { recipe in
-//                    NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
-//                        Text(recipe.name)
-//                    }
-//                    .simultaneousGesture(TapGesture().onEnded {
-//                        recipeModel.selectedRecipe = recipe
-//                    })
-//                  }
-                Spacer()
+             
+//                Spacer()
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 50) {
-                        ForEach(recipeModel.recipes) { recipe in
+                        ForEach(recipeModel.recipes.filter {$0.name.contains(searchText) || searchText.isEmpty}) { recipe in
                             GeometryReader { geometry in
                                 NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
                                     HomeRecipeCardView(recipe: recipe)
@@ -53,12 +35,21 @@ struct ContentView: View {
                     .padding()
                 }
                 .frame(height:100)
-                .searchable(text: $searchText)
+                .offset(y:140)
+//                .searchable(text: $searchText, placement: .sidebar)
                 Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: newAddRecipeView()) {
+                        Text("Add a recipe!").padding()
+                    }
+                    Spacer()
+                }.offset(y:-20)
 
             }
-            Divider()
+            .navigationTitle("ReciPlease")
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(recipeModel)
     }
 }
@@ -67,15 +58,28 @@ struct HomeRecipeCardView: View {
     @State var recipe: Recipe
     var body: some View {
         ZStack {
-            Image(recipe.imgName)
+            Image("donut")
                 .resizable()
                 .cornerRadius(15)
                 .frame(width:300, height:300)
                 .shadow(color: .gray, radius: 5, x:0, y: 3)
-//            Text(label)
+//            Rectangle()
+//                .frame(width:250, height:40)
+//                .cornerRadius(30)
+            Text(recipe.name)
+                .foregroundColor(Color.white)
+                .frame(width: 250, height: 40)
+                .background(Color.black)
+                .clipShape(Rectangle())
+                .cornerRadius(15)
+                .offset(y:120)
+  
+
         }
     }
 }
+
+
                 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

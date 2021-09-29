@@ -35,7 +35,7 @@ class Recipe: ObservableObject, Identifiable {
     @Published var name: String = ""
     @Published var method: [Step] = []
     @Published var ingredients: [Ingredient] = []
-    @Published var imgName: String = "stirFry"
+    @Published var imgName: String = "donut"
     @Published var cookTime: String = "10 min"
     @Published var numIngredients: String = "10 ingredients"
 }
@@ -50,7 +50,8 @@ class RecipeModel: ObservableObject {
     @Published var selectedRecipe: Recipe
     
     init() {
-        self.recipes = []
+        self.recipes = [Recipe()]
         self.selectedRecipe = Recipe()
+        self.recipes[0].name = "A yummy donut"
     }
 }
