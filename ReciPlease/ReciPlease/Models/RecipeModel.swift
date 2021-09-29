@@ -35,6 +35,9 @@ class Recipe: ObservableObject, Identifiable {
     @Published var name: String = ""
     @Published var method: [Step] = []
     @Published var ingredients: [Ingredient] = []
+    @Published var imgName: String = "stirFry"
+    @Published var cookTime: String = "10 min"
+    @Published var numIngredients: String = "10 ingredients"
 }
 
 struct Step: Identifiable {
@@ -44,8 +47,10 @@ struct Step: Identifiable {
 
 class RecipeModel: ObservableObject {
     @Published var recipes: [Recipe]
+    @Published var selectedRecipe: Recipe
     
     init() {
         self.recipes = []
+        self.selectedRecipe = Recipe()
     }
 }

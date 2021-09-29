@@ -9,12 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var recipeModel = RecipeModel()
-    
+    @State var test: String = ""
     var body: some View {
         NavigationView {
             VStack {
-
                 Text("Home Screen").font(.largeTitle)
+                TextField("Test", text: $test).padding()
+                Text(test)
+                
                 HStack {
                     NavigationLink(destination: AddRecipeView()) {
                         Text("Add a recipe!").padding()
@@ -25,11 +27,15 @@ struct ContentView: View {
                     }
                 }
                 List(recipeModel.recipes) { recipe in
-                    NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                    NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
                         Text(recipe.name)
                     }
+//                    .simultaneousGesture(TapGesture().onEnded {
+//                        recipeModel.selectedRecipe = recipe
+//                    })
                 }
                 Spacer()
+
             }
         }
         .environmentObject(recipeModel)
@@ -39,8 +45,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
-                .environmentObject(Recipe())
             ContentView()
                 .environmentObject(Recipe())
         }

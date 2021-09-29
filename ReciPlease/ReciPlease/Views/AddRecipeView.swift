@@ -12,12 +12,13 @@ let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
 struct PictureView: View {
+    var imgName: String
     var body: some View {
-        Image("recipe_default")
+        
+        Image(imgName)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: screenWidth, height: screenWidth)
-//                    .offset(y:-100)
     }
 }
 
@@ -25,51 +26,47 @@ struct AddRecipeView: View {
     @ObservedObject var currentRecipe: Recipe = Recipe()
     @EnvironmentObject var recipeModel: RecipeModel
     @Environment(\.presentationMode) var presentation
-    
+
 
     var body: some View {
-//        ScrollView {
-        VStack(spacing: 20) {
-//                PictureView()
-            Text("Add Recipe").font(.largeTitle)
-//                .offset(y: -50)
+        ScrollView {
+            PictureView(imgName: "stirFry")
 
-            Form {
-                Section(header: Text("Recipe Name")) {
-                    TextField("Recipe Name", text: $currentRecipe.name)
+            VStack() {
+                Text("Add Recipe").font(.largeTitle)
+    //                .offset(y: -50)
+                TextField("Recipe Name", text: $currentRecipe.name)
+                    .textFieldStyle(RoundedBorderTextFieldStyle()).padding()
+                Text("Ingredients").font(.headline)
+
+
+                NavigationLink(destination: AddIngredientView(ingredients: $currentRecipe.ingredients)) {
+                    Text("Add an ingredient")
+                        .padding(.all)
                 }
-            }
-            
-            NavigationLink(destination: AddIngredientView(ingredients: $currentRecipe.ingredients)) {
-                Text("Add an ingredient")
-                    .padding(.all)
-            }
-            
-            List(currentRecipe.ingredients) { ing in
-                VStack {
-                    HStack {
-                        Text(ing.name).font(.title3).bold().italic()
-//                            Spacer()
+                ForEach(currentRecipe.ingredients) { ing in
+                    VStack {
+                        HStack {
+                            Text(ing.name).font(.title3).bold().italic()
+                        }
+                        HStack {
+                            Text("Quantity: " + ing.quantity).font(.body)
+                            Text("Unit: " + ing.unit.rawValue).font(.body)
+                        }
+                        if let prod = ing.product {
+                            Text(prod.name)
+                        }
+                        Divider()
                     }
-                    HStack {
-                        Text("Quantity: " + ing.quantity).font(.body)
-                        Text("Unit: " + ing.unit.rawValue).font(.body)
-//                            Spacer()
-                    }
-                    if let prod = ing.product {
-                        Text(prod.name)
-                    }
+                }
+                Spacer()
+                Button("Submit") {
+                    recipeModel.recipes.append(currentRecipe)
+                    self.presentation.wrappedValue.dismiss()
+
                 }
             }
         }
-        
-        Spacer()
-        Button("Submit") {
-            recipeModel.recipes.append(currentRecipe)
-            self.presentation.wrappedValue.dismiss()
-
-        }
-//        }
     }
 
 }

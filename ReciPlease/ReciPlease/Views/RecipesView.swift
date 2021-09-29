@@ -11,9 +11,9 @@ struct RecipesView: View {
     @EnvironmentObject var recipeModel: RecipeModel
     var body: some View {
         List(recipeModel.recipes) { recipe in
-            NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                Text(recipe.name)
-            }
+//            NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+//                Text(recipe.name)
+//            }
         }
     }
 }
