@@ -6,6 +6,7 @@
 //
 
 import XCTest
+//@available(iOS 15.0, *)
 @testable import ReciPlease
 
 class ReciPleaseTests: XCTestCase {
