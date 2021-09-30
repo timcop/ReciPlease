@@ -17,6 +17,9 @@ struct newAddRecipeView: View {
     @State var addingIngredient = false
     @State var selectedUnit = Unit.each
     @State var currentIngredient: Ingredient = Ingredient()
+    @State var addingStep = false
+    @State var currentStep: Step = Step()
+    @State var stepPlaceholder = "Preheat oven to 180ºC..."
 
     
     var body: some View {
@@ -47,15 +50,17 @@ struct newAddRecipeView: View {
                         }.padding(.top)
                         IngredientListView(ingredients: currentRecipe.ingredients)
                     } else {
+                        // steps list
                         HStack {
                             Spacer()
                             Button("Add Step") {
-                            //action
+                                withAnimation {
+                                    addingStep.toggle()
+                                }
                             }
                             Spacer()
                         }.padding(.top)
                         MethodListView(method: currentRecipe.method)
-                        // steps list
                     }
                     HStack {
                         Spacer()
@@ -71,10 +76,16 @@ struct newAddRecipeView: View {
 
                 ZStack{
                     Color.black
+                        .onTapGesture {
+                            currentIngredient = Ingredient()
+                            withAnimation {
+                                addingIngredient.toggle()
+                            }
+                        }
                         .ignoresSafeArea()
                         .opacity(0.4)
-                    VStack {
-                        Text("Item Details").padding()
+                    VStack(spacing: 0){
+                        Text("Item Details").padding(.top, 20)
 
                         Form{
                             TextField("Name", text: $currentIngredient.name)
@@ -92,15 +103,71 @@ struct newAddRecipeView: View {
                             TextField("Quantity", text:$currentIngredient.quantity)
 
                         }
+                        NavigationLink(destination: SearchProductsView(ingProd: $currentIngredient.product, searchText: $currentIngredient.name)) {
+                           Text("Search product")
+                        }
                         HStack {
-                            NavigationLink(destination: SearchProductsView(ingProd: $currentIngredient.product, searchText: $currentIngredient.name)) {
-                               Text("Search product")
+                            Button("Cancel") {
+                                currentIngredient = Ingredient()
+                                withAnimation {
+                                    addingIngredient.toggle()
+                                }
                             }.padding()
-                            Button("SUBMIT") {
+                            Button("Submit") {
                                 currentRecipe.ingredients.append(currentIngredient)
                                 currentIngredient = Ingredient()
                                 withAnimation {
                                     addingIngredient.toggle()
+                                }
+                            }.padding()
+                        }
+                    }.frame(width:350, height:310)
+                        .background(Color(.systemGroupedBackground))
+                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                        .shadow(color: .gray, radius: 5, x:-9, y: -9)
+                }
+            }
+            
+            if addingStep {
+                ZStack {
+                    Color.black
+                        .onTapGesture {
+                            currentIngredient = Ingredient()
+                            withAnimation {
+                                addingStep.toggle()
+                            }
+                        }
+                        .ignoresSafeArea()
+                        .opacity(0.4)
+                    VStack(spacing: 20) {
+                        Text("Step \(currentRecipe.method.count+1)").padding(.top, 20)
+                        ZStack {
+                        if currentStep.string.isEmpty {
+                            TextEditor(text:$stepPlaceholder)
+                                .font(.body)
+                                .foregroundColor(.gray)
+                                .cornerRadius(8)
+                                .disabled(true)
+                                .padding()
+                            }
+                            TextEditor(text: $currentStep.string)
+                                .font(.body)
+                                .opacity(currentStep.string.isEmpty ? 0.25 : 1)
+                                .cornerRadius(8)
+                                .padding()
+                        }
+                        HStack {
+                            Button("Cancel") {
+                                currentStep = Step()
+                                withAnimation {
+                                    addingStep.toggle()
+                                }
+                            }.padding()
+                            Button("Submit") {
+                                currentRecipe.method.append(currentStep)
+                                currentStep = Step()
+                                withAnimation {
+                                    addingStep.toggle()
                                 }
                             }.padding()
                         }
