@@ -40,7 +40,7 @@ class Recipe: ObservableObject, Identifiable {
     @Published var numIngredients: String = "10 ingredients"
 }
 
-struct Step: Identifiable {
+struct Step: Codable, Identifiable {
     var id = UUID()
     var string: String = ""
 }
