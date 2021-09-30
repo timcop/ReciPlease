@@ -115,7 +115,7 @@ struct MethodListView: View {
     var method: [Step]
     var body: some View {
         ForEach(method) { step in
-            Text(step.string)
+            Text("• \(step.string)")
                 .padding(.horizontal)
                 .padding(.vertical, 4.0)
         }
