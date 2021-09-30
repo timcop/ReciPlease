@@ -146,12 +146,14 @@ struct newAddRecipeView: View {
                             TextEditor(text:$stepPlaceholder)
                                 .font(.body)
                                 .foregroundColor(.gray)
+                                .cornerRadius(8)
                                 .disabled(true)
                                 .padding()
                             }
                             TextEditor(text: $currentStep.string)
                                 .font(.body)
                                 .opacity(currentStep.string.isEmpty ? 0.25 : 1)
+                                .cornerRadius(8)
                                 .padding()
                         }
                         HStack {
