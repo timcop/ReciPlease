@@ -16,6 +16,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                SearchBar(searchText: $searchText, searching: $searching)
+                            .toolbar {
+                                if searching {
+                                    Button("Cancel") {
+                                        searchText = ""
+                                        withAnimation {
+                                            searching = false
+                                            UIApplication.shared.dismissKeyboard()
+                                        }
+                                    }
+                                }
+                            }
              
 //                Spacer()
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -36,7 +48,12 @@ struct ContentView: View {
                 }
                 .frame(height:100)
                 .offset(y:140)
-//                .searchable(text: $searchText, placement: .sidebar)
+                .gesture(DragGesture()
+                             .onChanged({ _ in
+                                 UIApplication.shared.dismissKeyboard()
+                             })
+                 )
+//                .searchable(text: $searchText, placement: .automatic)
                 Spacer()
                 HStack {
                     Spacer()
@@ -77,7 +94,14 @@ struct HomeRecipeCardView: View {
 
         }
     }
+    
 }
+extension UIApplication {
+      func dismissKeyboard() {
+          sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+      }
+  }
+ 
 
 
                 
