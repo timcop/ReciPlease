@@ -20,12 +20,35 @@ struct newAddRecipeView: View {
     @State var addingStep = false
     @State var currentStep: Step = Step()
     @State var stepPlaceholder = "Preheat oven to 180ºC..."
+    @State private var showingImagePicker = false
+    @State var inputImage: UIImage?
+    @State var image: Image? = Image("recipe_default")
 
     
     var body: some View {
         ZStack {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading) {
+                    ZStack{
+                    Rectangle()
+                            .fill(Color.white)
+                    if image != nil {
+                        image?
+                            .resizable()
+                            .frame(width: 300, height:300)
+                            .scaledToFit()
+                            .cornerRadius(15)
+                            
+                    } else {
+                        Text("Tap to select a picture")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                    }
+                    
+                    }.onTapGesture{
+                        self.showingImagePicker=true
+                    }
+                    
                     Group {
                         // title
                         TextField("Recipe Name", text: $currentRecipe.name)
@@ -65,11 +88,15 @@ struct newAddRecipeView: View {
                     HStack {
                         Spacer()
                         Button("Submit Recipe") {
+                            currentRecipe.uiImage = inputImage!
                             recipeModel.recipes.append(currentRecipe)
                             self.presentation.wrappedValue.dismiss()
                         }
                         Spacer()
                     }.padding()
+                }
+                .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                    ImagePicker(image: self.$inputImage)
                 }
             }
             if addingIngredient {
@@ -178,6 +205,10 @@ struct newAddRecipeView: View {
                 }
             }
         }
+    }
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
 }
 

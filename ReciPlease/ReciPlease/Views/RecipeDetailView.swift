@@ -12,11 +12,12 @@ struct RecipeDetailView: View {
     @EnvironmentObject var recipeModel: RecipeModel
     @ObservedObject var selectedRecipe: Recipe
     @State var isIngredient = true
+
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading) {
-                PictureView(imgName: selectedRecipe.imgName)
+                PictureView(uiImage: (selectedRecipe.uiImage!))
                 Group {
                     // title
                     Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
@@ -30,7 +31,7 @@ struct RecipeDetailView: View {
                             Text(selectedRecipe.cookTime)
                             Image(systemName:"pencil")
                                 .foregroundColor(.green)
-                            Text(selectedRecipe.numIngredients)
+                            Text(String(selectedRecipe.ingredients.count) + " ingredients")
                         }
                     }
                     .padding(.vertical)
@@ -48,8 +49,10 @@ struct RecipeDetailView: View {
                     // steps list
                 }
             }
+            
         }
     }
+    
 }
 
 struct IngredientMethodToggleStyle: ToggleStyle {
@@ -124,7 +127,7 @@ struct MethodListView: View {
 //struct RecipeDetailView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Group {
-//            RecipeDetailView()
+//            RecipeDetailView( selectedRecipe: <#Recipe#>)
 //        }
 //    }
 //}
