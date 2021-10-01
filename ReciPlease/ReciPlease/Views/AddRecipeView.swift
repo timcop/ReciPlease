@@ -12,10 +12,10 @@ let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
 struct PictureView: View {
-    var imgName: String
+    var uiImage: UIImage
     var body: some View {
         
-        Image(imgName)
+        Image(uiImage: uiImage)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: screenWidth, height: screenWidth)
@@ -30,7 +30,7 @@ struct AddRecipeView: View {
 
     var body: some View {
         ScrollView {
-            PictureView(imgName: "stirFry")
+            PictureView(uiImage: UIImage(named: "stirFry")!)
 
             VStack() {
                 Text("Add Recipe").font(.largeTitle)

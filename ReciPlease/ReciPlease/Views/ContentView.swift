@@ -58,7 +58,7 @@ struct HomeRecipeCardView: View {
     @State var recipe: Recipe
     var body: some View {
         ZStack {
-            Image("donut")
+            Image(uiImage: recipe.uiImage!)
                 .resizable()
                 .cornerRadius(15)
                 .frame(width:300, height:300)

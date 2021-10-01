@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 enum Unit: String, CaseIterable, Identifiable {
@@ -35,7 +36,7 @@ class Recipe: ObservableObject, Identifiable {
     @Published var name: String = ""
     @Published var method: [Step] = []
     @Published var ingredients: [Ingredient] = []
-    @Published var imgName: String = "donut"
+    @Published var uiImage : UIImage?
     @Published var cookTime: String = "10 min"
     @Published var numIngredients: String = "10 ingredients"
 }
@@ -53,5 +54,6 @@ class RecipeModel: ObservableObject {
         self.recipes = [Recipe()]
         self.selectedRecipe = Recipe()
         self.recipes[0].name = "A yummy donut"
+        self.recipes[0].uiImage = UIImage(named: "donut")
     }
 }
