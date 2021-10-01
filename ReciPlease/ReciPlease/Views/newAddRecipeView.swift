@@ -21,7 +21,7 @@ struct newAddRecipeView: View {
     @State var currentStep: Step = Step()
     @State var stepPlaceholder = "Preheat oven to 180ºC..."
     @State private var showingImagePicker = false
-    @State var inputImage: UIImage?
+    @State var inputImage: UIImage? = UIImage(named: "recipe_default")
     @State var image: Image? = Image("recipe_default")
 
     

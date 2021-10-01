@@ -23,6 +23,7 @@ struct ContentView: View {
                                         searchText = ""
                                         withAnimation {
                                             searching = false
+                                            UIApplication.shared.dismissKeyboard()
                                         }
                                     }
                                 }
@@ -47,6 +48,11 @@ struct ContentView: View {
                 }
                 .frame(height:100)
                 .offset(y:140)
+                .gesture(DragGesture()
+                             .onChanged({ _ in
+                                 UIApplication.shared.dismissKeyboard()
+                             })
+                 )
 //                .searchable(text: $searchText, placement: .automatic)
                 Spacer()
                 HStack {
@@ -88,7 +94,14 @@ struct HomeRecipeCardView: View {
 
         }
     }
+    
 }
+extension UIApplication {
+      func dismissKeyboard() {
+          sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+      }
+  }
+ 
 
 
                 
