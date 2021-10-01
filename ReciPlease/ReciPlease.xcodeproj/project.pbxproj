@@ -27,6 +27,7 @@
 		72E5319B2701E9D000B92677 /* ProductsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E5319A2701E9D000B92677 /* ProductsModel.swift */; };
 		72E5319D2701E9E300B92677 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E5319C2701E9E300B92677 /* RecipeModel.swift */; };
 		AAC691522705C52800AD146A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC691512705C52700AD146A /* ImagePicker.swift */; };
+		AAC691542706C66500AD146A /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC691532706C66500AD146A /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		72E5319A2701E9D000B92677 /* ProductsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsModel.swift; sourceTree = "<group>"; };
 		72E5319C2701E9E300B92677 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		AAC691512705C52700AD146A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		AAC691532706C66500AD146A /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				72E531662701E8E400B92677 /* ContentView.swift */,
+				AAC691532706C66500AD146A /* SearchBar.swift */,
 				72E531902701E94F00B92677 /* SearchProductsView.swift */,
 				72E531922701E96D00B92677 /* AddRecipeView.swift */,
 				728403BB2704104800FE9828 /* TestView.swift */,
@@ -317,6 +320,7 @@
 				72E531912701E94F00B92677 /* SearchProductsView.swift in Sources */,
 				728403C02704404200FE9828 /* newAddRecipeView.swift in Sources */,
 				728403C22704472500FE9828 /* MoveRowsListView.swift in Sources */,
+				AAC691542706C66500AD146A /* SearchBar.swift in Sources */,
 				72E5319B2701E9D000B92677 /* ProductsModel.swift in Sources */,
 				728403C4270473EA00FE9828 /* IngredientDetailsCardView.swift in Sources */,
 				72E531952701E98400B92677 /* RecipesView.swift in Sources */,

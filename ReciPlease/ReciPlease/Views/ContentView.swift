@@ -16,6 +16,17 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                SearchBar(searchText: $searchText, searching: $searching)
+                            .toolbar {
+                                if searching {
+                                    Button("Cancel") {
+                                        searchText = ""
+                                        withAnimation {
+                                            searching = false
+                                        }
+                                    }
+                                }
+                            }
              
 //                Spacer()
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -36,7 +47,7 @@ struct ContentView: View {
                 }
                 .frame(height:100)
                 .offset(y:140)
-//                .searchable(text: $searchText, placement: .sidebar)
+//                .searchable(text: $searchText, placement: .automatic)
                 Spacer()
                 HStack {
                     Spacer()
