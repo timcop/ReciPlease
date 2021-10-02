@@ -22,8 +22,8 @@ jobs:
         with: 
           project: ReciPlease/ReciPlease.xcodeproj
           scheme: ReciPlease
-          destination: platform=iOS Simulator, name=iPhone 13
-          enableCodeCoverage: true
+          destination: 'platform=iOS Simulator, name=iPhone 13'
+          enable-code-coverage: true
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1.2.1
   
