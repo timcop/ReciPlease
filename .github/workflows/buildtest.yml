@@ -16,10 +16,14 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Test
-        uses: sersoft-gmbh/xcodebuild-action@v1.8.0
+        uses: actions/checkout@v2
       - name: Build and Test
-        run:  xcodebuild clean test -project ReciPlease/ReciPlease.xcodeproj -scheme ReciPlease
-              -destination 'platform=iOS Simulator,name=iPhone 11' -enableCodeCoverage YES CODE_SIGNING_ALLOWED=NO build test
+        uses: sersoft-gmbh/xcodebuild-action@v1.8.0
+        with: 
+          project: ReciPlease/ReciPlease.xcodeproj
+          scheme: ReciPlease
+          destination: platform=iOS Simulator
+          enableCodeCoverage: true
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1.2.1
   
