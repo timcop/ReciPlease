@@ -18,7 +18,7 @@ jobs:
       - name: Test
         uses: actions/checkout@v1
       - name: Build and Test
-        run:  xcodebuild clean test -project Reciplease/Reciplease.xcodeproj -scheme Reciplease
+        run:  xcodebuild clean test -project ReciPlease/ReciPlease.xcodeproj -scheme ReciPlease
               -destination 'platform=iOS Simulator,name=iPhone 11' -enableCodeCoverage YES CODE_SIGNING_ALLOWED=NO build test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1.2.1
@@ -30,7 +30,7 @@ jobs:
       - name: Extract Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
-           inputs: "Reciplease/Reciplease"
+           inputs: "ReciPlease/ReciPlease"
            module-name: MyLibrary
            output: "Documentation"
       - name: Upload Documentation to Wiki
