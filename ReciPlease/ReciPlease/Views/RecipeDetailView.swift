@@ -116,7 +116,7 @@ struct IngredientMethodToggleStyle: ToggleStyle {
                     Rectangle()
                         .fill(Color.green)
                         .frame(width: configuration.isOn ? 110:70, height: 3)
-                        .offset(x: configuration.isOn ? 16 : 140) // 0: 115
+                        .offset(x: configuration.isOn ? 16 : 140) 
                     
                 }
             }

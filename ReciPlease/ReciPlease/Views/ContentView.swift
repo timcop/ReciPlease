@@ -36,8 +36,8 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     NavigationLink(destination: newAddRecipeView()) {
-                        Text("Add a recipe!").padding()
-                    }
+                        Text("Add a recipe!")
+                    }.buttonStyle(GrowingButton())
                     Spacer()
                 }.offset(y:-20)
 
@@ -111,6 +111,18 @@ struct HomeRecipeCardView: View {
             Text(recipe.name)
                 .modifier(RecipeCardTextViewModifier())
         }
+    }
+}
+
+struct GrowingButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color.green)
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
     }
 }
 

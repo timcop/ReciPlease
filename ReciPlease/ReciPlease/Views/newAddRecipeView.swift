@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+//let screenSize: CGRect = UIScreen.main.bounds
+//let screenWidth = screenSize.width
+//let screenHeight = screenSize.height
+
 struct newAddRecipeView: View {
     // Inherited
     @ObservedObject var currentRecipe: Recipe = Recipe()
@@ -27,86 +31,112 @@ struct newAddRecipeView: View {
     
     var body: some View {
         ZStack {
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading) {
-                    ZStack{
-                    Rectangle()
-                            .fill(Color.white)
-                    if image != nil {
-                        image?
-                            .resizable()
-                            .frame(width: 300, height:300)
-                            .scaledToFit()
-                            .cornerRadius(15)
+            GeometryReader { geometry in
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(alignment: .leading) {
+                        ZStack{
+//                            Rectangle()
+//                                    .fill(Color.white)
+//                                    .frame(width: 300, height: 200)
+                            HStack{
+                                Spacer()
+                                if image != nil {
+                                    image?
+                                        .resizable()
+                                        .frame(width: 300, height:300)
+                                        .scaledToFit()
+                                        .cornerRadius(15)
+                                        
+                                } else {
+                                    Text("Tap to select a picture")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                }
+                                Spacer()
+                            }
                             
-                    } else {
-                        Text("Tap to select a picture")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                    }
-                    
-                    }.onTapGesture{
-                        self.showingImagePicker=true
-                    }
-                    
-                    Group {
-                        // title
-                        TextField("Recipe Name", text: $currentRecipe.name)
-                            .textFieldStyle(RoundedBorderTextFieldStyle()).padding()
-                    }
-                    .padding(.horizontal)
-                    
-                    // ingredient/step toggle view
-                    Toggle(isOn: $isIngredient, label: {})
-                        .toggleStyle(IngredientMethodToggleStyle())
-                    
-                    if isIngredient {
-                        // ingredient list
-                        HStack {
-                            Spacer()
-                            Button("Add ingredient") {
-                                isNewIngredient = true
-                                withAnimation {
-                                    addingIngredient.toggle()
+                        }.onTapGesture{
+                            self.showingImagePicker=true
+                        }
+                        
+                        Group {
+                            // title
+                            TextField("Recipe Name", text: $currentRecipe.name)
+                                .textFieldStyle(RoundedBorderTextFieldStyle()).padding()
+                        }
+                        .padding(.horizontal)
+                        
+                        // ingredient/step toggle view
+                        Toggle(isOn: $isIngredient, label: {})
+                            .toggleStyle(IngredientMethodToggleStyle())
+                        
+                        if isIngredient {
+                            // ingredient list
+                            HStack {
+                                Spacer()
+                                Button("Add ingredient") {
+                                    isNewIngredient = true
+                                    withAnimation {
+                                        addingIngredient.toggle()
+                                    }
+                                }.buttonStyle(GrowingButton())
+                                Spacer()
+                            }.padding(.top)
+                            IngredientListView(recipe: currentRecipe,
+                                               ingredients: currentRecipe.ingredients,
+                                               isNewIngredient: $isNewIngredient,
+                                               currentIngredient: $currentIngredient,
+                                               editingIngredient: $addingIngredient)
+                        } else {
+                            // steps list
+                            HStack {
+                                Spacer()
+                                Button("Add Step") {
+                                    isNewStep = true
+                                    withAnimation {
+                                        addingStep.toggle()
+                                    }
                                 }
-                            }
-                            Spacer()
-                        }.padding(.top)
-                        IngredientListView(recipe: currentRecipe,
-                                           ingredients: currentRecipe.ingredients,
-                                           isNewIngredient: $isNewIngredient,
-                                           currentIngredient: $currentIngredient,
-                                           editingIngredient: $addingIngredient)
-                    } else {
-                        // steps list
-                        HStack {
-                            Spacer()
-                            Button("Add Step") {
-                                isNewStep = true
-                                withAnimation {
-                                    addingStep.toggle()
-                                }
-                            }
-                            Spacer()
-                        }.padding(.top)
-                        MethodListView(recipe: currentRecipe,
-                                       method: currentRecipe.method,
-                                       isNewStep: $isNewStep,
-                                       currentStep: $currentStep,
-                                       editingStep: $addingStep)
-                    }
-                    HStack {
+                                Spacer()
+                            }.padding(.top)
+                            MethodListView(recipe: currentRecipe,
+                                           method: currentRecipe.method,
+                                           isNewStep: $isNewStep,
+                                           currentStep: $currentStep,
+                                           editingStep: $addingStep)
+                        }
                         Spacer()
+    //                    .padding()
+                        Rectangle()
+                            .fill(Color.white)
+                            .frame(width:screenWidth, height:300)
+                    }
+//                    .frame(minHeight: geometry.size.height + 500)
+                    .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                        ImagePicker(image: self.$inputImage)
+                    }
+                }
+//                .frame(height: geometry.size.height + 500)
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    ZStack{
+                        Rectangle()
+                            .fill(Color.white)
+                            .frame(width: screenWidth, height:100)
+                            .offset(y:40)
+                            
                         Button("Submit Recipe") {
                             currentRecipe.uiImage = inputImage!
                             recipeModel.recipes.append(currentRecipe)
                             self.presentation.wrappedValue.dismiss()
                         }
-                        Spacer()
-                    }.padding()
-                }
-                .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                    ImagePicker(image: self.$inputImage)
+                        .buttonStyle(GrowingButton())
+                        .offset(y:30)
+                    }
+                    Spacer()
                 }
             }
             if addingIngredient {
