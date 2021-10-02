@@ -4,23 +4,23 @@
 //
 //  Created by Tim Copland on 23/09/21.
 //
-//import SwiftUI
+import SwiftUI
 //
-//let screenSize: CGRect = UIScreen.main.bounds
-//let screenWidth = screenSize.width
-//let screenHeight = screenSize.height
+let screenSize: CGRect = UIScreen.main.bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
 //
-//struct PictureView: View {
-//    var imgName: String
-//    var body: some View {
-//
-//        Image(imgName)
-//            .resizable()
-//            .aspectRatio(contentMode: .fit)
-//            .frame(width: screenWidth, height: screenWidth)
-//    }
-//}
-//
+struct PictureView: View {
+    var uiImage: UIImage
+    var body: some View {
+        
+        Image(uiImage: uiImage)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: screenWidth, height: screenWidth)
+    }
+}
+
 //struct AddRecipeView: View {
 //    @ObservedObject var currentRecipe: Recipe = Recipe()
 //    @EnvironmentObject var recipeModel: RecipeModel
