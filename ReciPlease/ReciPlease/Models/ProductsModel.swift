@@ -25,6 +25,7 @@ struct Product:Identifiable, Decodable {
     let unit: String
     let img: Img
     let priceDetails: PriceDetails
+    let sizeDetails: SizeDetails
     
     enum CodingKeys: String, CodingKey {
         case type
@@ -34,6 +35,7 @@ struct Product:Identifiable, Decodable {
         case unit
         case img = "images"
         case priceDetails = "price"
+        case sizeDetails = "size"
     }
 }
 
@@ -49,6 +51,12 @@ struct PriceDetails : Decodable {
     let salePrice: Double
     let savePrice: Double
     let isSpecial: Bool
+}
+
+struct SizeDetails : Decodable {
+    let cupPrice: Double?
+    let cupMeasure: String?
+    let volumeSize: String?
 }
 
 enum FetchError: Error {
