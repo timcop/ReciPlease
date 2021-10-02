@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		326150FC27059FBC003D2FBB /* IngredientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326150FB27059FBB003D2FBB /* IngredientListView.swift */; };
+		326150FE27059FCF003D2FBB /* MethodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326150FD27059FCF003D2FBB /* MethodListView.swift */; };
+		326151002705BF38003D2FBB /* EditIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326150FF2705BF37003D2FBB /* EditIngredientView.swift */; };
+		326151022705C070003D2FBB /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326151012705C070003D2FBB /* EditStepView.swift */; };
 		728403BC2704104800FE9828 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728403BB2704104800FE9828 /* TestView.swift */; };
 		728403BE2704161F00FE9828 /* RecipeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728403BD2704161F00FE9828 /* RecipeNameView.swift */; };
 		728403C02704404200FE9828 /* newAddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728403BF2704404200FE9828 /* newAddRecipeView.swift */; };
@@ -22,7 +26,6 @@
 		72E531912701E94F00B92677 /* SearchProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531902701E94F00B92677 /* SearchProductsView.swift */; };
 		72E531932701E96D00B92677 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531922701E96D00B92677 /* AddRecipeView.swift */; };
 		72E531952701E98400B92677 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531942701E98400B92677 /* RecipesView.swift */; };
-		72E531972701E99A00B92677 /* AddIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531962701E99A00B92677 /* AddIngredientView.swift */; };
 		72E531992701E9B300B92677 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531982701E9B300B92677 /* RecipeDetailView.swift */; };
 		72E5319B2701E9D000B92677 /* ProductsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E5319A2701E9D000B92677 /* ProductsModel.swift */; };
 		72E5319D2701E9E300B92677 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E5319C2701E9E300B92677 /* RecipeModel.swift */; };
@@ -48,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		326150FB27059FBB003D2FBB /* IngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListView.swift; sourceTree = "<group>"; };
+		326150FD27059FCF003D2FBB /* MethodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodListView.swift; sourceTree = "<group>"; };
+		326150FF2705BF37003D2FBB /* EditIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIngredientView.swift; sourceTree = "<group>"; };
+		326151012705C070003D2FBB /* EditStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepView.swift; sourceTree = "<group>"; };
 		728403BB2704104800FE9828 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		728403BD2704161F00FE9828 /* RecipeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNameView.swift; sourceTree = "<group>"; };
 		728403BF2704404200FE9828 /* newAddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAddRecipeView.swift; sourceTree = "<group>"; };
@@ -66,7 +73,6 @@
 		72E531902701E94F00B92677 /* SearchProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsView.swift; sourceTree = "<group>"; };
 		72E531922701E96D00B92677 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		72E531942701E98400B92677 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
-		72E531962701E99A00B92677 /* AddIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientView.swift; sourceTree = "<group>"; };
 		72E531982701E9B300B92677 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		72E5319A2701E9D000B92677 /* ProductsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsModel.swift; sourceTree = "<group>"; };
 		72E5319C2701E9E300B92677 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
@@ -175,12 +181,15 @@
 				728403BB2704104800FE9828 /* TestView.swift */,
 				728403BD2704161F00FE9828 /* RecipeNameView.swift */,
 				72E531942701E98400B92677 /* RecipesView.swift */,
-				72E531962701E99A00B92677 /* AddIngredientView.swift */,
 				72E531982701E9B300B92677 /* RecipeDetailView.swift */,
 				AAC691512705C52700AD146A /* ImagePicker.swift */,
 				728403BF2704404200FE9828 /* newAddRecipeView.swift */,
+				326151012705C070003D2FBB /* EditStepView.swift */,
 				728403C3270473E900FE9828 /* IngredientDetailsCardView.swift */,
 				728403C12704472500FE9828 /* MoveRowsListView.swift */,
+				326150FB27059FBB003D2FBB /* IngredientListView.swift */,
+				326150FD27059FCF003D2FBB /* MethodListView.swift */,
+				326150FF2705BF37003D2FBB /* EditIngredientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,10 +329,14 @@
 				72E531912701E94F00B92677 /* SearchProductsView.swift in Sources */,
 				728403C02704404200FE9828 /* newAddRecipeView.swift in Sources */,
 				728403C22704472500FE9828 /* MoveRowsListView.swift in Sources */,
+				326150FC27059FBC003D2FBB /* IngredientListView.swift in Sources */,
 				AAC691542706C66500AD146A /* SearchBar.swift in Sources */,
 				72E5319B2701E9D000B92677 /* ProductsModel.swift in Sources */,
+				326150FE27059FCF003D2FBB /* MethodListView.swift in Sources */,
 				728403C4270473EA00FE9828 /* IngredientDetailsCardView.swift in Sources */,
+				326151002705BF38003D2FBB /* EditIngredientView.swift in Sources */,
 				72E531952701E98400B92677 /* RecipesView.swift in Sources */,
+				326151022705C070003D2FBB /* EditStepView.swift in Sources */,
 				72E531932701E96D00B92677 /* AddRecipeView.swift in Sources */,
 				728403BE2704161F00FE9828 /* RecipeNameView.swift in Sources */,
 				728403BC2704104800FE9828 /* TestView.swift in Sources */,

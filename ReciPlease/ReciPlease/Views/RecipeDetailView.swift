@@ -12,44 +12,70 @@ struct RecipeDetailView: View {
     @EnvironmentObject var recipeModel: RecipeModel
     @ObservedObject var selectedRecipe: Recipe
     @State var isIngredient = true
-
+    @State var editingStep = false
+    @State var isNewStep = false
+    @State var currentStep = Step()
+    @State var editingIngredient = false
+    @State var isNewIngredient = false
+    @State var currentIngredient = Ingredient()
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            VStack(alignment: .leading) {
-                PictureView(uiImage: (selectedRecipe.uiImage!))
-                Group {
-                    // title
-                    Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
-                    
-                    //info view
-                    HStack(spacing: 32) {
-                        HStack(spacing: 12) {
-                            Image(systemName: "clock")
-                                .foregroundColor(.green)
-                            
-                            Text(selectedRecipe.cookTime)
-                            Image(systemName:"pencil")
-                                .foregroundColor(.green)
-                            Text(String(selectedRecipe.ingredients.count) + " ingredients")
+        ZStack {
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading) {
+                    PictureView(uiImage: (selectedRecipe.uiImage!))
+                    Group {
+                        // title
+                        Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
+                        
+                        //info view
+                        HStack(spacing: 32) {
+                            HStack(spacing: 12) {
+                                Image(systemName: "clock")
+                                    .foregroundColor(.green)
+                                
+                                Text(selectedRecipe.cookTime)
+                                Image(systemName:"pencil")
+                                    .foregroundColor(.green)
+                                Text(String(selectedRecipe.ingredients.count) + " ingredients")
+                            }
                         }
+                        .padding(.vertical)
                     }
-                    .padding(.vertical)
-                }
-                .padding(.horizontal)
-                // ingredient/step toggle view
-                Toggle(isOn: $isIngredient, label: {})
-                    .toggleStyle(IngredientMethodToggleStyle())
-                
-                if isIngredient {
-                    // ingredient list
-                    IngredientListView(ingredients: selectedRecipe.ingredients)
-                } else {
-                    MethodListView(method: selectedRecipe.method)
-                    // steps list
+                    .padding(.horizontal)
+                    // ingredient/step toggle view
+                    Toggle(isOn: $isIngredient, label: {})
+                        .toggleStyle(IngredientMethodToggleStyle())
+                    
+                    if isIngredient {
+                        // ingredient list
+                        IngredientListView(recipe: selectedRecipe,
+                                           ingredients: selectedRecipe.ingredients,
+                                           isNewIngredient: $isNewIngredient,
+                                           currentIngredient: $currentIngredient,
+                                           editingIngredient: $editingIngredient)
+                    } else {
+                        MethodListView(recipe: selectedRecipe,
+                                       method: selectedRecipe.method,
+                                       isNewStep: $isNewStep,
+                                       currentStep: $currentStep,
+                                       editingStep: $editingStep)
+                        // steps list
+                    }
                 }
             }
-            
+            if editingIngredient {
+                EditIngredientView(editingIngredient:$editingIngredient,
+                                   isNewIngredient: isNewIngredient,
+                                   currentRecipe: selectedRecipe,
+                                   currentIngredient: $currentIngredient)
+            }
+            if editingStep {
+                EditStepView(editingStep:$editingStep,
+                             isNewStep: isNewStep,
+                             currentRecipe: selectedRecipe,
+                             currentStep: $currentStep)
+            }
         }
     }
     
@@ -97,37 +123,11 @@ struct IngredientMethodToggleStyle: ToggleStyle {
     }
 }
 
-struct IngredientListView: View {
-    var ingredients: [Ingredient]
-    var body: some View {
-        VStack {
-            ForEach(ingredients) { ing in
-                HStack{
-                    Text(ing.name)
-                        .padding(.horizontal)
-                        .padding(.vertical, 4.0)
-                    Spacer()
-                }
-                Divider()
-            }
+struct RecipeDetailView_Previews: PreviewProvider {
+    @State static var isIngredient = true
+    static var previews: some View {
+        Group {
+            RecipeDetailView(selectedRecipe: Recipe())
         }
     }
 }
-
-struct MethodListView: View {
-    var method: [Step]
-    var body: some View {
-        ForEach(method) { step in
-            Text("• \(step.string)")
-                .padding(.horizontal)
-                .padding(.vertical, 4.0)
-        }
-    }
-}
-//struct RecipeDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            RecipeDetailView( selectedRecipe: <#Recipe#>)
-//        }
-//    }
-//}

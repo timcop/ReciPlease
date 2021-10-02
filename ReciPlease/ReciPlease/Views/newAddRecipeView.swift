@@ -15,11 +15,11 @@ struct newAddRecipeView: View {
     
     @State var isIngredient = true
     @State var addingIngredient = false
-    @State var selectedUnit = Unit.each
-    @State var currentIngredient: Ingredient = Ingredient()
+    @State var currentIngredient = Ingredient()
+    @State var isNewIngredient = true
     @State var addingStep = false
-    @State var currentStep: Step = Step()
-    @State var stepPlaceholder = "Preheat oven to 180ºC..."
+    @State var currentStep = Step()
+    @State var isNewStep = true
     @State private var showingImagePicker = false
     @State var inputImage: UIImage? = UIImage(named: "recipe_default")
     @State var image: Image? = Image("recipe_default")
@@ -65,25 +65,35 @@ struct newAddRecipeView: View {
                         HStack {
                             Spacer()
                             Button("Add ingredient") {
+                                isNewIngredient = true
                                 withAnimation {
                                     addingIngredient.toggle()
                                 }
                             }
                             Spacer()
                         }.padding(.top)
-                        IngredientListView(ingredients: currentRecipe.ingredients)
+                        IngredientListView(recipe: currentRecipe,
+                                           ingredients: currentRecipe.ingredients,
+                                           isNewIngredient: $isNewIngredient,
+                                           currentIngredient: $currentIngredient,
+                                           editingIngredient: $addingIngredient)
                     } else {
                         // steps list
                         HStack {
                             Spacer()
                             Button("Add Step") {
+                                isNewStep = true
                                 withAnimation {
                                     addingStep.toggle()
                                 }
                             }
                             Spacer()
                         }.padding(.top)
-                        MethodListView(method: currentRecipe.method)
+                        MethodListView(recipe: currentRecipe,
+                                       method: currentRecipe.method,
+                                       isNewStep: $isNewStep,
+                                       currentStep: $currentStep,
+                                       editingStep: $addingStep)
                     }
                     HStack {
                         Spacer()
@@ -100,109 +110,17 @@ struct newAddRecipeView: View {
                 }
             }
             if addingIngredient {
-
-                ZStack{
-                    Color.black
-                        .onTapGesture {
-                            currentIngredient = Ingredient()
-                            withAnimation {
-                                addingIngredient.toggle()
-                            }
-                        }
-                        .ignoresSafeArea()
-                        .opacity(0.4)
-                    VStack(spacing: 0){
-                        Text("Item Details").padding(.top, 20)
-
-                        Form{
-                            TextField("Name", text: $currentIngredient.name)
-
-                            Picker(selection: $selectedUnit, label:Text("Unit")) {
-                                Text("Each").tag(Unit.each)
-                                Text("Grams").tag(Unit.g)
-                                Text("Kg").tag(Unit.kg)
-                                Text("mL").tag(Unit.ml)
-                                Text("L").tag(Unit.l)
-                                Text("Handfull").tag(Unit.handfull)
-                                Text("Bunch").tag(Unit.bunch)
-                            }
-                        
-                            TextField("Quantity", text:$currentIngredient.quantity)
-
-                        }
-                        NavigationLink(destination: SearchProductsView(ingProd: $currentIngredient.product, searchText: $currentIngredient.name)) {
-                           Text("Search product")
-                        }
-                        HStack {
-                            Button("Cancel") {
-                                currentIngredient = Ingredient()
-                                withAnimation {
-                                    addingIngredient.toggle()
-                                }
-                            }.padding()
-                            Button("Submit") {
-                                currentRecipe.ingredients.append(currentIngredient)
-                                currentIngredient = Ingredient()
-                                withAnimation {
-                                    addingIngredient.toggle()
-                                }
-                            }.padding()
-                        }
-                    }.frame(width:350, height:310)
-                        .background(Color(.systemGroupedBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                        .shadow(color: .gray, radius: 5, x:-9, y: -9)
-                }
+                EditIngredientView(editingIngredient: $addingIngredient,
+                                   isNewIngredient: isNewIngredient,
+                                   currentRecipe: currentRecipe,
+                                   currentIngredient: $currentIngredient)
             }
             
             if addingStep {
-                ZStack {
-                    Color.black
-                        .onTapGesture {
-                            currentIngredient = Ingredient()
-                            withAnimation {
-                                addingStep.toggle()
-                            }
-                        }
-                        .ignoresSafeArea()
-                        .opacity(0.4)
-                    VStack(spacing: 20) {
-                        Text("Step \(currentRecipe.method.count+1)").padding(.top, 20)
-                        ZStack {
-                        if currentStep.string.isEmpty {
-                            TextEditor(text:$stepPlaceholder)
-                                .font(.body)
-                                .foregroundColor(.gray)
-                                .cornerRadius(8)
-                                .disabled(true)
-                                .padding()
-                            }
-                            TextEditor(text: $currentStep.string)
-                                .font(.body)
-                                .opacity(currentStep.string.isEmpty ? 0.25 : 1)
-                                .cornerRadius(8)
-                                .padding()
-                        }
-                        HStack {
-                            Button("Cancel") {
-                                currentStep = Step()
-                                withAnimation {
-                                    addingStep.toggle()
-                                }
-                            }.padding()
-                            Button("Submit") {
-                                currentRecipe.method.append(currentStep)
-                                currentStep = Step()
-                                withAnimation {
-                                    addingStep.toggle()
-                                }
-                            }.padding()
-                        }
-                    }.frame(width:350, height:310)
-                        .background(Color(.systemGroupedBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                        .shadow(color: .gray, radius: 5, x:-9, y: -9)
-                }
+                EditStepView(editingStep: $addingStep,
+                             isNewStep: isNewStep,
+                             currentRecipe: currentRecipe,
+                             currentStep: $currentStep)
             }
         }
     }
