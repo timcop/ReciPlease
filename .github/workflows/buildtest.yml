@@ -27,6 +27,8 @@ jobs:
           scheme: ReciPlease
           destination: 'platform=iOS Simulator,name=Any iOS Device'
           enable-code-coverage: true
+        env:
+          MD_APPLE_SDK_ROOT: /Applications/Xcode_13.0.app
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1.2.1
   
