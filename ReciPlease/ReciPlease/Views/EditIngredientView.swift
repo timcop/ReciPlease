@@ -32,9 +32,6 @@ struct EditIngredientView: View {
                 Form{
     
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
-                        .onChange(of: currentRecipe.currentIngredient.name){newValue in
-                            currentRecipe.currentIngredient.product = nil
-                        }
 
                     Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
                         Text("Each").tag(Unit.each)
@@ -61,7 +58,9 @@ struct EditIngredientView: View {
                         }
                     }.padding()
                     Button("Submit") {
-                        print(currentRecipe.currentIngredient.product?.img.imageURL as Any)
+                        if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
+                            currentRecipe.currentIngredient.product = nil
+                        }
                         if isNewIngredient {
                             currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {

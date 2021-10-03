@@ -24,10 +24,10 @@ struct IngredientListView: View {
                         Text(ingredient.name)
                             .padding(.horizontal)
                             .padding(.vertical, 2.0)
+                        Text(String(ingredient.product?.sizeDetail.cupPrice) + " per " + ingredient.product?.sizeDetail.cupMeasure)
                     }
                     Spacer()
-                    if(currentRecipe.ingredients.product!=nil){
-                    AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL)!)) { phase in
+                    AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL) ?? "photo")) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -36,14 +36,13 @@ struct IngredientListView: View {
                                 .interpolation(.none)
                                 .scaledToFit()
                                 .frame(width: 80, height: 80)
+                                .padding(.horizontal)
                         case .failure:
                             Image(systemName: "photo")
+                                .padding(.horizontal)
                         @unknown default:
                             EmptyView()
                         }
-                    }
-                    }else{
-                        Image(systemName: "photo")
                     }
                 }.onTapGesture {
                     isNewIngredient = false
