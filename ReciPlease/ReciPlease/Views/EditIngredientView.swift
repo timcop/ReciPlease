@@ -9,10 +9,9 @@ import SwiftUI
 
 struct EditIngredientView: View {
     
+    @EnvironmentObject var currentRecipe: Recipe
     @Binding var editingIngredient: Bool
     @State var isNewIngredient: Bool
-    @State var currentRecipe: Recipe
-    @Binding var currentIngredient: Ingredient
     @State var selectedUnit: Unit = Unit.each
     @Environment(\.presentationMode) var presentation
     
@@ -20,7 +19,7 @@ struct EditIngredientView: View {
         ZStack{
             Color.black
                 .onTapGesture {
-                    currentIngredient = Ingredient()
+                    currentRecipe.currentIngredient = Ingredient()
                     withAnimation {
                         editingIngredient.toggle()
                     }
@@ -31,7 +30,7 @@ struct EditIngredientView: View {
                 Text("Item Details").padding(.top, 20)
 
                 Form{
-                    TextField("Name", text: $currentIngredient.name)
+                    TextField("Name", text: $currentRecipe.currentIngredient.name)
 
                     Picker(selection: $selectedUnit, label:Text("Unit")) {
                         Text("Each").tag(Unit.each)
@@ -43,34 +42,34 @@ struct EditIngredientView: View {
                         Text("Bunch").tag(Unit.bunch)
                     }
                 
-                    TextField("Quantity", text:$currentIngredient.quantity)
+                    TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)
 
                 }
-                NavigationLink(destination: SearchProductsView(ingProd: $currentIngredient.product, searchText: $currentIngredient.name)) {
+                NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
                    Text("Search product")
-                }
+                }.environmentObject(currentRecipe)
                 HStack {
                     Button("Cancel") {
-                        currentIngredient = Ingredient()
+                        currentRecipe.currentIngredient = Ingredient()
                         withAnimation {
                             editingIngredient.toggle()
                         }
                     }.padding()
                     Button("Submit") {
                         if isNewIngredient {
-                            currentRecipe.ingredients.append(currentIngredient)
+                            currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {
                             let oldIngs = currentRecipe.ingredients
                             currentRecipe.ingredients = []
                             oldIngs.forEach {ing in
-                                if ing.id == $currentIngredient.id {
-                                    currentRecipe.ingredients.append(currentIngredient)
+                                if ing.id == $currentRecipe.currentIngredient.id {
+                                    currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                                 } else {
                                     currentRecipe.ingredients.append(ing)
                                 }
                             }
                         }
-                        currentIngredient = Ingredient()
+                        currentRecipe.currentIngredient = Ingredient()
                         withAnimation {
                             editingIngredient.toggle()
                         }
@@ -81,6 +80,8 @@ struct EditIngredientView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                 .shadow(color: .gray, radius: 5, x:-9, y: -9)
         }
+        .environmentObject(currentRecipe)
+
     }
 }
 

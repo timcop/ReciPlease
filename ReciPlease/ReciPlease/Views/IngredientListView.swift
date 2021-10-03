@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct IngredientListView: View {
-    var recipe: Recipe
-    var ingredients: [Ingredient]
+    @StateObject var currentRecipe: Recipe
+//    var ingredients: [Ingredient]
     @Binding var isNewIngredient: Bool
-    @Binding var currentIngredient: Ingredient
+//    @Binding var currentIngredient: Ingredient
     @Binding var editingIngredient: Bool
     var body: some View {
         VStack{
-            ForEach(ingredients) { ingredient in
+            ForEach(currentRecipe.ingredients) { ingredient in
                 HStack{
                     Text(ingredient.name)
                         .padding(.horizontal)
@@ -23,7 +23,7 @@ struct IngredientListView: View {
                     Spacer()
                 }.onTapGesture {
                     isNewIngredient = false
-                    currentIngredient = ingredient
+                    currentRecipe.currentIngredient = ingredient
                     editingIngredient.toggle()
                 }
                 Divider()

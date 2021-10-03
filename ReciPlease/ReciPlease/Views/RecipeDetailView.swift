@@ -49,10 +49,8 @@ struct RecipeDetailView: View {
                     
                     if isIngredient {
                         // ingredient list
-                        IngredientListView(recipe: selectedRecipe,
-                                           ingredients: selectedRecipe.ingredients,
+                        IngredientListView( currentRecipe: selectedRecipe,
                                            isNewIngredient: $isNewIngredient,
-                                           currentIngredient: $currentIngredient,
                                            editingIngredient: $editingIngredient)
                     } else {
                         MethodListView(recipe: selectedRecipe,
@@ -66,14 +64,11 @@ struct RecipeDetailView: View {
             }
             if editingIngredient {
                 EditIngredientView(editingIngredient:$editingIngredient,
-                                   isNewIngredient: isNewIngredient,
-                                   currentRecipe: selectedRecipe,
-                                   currentIngredient: $currentIngredient)
+                                   isNewIngredient: isNewIngredient)
             }
             if editingStep {
                 EditStepView(editingStep:$editingStep,
                              isNewStep: isNewStep,
-                             currentRecipe: selectedRecipe,
                              currentStep: $currentStep)
             }
         }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct EditStepView: View {
     
+    @EnvironmentObject var currentRecipe: Recipe
     @Binding var editingStep: Bool
     @State var isNewStep: Bool
-    @State var currentRecipe: Recipe
     @Binding var currentStep: Step
     @State var selectedUnit: Unit = Unit.each
     @State var stepPlaceholder = "Preheat oven to 180ºC..."

@@ -19,7 +19,7 @@ struct newAddRecipeView: View {
     
     @State var isIngredient = true
     @State var addingIngredient = false
-    @State var currentIngredient = Ingredient()
+//    @State var currentIngredient = Ingredient()
     @State var isNewIngredient = true
     @State var addingStep = false
     @State var currentStep = Step()
@@ -35,9 +35,6 @@ struct newAddRecipeView: View {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(alignment: .leading) {
                         ZStack{
-//                            Rectangle()
-//                                    .fill(Color.white)
-//                                    .frame(width: 300, height: 200)
                             HStack{
                                 Spacer()
                                 if image != nil {
@@ -82,10 +79,8 @@ struct newAddRecipeView: View {
                                 }.buttonStyle(GrowingButton())
                                 Spacer()
                             }.padding(.top)
-                            IngredientListView(recipe: currentRecipe,
-                                               ingredients: currentRecipe.ingredients,
+                            IngredientListView( currentRecipe: currentRecipe,
                                                isNewIngredient: $isNewIngredient,
-                                               currentIngredient: $currentIngredient,
                                                editingIngredient: $addingIngredient)
                         } else {
                             // steps list
@@ -141,18 +136,20 @@ struct newAddRecipeView: View {
             }
             if addingIngredient {
                 EditIngredientView(editingIngredient: $addingIngredient,
-                                   isNewIngredient: isNewIngredient,
-                                   currentRecipe: currentRecipe,
-                                   currentIngredient: $currentIngredient)
+                                   isNewIngredient: isNewIngredient)
+                    .environmentObject(currentRecipe)
+
             }
             
             if addingStep {
                 EditStepView(editingStep: $addingStep,
                              isNewStep: isNewStep,
-                             currentRecipe: currentRecipe,
                              currentStep: $currentStep)
             }
+
         }
+        .environmentObject(currentRecipe)
+
     }
     func loadImage() {
         guard let inputImage = inputImage else { return }

@@ -39,6 +39,7 @@ class Recipe: ObservableObject, Identifiable {
     @Published var uiImage : UIImage?
     @Published var cookTime: String = "10 min"
     @Published var numIngredients: String = "10 ingredients"
+    @Published var currentIngredient = Ingredient()
 }
 
 struct Step: Codable, Identifiable {
