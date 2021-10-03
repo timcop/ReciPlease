@@ -30,9 +30,13 @@ struct EditIngredientView: View {
                 Text("Item Details").padding(.top, 20)
 
                 Form{
+    
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
+                        .onChange(of: currentRecipe.currentIngredient.name){newValue in
+                            currentRecipe.currentIngredient.product = nil
+                        }
 
-                    Picker(selection: $selectedUnit, label:Text("Unit")) {
+                    Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
                         Text("Each").tag(Unit.each)
                         Text("Grams").tag(Unit.g)
                         Text("Kg").tag(Unit.kg)
@@ -43,6 +47,7 @@ struct EditIngredientView: View {
                     }
                 
                     TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)
+                        .keyboardType(.numberPad)
 
                 }
                 NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
@@ -56,6 +61,7 @@ struct EditIngredientView: View {
                         }
                     }.padding()
                     Button("Submit") {
+                        print(currentRecipe.currentIngredient.product?.img.imageURL as Any)
                         if isNewIngredient {
                             currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {

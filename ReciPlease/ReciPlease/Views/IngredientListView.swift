@@ -17,10 +17,34 @@ struct IngredientListView: View {
         VStack{
             ForEach(currentRecipe.ingredients) { ingredient in
                 HStack{
-                    Text(ingredient.name)
-                        .padding(.horizontal)
-                        .padding(.vertical, 4.0)
+                    VStack(alignment: .leading){
+                        Text(ingredient.quantity + " " + ingredient.unit.id + " of: ")
+                            .padding(.horizontal)
+                            .font(Font.body.weight(.bold))
+                        Text(ingredient.name)
+                            .padding(.horizontal)
+                            .padding(.vertical, 2.0)
+                    }
                     Spacer()
+                    if(currentRecipe.ingredients.product!=nil){
+                    AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL)!)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image.resizable()
+                                .interpolation(.none)
+                                .scaledToFit()
+                                .frame(width: 80, height: 80)
+                        case .failure:
+                            Image(systemName: "photo")
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                    }else{
+                        Image(systemName: "photo")
+                    }
                 }.onTapGesture {
                     isNewIngredient = false
                     currentRecipe.currentIngredient = ingredient

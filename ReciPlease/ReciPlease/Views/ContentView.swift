@@ -69,6 +69,7 @@ struct RecipeCardScrollView: View {
             }
             .padding()
         }
+        .environmentObject(recipeModel)
         .frame(height:100)
         .offset(y:140)
         .gesture(DragGesture()
