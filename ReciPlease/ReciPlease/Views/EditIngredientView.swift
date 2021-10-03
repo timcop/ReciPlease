@@ -39,8 +39,9 @@ struct EditIngredientView: View {
                         Text("Kg").tag(Unit.kg)
                         Text("mL").tag(Unit.ml)
                         Text("L").tag(Unit.l)
-                        Text("Handfull").tag(Unit.handfull)
-                        Text("Bunch").tag(Unit.bunch)
+                        Text("Cup").tag(Unit.cup)
+                        Text("Tablespoon").tag(Unit.Tbsp)
+                        Text("Teaspoon").tag(Unit.tsp)
                     }
                 
                     TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)

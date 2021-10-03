@@ -24,7 +24,15 @@ struct IngredientListView: View {
                         Text(ingredient.name)
                             .padding(.horizontal)
                             .padding(.vertical, 2.0)
-                        Text(String(ingredient.product?.sizeDetail.cupPrice) + " per " + ingredient.product?.sizeDetail.cupMeasure)
+                        if(ingredient.product != nil){
+                            Text(String(format: "%.2f$", ingredient.product?.sizeDetails.cupPrice ?? "") + " per " + (ingredient.product?.sizeDetails.cupMeasure ?? ""))
+                                .padding(.horizontal)
+                        }else{
+                            Text("no price available for this item")
+                                .padding(.horizontal)
+                        }
+                      
+                           
                     }
                     Spacer()
                     AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL) ?? "photo")) { phase in
