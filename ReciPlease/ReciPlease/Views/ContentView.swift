@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var test: String = ""
     @State var searchText: String = ""
     @State var searching = false
+    @State var randomRecipeIdx: Int = 0
     
     var body: some View {
         NavigationView {
@@ -35,17 +36,31 @@ struct ContentView: View {
                 // Add recipe button
                 HStack {
                     Spacer()
+                    NavigationLink(destination: RandomRecipeView(recipes: recipeModel.recipes, idx: randomRecipeIdx)) {
+                        Text("Random recipe")
+                            .onAppear() {
+                                randomRecipeIdx = Int.random(in: 0..<recipeModel.recipes.count)
+                            }
+                    }.buttonStyle(GrowingButton())
+                    Spacer()
                     NavigationLink(destination: newAddRecipeView()) {
-                        Text("Add a recipe!")
+                        Text("Add a recipe")
                     }.buttonStyle(GrowingButton())
                     Spacer()
                 }.offset(y:-20)
-
             }
             .navigationTitle("ReciPlease")
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(recipeModel)
+    }
+}
+
+struct RandomRecipeView: View {
+    var recipes: [Recipe]
+    var idx: Int
+    var body: some View {
+        RecipeDetailView(selectedRecipe: recipes[idx])
     }
 }
 
@@ -137,6 +152,10 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             ContentView()
                 .environmentObject(Recipe())
+                .previewInterfaceOrientation(.portrait)
+            ContentView()
+                .environmentObject(Recipe())
+                .previewInterfaceOrientation(.portrait)
         }
     }
 }
