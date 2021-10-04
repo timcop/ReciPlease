@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipeDetailView: View {
 //    let recipe: Recipe
     @EnvironmentObject var recipeModel: RecipeModel
-    @ObservedObject var selectedRecipe: Recipe
+    @StateObject var selectedRecipe: Recipe
     @State var isIngredient = true
     @State var editingStep = false
     @State var isNewStep = false
@@ -49,7 +49,7 @@ struct RecipeDetailView: View {
                     
                     if isIngredient {
                         // ingredient list
-                        IngredientListView( currentRecipe: selectedRecipe,
+                        IngredientListView(currentRecipe: selectedRecipe,
                                            isNewIngredient: $isNewIngredient,
                                            editingIngredient: $editingIngredient)
                     } else {
@@ -72,6 +72,7 @@ struct RecipeDetailView: View {
                              currentStep: $currentStep)
             }
         }
+        .environmentObject(selectedRecipe)
     }
     
 }
