@@ -30,19 +30,22 @@ struct EditIngredientView: View {
                 Text("Item Details").padding(.top, 20)
 
                 Form{
+    
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
 
-                    Picker(selection: $selectedUnit, label:Text("Unit")) {
+                    Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
                         Text("Each").tag(Unit.each)
                         Text("Grams").tag(Unit.g)
                         Text("Kg").tag(Unit.kg)
                         Text("mL").tag(Unit.ml)
                         Text("L").tag(Unit.l)
-                        Text("Handfull").tag(Unit.handfull)
-                        Text("Bunch").tag(Unit.bunch)
+                        Text("Cup").tag(Unit.cup)
+                        Text("Tablespoon").tag(Unit.Tbsp)
+                        Text("Teaspoon").tag(Unit.tsp)
                     }
                 
                     TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)
+                        .keyboardType(.numberPad)
 
                 }
                 NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
@@ -56,6 +59,9 @@ struct EditIngredientView: View {
                         }
                     }.padding()
                     Button("Submit") {
+                        if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
+                            currentRecipe.currentIngredient.product = nil
+                        }
                         if isNewIngredient {
                             currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {

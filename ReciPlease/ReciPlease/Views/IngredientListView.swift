@@ -17,10 +17,41 @@ struct IngredientListView: View {
         VStack{
             ForEach(currentRecipe.ingredients) { ingredient in
                 HStack{
-                    Text(ingredient.name)
-                        .padding(.horizontal)
-                        .padding(.vertical, 4.0)
+                    VStack(alignment: .leading){
+                        Text(ingredient.quantity + " " + ingredient.unit.id + " of: ")
+                            .padding(.horizontal)
+                            .font(Font.body.weight(.bold))
+                        Text(ingredient.name)
+                            .padding(.horizontal)
+                            .padding(.vertical, 2.0)
+                        if(ingredient.product != nil){
+                            Text(String(format: "%.2f$", ingredient.product?.sizeDetails.cupPrice ?? "") + " per " + (ingredient.product?.sizeDetails.cupMeasure ?? ""))
+                                .padding(.horizontal)
+                        }else{
+                            Text("no price available for this item")
+                                .padding(.horizontal)
+                        }
+                      
+                           
+                    }
                     Spacer()
+                    AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL) ?? "photo")) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image.resizable()
+                                .interpolation(.none)
+                                .scaledToFit()
+                                .frame(width: 80, height: 80)
+                                .padding(.horizontal)
+                        case .failure:
+                            Image(systemName: "photo")
+                                .padding(.horizontal)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
                 }.onTapGesture {
                     isNewIngredient = false
                     currentRecipe.currentIngredient = ingredient

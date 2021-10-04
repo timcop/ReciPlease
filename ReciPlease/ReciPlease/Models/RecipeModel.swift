@@ -15,8 +15,9 @@ enum Unit: String, CaseIterable, Identifiable {
     case kg
     case ml
     case l
-    case handfull
-    case bunch
+    case cup
+    case Tbsp
+    case tsp
     
     var id: String {self.rawValue}
 }
