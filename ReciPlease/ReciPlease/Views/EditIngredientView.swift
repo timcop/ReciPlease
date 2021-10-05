@@ -50,14 +50,17 @@ struct EditIngredientView: View {
                 }
                 NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
                    Text("Search product")
-                }.environmentObject(currentRecipe)
+                }.buttonStyle(GrowingButton())
+                .environmentObject(currentRecipe)
                 HStack {
                     Button("Cancel") {
                         currentRecipe.currentIngredient = Ingredient()
                         withAnimation {
                             editingIngredient.toggle()
                         }
-                    }.padding()
+                    }
+                    .buttonStyle(GrowingButton())
+                    .padding()
                     Button("Submit") {
                         if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
                             currentRecipe.currentIngredient.product = nil
@@ -79,9 +82,12 @@ struct EditIngredientView: View {
                         withAnimation {
                             editingIngredient.toggle()
                         }
-                    }.padding()
+                    }
+                    .buttonStyle(GrowingButton())
+                    .disabled(currentRecipe.currentIngredient.name == "" || currentRecipe.currentIngredient.quantity == "")
+                    .padding()
                 }
-            }.frame(width:350, height:310)
+            }.frame(width:350, height:510)
                 .background(Color(.systemGroupedBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                 .shadow(color: .gray, radius: 5, x:-9, y: -9)
