@@ -91,7 +91,7 @@ struct newAddRecipeView: View {
                                     withAnimation {
                                         addingStep.toggle()
                                     }
-                                }
+                                }.buttonStyle(GrowingButton())
                                 Spacer()
                             }.padding(.top)
                             MethodListView(recipe: currentRecipe,

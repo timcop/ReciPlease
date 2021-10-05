@@ -50,7 +50,9 @@ struct EditStepView: View {
                         withAnimation {
                             editingStep.toggle()
                         }
-                    }.padding()
+                    }
+                    .buttonStyle(GrowingButton())
+                    .padding()
                     Button("Submit") {
                         if isNewStep {
                             currentRecipe.method.append(currentStep)
@@ -69,7 +71,10 @@ struct EditStepView: View {
                         withAnimation {
                             editingStep.toggle()
                         }
-                    }.padding()
+                    }
+                    .disabled(currentStep.string.isEmpty)
+                    .buttonStyle(GrowingButton())
+                    .padding()
                 }
             }.frame(width:350, height:310)
                 .background(Color(.systemGroupedBackground))
