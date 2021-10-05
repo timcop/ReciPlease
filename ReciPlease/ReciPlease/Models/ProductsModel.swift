@@ -12,7 +12,7 @@ struct ProductsResponse:Decodable {
 }
 
 struct ProductRef:Decodable {
-    let items: [Product]
+    let items: [FailableDecodable<Product>]
 }
 
 struct Product:Identifiable, Decodable {
@@ -64,6 +64,18 @@ enum FetchError: Error {
     case badResponse
 }
 
+struct FailableDecodable<Base : Decodable> : Decodable, Identifiable {
+    let id = UUID()
+    let base: Base?
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.base = try? container.decode(Base.self)
+    }
+}
+
+
+
 class ProductsModel {
     func getProducts(searchTerm: String) async throws -> [Product] {
         guard let url = URL(string: "https://shop.countdown.co.nz/api/v1/products?target=search&search='\(searchTerm)'") else {
@@ -78,6 +90,9 @@ class ProductsModel {
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {throw FetchError.badResponse}
         
         let maybeProductData = try JSONDecoder().decode(ProductsResponse.self, from: data)
-        return maybeProductData.products.items
+        let filtered = maybeProductData.products.items
+            .compactMap{$0.base}
+            
+        return filtered
     }
 }

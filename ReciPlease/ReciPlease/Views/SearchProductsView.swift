@@ -12,6 +12,7 @@ struct SearchProductsView: View {
     @StateObject var currentRecipe: Recipe
     var productsModel = ProductsModel()
     @State private var products = [Product]()
+//    @State private var products = [FailableDecodable<Product>]()
     @Binding var searchText: String
     @Environment(\.presentationMode) var presentation
     
@@ -65,7 +66,9 @@ struct SearchProductsView: View {
         .onSubmit(of: .search) {
             Task {
                 if !searchText.isEmpty {
-                products = try! await productsModel.getProducts(searchTerm: searchText)
+                    products = try! await productsModel.getProducts(searchTerm: searchText)
+                    print(products[0].name)
+                
                 } else {
                     products = []
                 }
