@@ -84,7 +84,7 @@ struct RecipeDetailView: View {
                     }
 
                 }
-                //.blur(radius: showingDeleteConfirmation ? 5 : 0)
+                .blur(radius: showingDeleteConfirmation ? 5 : 0)
                 .navigationBarItems(trailing:
                     HStack {
                         if (editingRecipe) {
@@ -112,14 +112,14 @@ struct RecipeDetailView: View {
                                  currentStep: $currentStep)
                 }
                 if showingDeleteConfirmation {
-                    Color.black
+                    Color.white
                         .onTapGesture {
                             withAnimation {
                                 showingDeleteConfirmation.toggle()
                             }
                         }
                         .ignoresSafeArea()
-                        .opacity(0.4)
+                        .opacity(0.01)
                     ZStack {
                         
                         VStack {
