@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct ProductsResponse:Decodable {
+struct ProductsResponse:Codable {
     let products: ProductRef
 }
 
-struct ProductRef:Decodable {
+struct ProductRef:Codable {
     let items: [Product]
 }
 
-struct Product:Identifiable, Decodable {
+struct Product:Identifiable, Codable {
     let id = UUID()
     
     let type: String
@@ -39,21 +39,21 @@ struct Product:Identifiable, Decodable {
     }
 }
 
-struct Img:Decodable {
+struct Img:Codable {
     let imageURL: String
     enum CodingKeys: String, CodingKey {
         case imageURL = "big"
     }
 }
 
-struct PriceDetails : Decodable {
+struct PriceDetails : Codable {
     let originalPrice: Double
     let salePrice: Double
     let savePrice: Double
     let isSpecial: Bool
 }
 
-struct SizeDetails : Decodable {
+struct SizeDetails : Codable {
     let cupPrice: Double?
     let cupMeasure: String?
     let volumeSize: String?
