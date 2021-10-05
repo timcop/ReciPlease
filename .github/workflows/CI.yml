@@ -25,9 +25,9 @@ jobs:
         - uses: actions/checkout@v2
         - name: iOS - ${{ matrix.destination }}
           run: xcodebuild -project "ReciPlease/ReciPlease.xcodeproj" -scheme "ReciPlease" -destination "${{ matrix.destination }}" 
-               -enableCodeCoverage YES CODE_SIGNING_ALLOWED=NO clean build test | xcpretty
+               -enableCodeCoverage YES CODE_SIGNING_ALLOWED=NO build test
         - name: Upload coverage to Codecov
-          uses: codecov/codecov-action@v2
+          uses: codecov/codecov-action@v1.2.1
 
   Documentaton:
     runs-on: ubuntu-latest
