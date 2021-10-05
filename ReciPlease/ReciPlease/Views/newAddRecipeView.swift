@@ -129,6 +129,7 @@ struct newAddRecipeView: View {
                             self.presentation.wrappedValue.dismiss()
                         }
                         .buttonStyle(GrowingButton())
+                        .disabled(currentRecipe.ingredients.count < 1)
                         .offset(y:30)
                     }
                     Spacer()
