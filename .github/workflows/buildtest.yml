@@ -25,7 +25,7 @@ jobs:
         with: 
           project: ReciPlease/ReciPlease.xcodeproj
           scheme: ReciPlease
-#           destination: 'platform=iOS Simulator,name=iPhone 11'
+          destination: 'platform=iOS Simulator,name=iPhone 13'
           enable-code-coverage: true
         env:
           MD_APPLE_SDK_ROOT: /Applications/Xcode_13.0.app
