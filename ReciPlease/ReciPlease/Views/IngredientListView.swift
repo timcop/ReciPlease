@@ -53,24 +53,6 @@ struct IngredientListView: View {
 
                         }
                     }
-//
-//                    AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL) ?? "photo")) { phase in
-//                        switch phase {
-//                        case .empty:
-//                            ProgressView()
-//                        case .success(let image):
-//                            image.resizable()
-//                                .interpolation(.none)
-//                                .scaledToFit()
-//                                .frame(width: 80, height: 80)
-//                                .padding(.horizontal)
-//                        case .failure:
-//                            Image(systemName: "photo")
-//                                .padding(.horizontal)
-//                        @unknown default:
-//                            EmptyView()
-//                        }
-//                    }
                 }
 //                }.onTapGesture {
 //                    isNewIngredient = false
