@@ -18,9 +18,6 @@ jobs:
   iOS_15:
       name: Test iOS 15
       runs-on: macOS-latest
-#       env:
-# #         DEVELOPER_DIR: /Applications/Xcode_13.0.app/Contents/Developer
-#       timeout-minutes: 10
       strategy:
         matrix:
           destination: ["OS=15.0,name=iPhone 13 Pro"]
@@ -47,23 +44,3 @@ jobs:
          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
          
          
-
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v1
-#       - name: Generate Documentation
-#         uses: SwiftDocOrg/swift-doc@master
-#         with:
-#           inputs: "Sources"
-#           module-name: MyLibrary
-#           output: "Documentation"
-#       - name: Upload Documentation to Wiki
-#         uses: SwiftDocOrg/github-wiki-publish-action@v1
-#         with:
-#           path: "Documentation"
-#         env:
-#           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
