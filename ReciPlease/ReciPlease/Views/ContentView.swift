@@ -17,21 +17,32 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // Search bar
-                SearchBar(searchText: $searchText, searching: $searching)
-                            .toolbar {
-                                if searching {
-                                    Button("Cancel") {
-                                        searchText = ""
-                                        withAnimation {
-                                            searching = false
-                                            UIApplication.shared.dismissKeyboard()
+                if recipeModel.recipes.count < 1 {
+                    Spacer()
+                    Text("It's looking empty in here...")
+                        .padding(.bottom, 8)
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                    Text("Add a recipe!")
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                } else {
+                    // Search bar
+                    SearchBar(searchText: $searchText, searching: $searching)
+                                .toolbar {
+                                    if searching {
+                                        Button("Cancel") {
+                                            searchText = ""
+                                            withAnimation {
+                                                searching = false
+                                                UIApplication.shared.dismissKeyboard()
+                                            }
                                         }
                                     }
                                 }
-                            }
-                // Recipe Scroll view
-                RecipeCardScrollView(searchText: $searchText)
+                    // Recipe Scroll view
+                    RecipeCardScrollView(searchText: $searchText)
+                }
                 Spacer()
                 // Add recipe button
                 HStack {
