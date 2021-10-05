@@ -13,40 +13,55 @@ on:
 
 
 
-
 jobs:
-  build:
-    runs-on: macOS-latest
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_13.0.app/Contents/Developer
-    steps:
-      - name: Test
-        uses: actions/checkout@v2
-      - name: Build and Test
-        uses: sersoft-gmbh/xcodebuild-action@v1.8.0
-        with: 
-          project: ReciPlease/ReciPlease.xcodeproj
-          scheme: ReciPlease
-          destination: 'platform=iOS Simulator,name=iPhone 13'
-          enable-code-coverage: true
-        env:
-          MD_APPLE_SDK_ROOT: /Applications/Xcode_13.0.app
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1.2.1
-  
-  Documentaton:
-      runs-on: ubuntu-latest
+
+  iOS_15:
+      name: Test iOS 15
+      runs-on: firebreak
+      env:
+        DEVELOPER_DIR: /Applications/Xcode_13.0.app/Contents/Developer
+      timeout-minutes: 10
+      strategy:
+        matrix:
+          destination: ["OS=15.0,name=iPhone 13 Pro"]
       steps:
-      - uses: actions/checkout@v2
-      - name: Extract Documentation
-        uses: SwiftDocOrg/swift-doc@master
-        with:
-           inputs: "ReciPlease/ReciPlease"
-           module-name: MyLibrary
-           output: "Documentation"
-      - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-           path: "Documentation"
-        env:
-           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        - uses: actions/checkout@v2
+        - name: Install Firewalk
+          run: arch -arch arm64e brew install alamofire/alamofire/firewalk || arch -arch arm64e brew upgrade alamofire/alamofire/firewalk && arch -arch x86_64 firewalk &
+        - name: iOS - ${{ matrix.destination }}
+          run: set -o pipefail && arch -arch arm64e env NSUnbufferedIO=YES xcodebuild -project "ReciPlease/ReciPlease.xcodeproj" -scheme "ReciPlease" -destination "${{ matrix.destination }}" clean test | xcpretty
+#   build:
+#     runs-on: macOS-latest
+#     env:
+#       DEVELOPER_DIR: /Applications/Xcode_13.0.app/Contents/Developer
+#     steps:
+#       - name: Test
+#         uses: actions/checkout@v2
+#       - name: Build and Test
+#         uses: sersoft-gmbh/xcodebuild-action@v1.8.0
+#         with: 
+#           project: ReciPlease/ReciPlease.xcodeproj
+#           scheme: ReciPlease
+#           destination: 'platform=iOS Simulator,name=iPhone 13'
+#           enable-code-coverage: true
+#         env:
+#           MD_APPLE_SDK_ROOT: /Applications/Xcode_13.0.app
+#       - name: Upload coverage to Codecov
+#         uses: codecov/codecov-action@v1.2.1
+  
+#   Documentaton:
+#       runs-on: ubuntu-latest
+#       steps:
+#       - uses: actions/checkout@v2
+#       - name: Extract Documentation
+#         uses: SwiftDocOrg/swift-doc@master
+#         with:
+#            inputs: "ReciPlease/ReciPlease"
+#            module-name: MyLibrary
+#            output: "Documentation"
+#       - name: Upload Documentation to Wiki
+#         uses: SwiftDocOrg/github-wiki-publish-action@v1
+#         with:
+#            path: "Documentation"
+#         env:
+#            GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
