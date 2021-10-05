@@ -122,14 +122,30 @@ struct newAddRecipeView: View {
                             .fill(Color.white)
                             .frame(width: screenWidth, height:100)
                             .offset(y:40)
+                        HStack {
+                            Button("Submit Recipe") {
+                                currentRecipe.uiImage = inputImage!
+                                recipeModel.recipes.append(currentRecipe)
+                                self.presentation.wrappedValue.dismiss()
+                            }
+                            .buttonStyle(GrowingButton())
+                            .disabled(currentRecipe.ingredients.count < 1 || currentRecipe.name == "")
                             
-                        Button("Submit Recipe") {
-                            currentRecipe.uiImage = inputImage!
-                            recipeModel.recipes.append(currentRecipe)
-                            self.presentation.wrappedValue.dismiss()
+                            
+                            Spacer()
+                            
+                            Button("Cancel") {
+                                // work around, can't reinitialise currentIngredient how i wanted to
+                                currentRecipe.ingredients = []
+                                currentRecipe.name = ""
+                                currentRecipe.method = []
+                                currentRecipe.cookTime = "10 min"
+                                currentRecipe.numIngredients = "10 ingredients"
+                                currentRecipe.currentIngredient = Ingredient()
+                                self.presentation.wrappedValue.dismiss()
+                            }
+                            .buttonStyle(GrowingButton())
                         }
-                        .buttonStyle(GrowingButton())
-                        .disabled(currentRecipe.ingredients.count < 1)
                         .offset(y:30)
                     }
                     Spacer()
