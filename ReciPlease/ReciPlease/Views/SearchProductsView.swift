@@ -54,10 +54,7 @@ struct SearchProductsView: View {
                     // NAVIGATE TO NEW VIEW FROM HERE
                     currentRecipe.currentIngredient.product = prod
                     print(currentRecipe.currentIngredient.product?.img.imageURL as Any)
-                    currentRecipe.currentIngredient.name=currentRecipe.currentIngredient.product!.name
                     self.presentation.wrappedValue.dismiss()
-//                    print(currentRecipe.currentIngredient.name)
-//                    print(currentRecipe.currentIngredient.product.name!)
 
                     // SEND THE PRODUCT DETAIL
                 }

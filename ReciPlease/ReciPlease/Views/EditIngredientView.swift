@@ -62,9 +62,9 @@ struct EditIngredientView: View {
                     .buttonStyle(GrowingButton())
                     .padding()
                     Button("Submit") {
-                        if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
-                            currentRecipe.currentIngredient.product = nil
-                        }
+//                        if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
+//                            currentRecipe.currentIngredient.product = nil
+//                        }
                         if isNewIngredient {
                             currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {
