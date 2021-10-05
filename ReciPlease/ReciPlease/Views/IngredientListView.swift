@@ -16,47 +16,49 @@ struct IngredientListView: View {
     var body: some View {
         VStack{
             ForEach(currentRecipe.ingredients) { ingredient in
-                HStack{
-                    VStack(alignment: .leading){
-                        Text(ingredient.quantity + " " + ingredient.unit.id + " of: ")
-                            .padding(.horizontal)
-                            .font(Font.body.weight(.bold))
-                        Text(ingredient.name)
-                            .padding(.horizontal)
-                            .padding(.vertical, 2.0)
-                        if(ingredient.product != nil){
-                            Text(String(format: "%.2f$", ingredient.product?.sizeDetails.cupPrice ?? "") + " per " + (ingredient.product?.sizeDetails.cupMeasure ?? ""))
-                                .padding(.horizontal)
-                        }else{
-                            Text("no price available for this item")
-                                .padding(.horizontal)
-                        }
-                      
-                           
+
+                VStack {
+                    HStack {
+                        Group {
+                            Text(ingredient.quantity)
+                                .padding(.leading)
+    //                            .padding(.vertical, 4.0)
+                            if (ingredient.unit.id != "each") {
+                                Text(ingredient.unit.id)
+                            }
+                            Text(ingredient.name)
+                                .padding(.vertical, 3.0)
+//                                .padding(.horizontal)
+//                                .font(Font.body.weight(.bold))
+                        }.font(Font.body.weight(.bold))
+                        Spacer()
                     }
-                    Spacer()
-                    AsyncImageHack(url: URL(string: (ingredient.product?.img.imageURL) ?? "photo")) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image.resizable()
-                                .interpolation(.none)
-                                .scaledToFit()
-                                .frame(width: 80, height: 80)
-                                .padding(.horizontal)
-                        case .failure:
-                            Image(systemName: "photo")
-                                .padding(.horizontal)
-                        @unknown default:
-                            EmptyView()
+                    if (ingredient.product != nil) {
+
+                        HStack{
+                            Text("-")
+                            if (ingredient.product?.sizeDetails.cupPrice != nil && ingredient.product?.sizeDetails.cupPrice != 0.0) {
+                                Text(String(format: "$%.2f", ingredient.product?.sizeDetails.cupPrice ?? ""))
+                            } else {
+                                Text(String(format: "$%.2f", ingredient.product?.priceDetails.salePrice ?? ""))
+                            }
+                            Text("/")
+                            if (ingredient.product?.sizeDetails.cupMeasure != nil) {
+                                Text(ingredient.product?.sizeDetails.cupMeasure ?? "")
+                                
+                            } else {
+                                Text(ingredient.product?.sizeDetails.volumeSize ?? "")
+                            }
+                            Spacer()
+
                         }
                     }
-                }.onTapGesture {
-                    isNewIngredient = false
-                    currentRecipe.currentIngredient = ingredient
-                    editingIngredient.toggle()
                 }
+//                }.onTapGesture {
+//                    isNewIngredient = false
+//                    currentRecipe.currentIngredient = ingredient
+//                    editingIngredient.toggle()
+//                }
                 Divider()
             }
         }
