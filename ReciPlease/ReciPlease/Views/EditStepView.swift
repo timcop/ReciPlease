@@ -19,7 +19,7 @@ struct EditStepView: View {
     
     var body: some View {
         ZStack {
-            Color.black
+            Color.white
                 .onTapGesture {
                     currentStep = Step()
                     withAnimation {
@@ -27,7 +27,7 @@ struct EditStepView: View {
                     }
                 }
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.01)
             VStack(spacing: 20) {
                 ZStack {
                 if currentStep.string.isEmpty {

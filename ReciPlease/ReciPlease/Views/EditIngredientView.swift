@@ -17,7 +17,7 @@ struct EditIngredientView: View {
     
     var body: some View {
         ZStack{
-            Color.black
+            Color.white
                 .onTapGesture {
                     currentRecipe.currentIngredient = Ingredient()
                     withAnimation {
@@ -25,7 +25,7 @@ struct EditIngredientView: View {
                     }
                 }
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.01)
             VStack(spacing: 0){
                 Text("Item Details").padding(.top, 20)
 

@@ -101,27 +101,27 @@ struct newAddRecipeView: View {
                                            editingStep: $addingStep)
                         }
                         Spacer()
-    //                    .padding()
                         Rectangle()
                             .fill(Color.white)
                             .frame(width:screenWidth, height:300)
+                            .hidden()
                     }
-//                    .frame(minHeight: geometry.size.height + 500)
                     .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                         ImagePicker(image: self.$inputImage)
                     }
                 }
-//                .frame(height: geometry.size.height + 500)
             }
+            .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
+            .allowsHitTesting(!(addingIngredient || addingStep))
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
                     ZStack{
                         Rectangle()
-                            .fill(Color.white)
                             .frame(width: screenWidth, height:100)
                             .offset(y:40)
+                            .hidden()
                         HStack {
                             Button("Submit Recipe") {
                                 currentRecipe.uiImage = inputImage!
@@ -151,6 +151,8 @@ struct newAddRecipeView: View {
                     Spacer()
                 }
             }
+            .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
+            .allowsHitTesting(!(addingIngredient || addingStep))
             if addingIngredient {
                 EditIngredientView(editingIngredient: $addingIngredient,
                                    isNewIngredient: isNewIngredient)

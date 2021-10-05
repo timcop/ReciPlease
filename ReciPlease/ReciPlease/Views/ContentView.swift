@@ -76,17 +76,21 @@ struct RecipeCardScrollView: View {
                             HomeRecipeCardView(recipe: recipe)
                         }
                         .rotation3DEffect(Angle(degrees:
-                            Double(geometry.frame(in: .global).minX) / -20
-                               ), axis: (x: 0, y: 10.0, z: 0))
+                            Double(geometry.frame(in: .global).minX - 40) / -10
+                               ), axis: (x: 0, y: 100.0, z: 0))
                     }
-                    .frame(width:246, height: 350)
+                    .frame(width:230, height: 350)
                 }
+                Rectangle()
+                    .frame(width:30, height:350)
+                    .hidden()
+                    
             }
-            .padding()
+            .padding(40)
         }
         .environmentObject(recipeModel)
         .frame(height:100)
-        .offset(y:140)
+        .offset(y:180)
         .gesture(DragGesture()
                      .onChanged({ _ in
                          UIApplication.shared.dismissKeyboard()
@@ -153,9 +157,6 @@ extension UIApplication {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
-                .environmentObject(Recipe())
-                .previewInterfaceOrientation(.portrait)
             ContentView()
                 .environmentObject(Recipe())
                 .previewInterfaceOrientation(.portrait)
