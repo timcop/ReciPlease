@@ -13,6 +13,7 @@ struct IngredientListView: View {
     @Binding var isNewIngredient: Bool
 //    @Binding var currentIngredient: Ingredient
     @Binding var editingIngredient: Bool
+    @Binding var editingRecipe: Bool
     var body: some View {
         VStack{
             ForEach(currentRecipe.ingredients) { ingredient in
@@ -32,6 +33,24 @@ struct IngredientListView: View {
 //                                .font(Font.body.weight(.bold))
                         }.font(Font.body.weight(.bold))
                         Spacer()
+                        if (editingRecipe) {
+                            HStack {
+                                Image(systemName:"pencil")
+                                    .foregroundColor(Color.green)
+                                    .onTapGesture {
+                                        isNewIngredient = false
+                                        currentRecipe.currentIngredient = ingredient
+                                        editingIngredient.toggle()
+                                    }
+                                Image(systemName:"xmark")
+                                    .foregroundColor(Color.green)
+                                    .onTapGesture {
+                                        if let index = currentRecipe.ingredients.firstIndex(where: {$0.id == ingredient.id}) {
+                                            currentRecipe.ingredients.remove(at: index)
+                                        }
+                                    }
+                            }.padding(.trailing)
+                        }
                     }
                     if (ingredient.product != nil) {
 
@@ -50,15 +69,9 @@ struct IngredientListView: View {
                                 Text(ingredient.product?.sizeDetails.volumeSize ?? "")
                             }
                             Spacer()
-
                         }
                     }
                 }
-//                }.onTapGesture {
-//                    isNewIngredient = false
-//                    currentRecipe.currentIngredient = ingredient
-//                    editingIngredient.toggle()
-//                }
                 Divider()
             }
         }

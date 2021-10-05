@@ -24,6 +24,7 @@ struct newAddRecipeView: View {
     @State var addingStep = false
     @State var currentStep = Step()
     @State var isNewStep = true
+    @State var editingRecipe = true
     @State private var showingImagePicker = false
     @State var inputImage: UIImage? = UIImage(named: "recipe_default")
     @State var image: Image? = Image("recipe_default")
@@ -81,7 +82,8 @@ struct newAddRecipeView: View {
                             }.padding(.top)
                             IngredientListView( currentRecipe: currentRecipe,
                                                isNewIngredient: $isNewIngredient,
-                                               editingIngredient: $addingIngredient)
+                                               editingIngredient: $addingIngredient,
+                                               editingRecipe: $editingRecipe)
                         } else {
                             // steps list
                             HStack {
@@ -91,14 +93,14 @@ struct newAddRecipeView: View {
                                     withAnimation {
                                         addingStep.toggle()
                                     }
-                                }
+                                }.buttonStyle(GrowingButton())
                                 Spacer()
                             }.padding(.top)
-                            MethodListView(recipe: currentRecipe,
-                                           method: currentRecipe.method,
+                            MethodListView(currentRecipe: currentRecipe,
                                            isNewStep: $isNewStep,
                                            currentStep: $currentStep,
-                                           editingStep: $addingStep)
+                                           editingStep: $addingStep,
+                                           editingRecipe: $editingRecipe)
                         }
                         Spacer()
     //                    .padding()
@@ -123,17 +125,7 @@ struct newAddRecipeView: View {
                             .frame(width: screenWidth, height:100)
                             .offset(y:40)
                         HStack {
-                            Button("Submit Recipe") {
-                                currentRecipe.uiImage = inputImage!
-                                recipeModel.recipes.append(currentRecipe)
-                                self.presentation.wrappedValue.dismiss()
-                            }
-                            .buttonStyle(GrowingButton())
-                            .disabled(currentRecipe.ingredients.count < 1 || currentRecipe.name == "")
-                            
-                            
                             Spacer()
-                            
                             Button("Cancel") {
                                 // work around, can't reinitialise currentIngredient how i wanted to
                                 currentRecipe.ingredients = []
@@ -145,6 +137,17 @@ struct newAddRecipeView: View {
                                 self.presentation.wrappedValue.dismiss()
                             }
                             .buttonStyle(GrowingButton())
+                            
+                            Spacer()
+                            
+                            Button("Submit") {
+                                currentRecipe.uiImage = inputImage!
+                                recipeModel.recipes.append(currentRecipe)
+                                self.presentation.wrappedValue.dismiss()
+                            }
+                            .buttonStyle(GrowingButton())
+                            .disabled(currentRecipe.ingredients.count < 1 || currentRecipe.name == "")
+                            Spacer()
                         }
                         .offset(y:30)
                     }

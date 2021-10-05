@@ -39,9 +39,14 @@ struct ContentView: View {
                     NavigationLink(destination: RandomRecipeView(recipes: recipeModel.recipes, idx: randomRecipeIdx)) {
                         Text("Random recipe")
                             .onAppear() {
+                                if recipeModel.recipes.count < 1 {
+                                    return
+                                }
                                 randomRecipeIdx = Int.random(in: 0..<recipeModel.recipes.count)
                             }
-                    }.buttonStyle(GrowingButton())
+                    }
+                    .buttonStyle(GrowingButton())
+                    .disabled(recipeModel.recipes.count < 1)
                     Spacer()
                     NavigationLink(destination: newAddRecipeView()) {
                         Text("Add a recipe")
