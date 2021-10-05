@@ -131,10 +131,12 @@ struct HomeRecipeCardView: View {
 }
 
 struct GrowingButton: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color.green)
+            .background(isEnabled ? Color.green: Color.gray)
             .foregroundColor(.white)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
