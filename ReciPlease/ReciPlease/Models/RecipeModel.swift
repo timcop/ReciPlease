@@ -207,6 +207,7 @@ class RecipeModel: ObservableObject, Codable {
             }
             catch{
                 print(error)
+                return []
             }
         return []
         }
