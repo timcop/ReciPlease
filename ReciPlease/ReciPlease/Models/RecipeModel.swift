@@ -199,16 +199,12 @@ class RecipeModel: ObservableObject, Codable {
             let recFolder = url.appendingPathComponent("Recipes")
             let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
             
-            do {
-                let tempRecList = manager.contents(atPath: recipeList.path)
-                let result = try JSONDecoder().decode([Recipe].self, from: tempRecList!)
-                return result
-                
-            }
-            catch{
-                print(error)
-                return []
-            }
+            let tempRecList = manager.contents(atPath: recipeList.path)
+            if tempRecList != nil {
+                if let result = try? JSONDecoder().decode([Recipe].self, from: tempRecList!) {
+                    return result
+                }
+            } 
         return []
         }
     
