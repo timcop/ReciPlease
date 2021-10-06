@@ -20,8 +20,8 @@ struct ReciPleaseApp: App {
                if (isLoaded) { ContentView().environmentObject(recipeModel) }
                else {
                    
-//                   Text("Loading . . .")
                    LoadingView()
+                   
                    
                }
             }.onAppear() {
@@ -70,8 +70,10 @@ struct LoadingView: View {
             RoundedRectangle(cornerRadius: 3)
                 .stroke(Color.orange, lineWidth: 3)
                 .frame(width: 30, height: 3)
-                .offset(x: 110, y: 0)
-//                .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                .offset(x: isLoading ? 110 : -110, y: 0)
+                .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+        }.onAppear {
+            isLoading = true
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
