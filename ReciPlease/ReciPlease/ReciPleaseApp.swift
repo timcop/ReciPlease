@@ -52,7 +52,7 @@ func completionHandler(value: @escaping (Bool) -> Void) {
     
     // some heavy work here!
     
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(3000)) { value(true) }
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(2000)) { value(true) }
     
 }
 
@@ -68,7 +68,7 @@ struct LoadingView: View {
                 .stroke(Color(.systemGray5), lineWidth: 3)
                 .frame(width: 250, height: 3)
             RoundedRectangle(cornerRadius: 3)
-                .stroke(Color.orange, lineWidth: 3)
+                .stroke(Color.blue, lineWidth: 3)
                 .frame(width: 30, height: 3)
                 .offset(x: isLoading ? 110 : -110, y: 0)
                 .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
@@ -76,7 +76,7 @@ struct LoadingView: View {
             isLoading = true
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(#colorLiteral(red: 1, green: 0.8612575531, blue: 0.6343607306, alpha: 1)))
+        .background(Color(#colorLiteral(red: 0.953, green: 0.627, blue: 0.067, alpha: 1)))
         .edgesIgnoringSafeArea(.all)
     }
 }
