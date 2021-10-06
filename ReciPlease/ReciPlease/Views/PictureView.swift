@@ -17,6 +17,7 @@ struct PictureView: View {
     var uiImage: UIImage
     var body: some View {
         
+//        Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
         Image(uiImage: uiImage)
             .resizable()
             .aspectRatio(contentMode: .fit)

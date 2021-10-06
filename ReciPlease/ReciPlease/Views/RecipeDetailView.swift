@@ -25,7 +25,7 @@ struct RecipeDetailView: View {
             ZStack {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(alignment: .leading) {
-                        PictureView(uiImage: (selectedRecipe.uiImage!))
+                        PictureView(uiImage: UIImage(data: selectedRecipe.uiImage!.photo)!)
                         Group {
                             // title
                             Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
@@ -97,6 +97,10 @@ struct RecipeDetailView: View {
                         }
                         Button(action: {
                             editingRecipe.toggle()
+                            if (!editingRecipe) {
+                                // save
+                                recipeModel.storeRecList(recs: recipeModel.recipes)
+                            }
                         }) {
                             Text(editingRecipe ? "Done" : "Edit")
                         }
@@ -139,6 +143,7 @@ struct RecipeDetailView: View {
                                 Button(action: {
                                     if let index = $recipeModel.recipes.firstIndex(where: {$0.id == selectedRecipe.id}) {
                                         recipeModel.recipes.remove(at: index)
+                                        recipeModel.storeRecList(recs: recipeModel.recipes)
                                     }
                                 }) {
                                     Text("Delete")

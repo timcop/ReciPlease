@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var recipeModel = RecipeModel()
+//    @AppStorage("recipeModel") var recipeModel = RecipeModel()
+//    @StateObject var recipeModel = RecipeModel()
+    @EnvironmentObject var recipeModel:RecipeModel
     @State var test: String = ""
     @State var searchText: String = ""
     @State var searching = false
     @State var randomRecipeIdx: Int = 0
+    @State var loadedRecipes: [Recipe] = []
     
     var body: some View {
         NavigationView {
@@ -142,7 +145,7 @@ struct HomeRecipeCardView: View {
     @State var recipe: Recipe
     var body: some View {
         ZStack {
-            Image(uiImage: recipe.uiImage!)
+            Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
                 .RecipeCardImageModifier()
             Text(recipe.name)
                 .modifier(RecipeCardTextViewModifier())
@@ -170,12 +173,12 @@ extension UIApplication {
       }
   }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView()
-                .environmentObject(Recipe())
-                .previewInterfaceOrientation(.portrait)
-        }
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            ContentView()
+//                .environmentObject(Recipe())
+//                .previewInterfaceOrientation(.portrait)
+//        }
+//    }
+//}

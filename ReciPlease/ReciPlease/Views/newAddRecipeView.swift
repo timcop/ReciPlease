@@ -141,8 +141,10 @@ struct newAddRecipeView: View {
                             Spacer()
                             
                             Button("Submit") {
-                                currentRecipe.uiImage = inputImage!
+                                currentRecipe.uiImage = SomeImage(photo: inputImage!)
                                 recipeModel.recipes.append(currentRecipe)
+                                // save to memory
+                                recipeModel.storeRecList(recs: recipeModel.recipes)
                                 self.presentation.wrappedValue.dismiss()
                             }
                             .buttonStyle(GrowingButton())

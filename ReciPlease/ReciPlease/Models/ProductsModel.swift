@@ -6,16 +6,108 @@
 //
 
 import Foundation
+//
+//struct ProductsResponse:Decodable {
+//    let products: ProductRef
+//}
+//
+//struct ProductRef:Decodable {
+//    let items: [FailableDecodable<Product>]
+//}
+//
+//struct Product:Identifiable, Decodable {
+//    let id = UUID()
+//
+//    let type: String
+//    let name: String
+//    let barcode: String
+//    let brand: String
+//    let unit: String
+//    let img: Img
+//    let priceDetails: PriceDetails
+//    let sizeDetails: SizeDetails
+//
+//    enum CodingKeys: String, CodingKey {
+//        case type
+//        case name
+//        case barcode
+//        case brand
+//        case unit
+//        case img = "images"
+//        case priceDetails = "price"
+//        case sizeDetails = "size"
+//    }
+//}
+//
+//struct Img:Decodable {
+//    let imageURL: String
+//    enum CodingKeys: String, CodingKey {
+//        case imageURL = "big"
+//    }
+//}
+//
+//struct PriceDetails : Decodable {
+//    let originalPrice: Double
+//    let salePrice: Double
+//    let savePrice: Double
+//    let isSpecial: Bool
+//}
+//
+//struct SizeDetails : Decodable {
+//    let cupPrice: Double?
+//    let cupMeasure: String?
+//    let volumeSize: String?
+//}
+//
+//enum FetchError: Error {
+//    case badURL
+//    case badResponse
+//}
 
-struct ProductsResponse:Decodable {
+struct FailableDecodable<Base : Codable> : Codable, Identifiable {
+    let id = UUID()
+    let base: Base?
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.base = try? container.decode(Base.self)
+    }
+}
+
+//
+//
+//class ProductsModel {
+//    func getProducts(searchTerm: String) async throws -> [Product] {
+//        guard let url = URL(string: "https://shop.countdown.co.nz/api/v1/products?target=search&search='\(searchTerm)'") else {
+//            return []
+//        }
+//        
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = "GET"
+//        urlRequest.setValue("OnlineShopping.WebApp", forHTTPHeaderField: "x-requested-with")
+//        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+//        
+//        guard (response as? HTTPURLResponse)?.statusCode == 200 else {throw FetchError.badResponse}
+//        
+//        let maybeProductData = try JSONDecoder().decode(ProductsResponse.self, from: data)
+//        let filtered = maybeProductData.products.items
+//            .compactMap{$0.base}
+//            
+//        return filtered
+//    }
+//}
+
+
+
+struct ProductsResponse:Codable {
     let products: ProductRef
 }
 
-struct ProductRef:Decodable {
+struct ProductRef:Codable {
     let items: [FailableDecodable<Product>]
 }
 
-struct Product:Identifiable, Decodable {
+struct Product:Identifiable, Codable {
     let id = UUID()
     
     let type: String
@@ -39,21 +131,21 @@ struct Product:Identifiable, Decodable {
     }
 }
 
-struct Img:Decodable {
+struct Img:Codable {
     let imageURL: String
     enum CodingKeys: String, CodingKey {
         case imageURL = "big"
     }
 }
 
-struct PriceDetails : Decodable {
+struct PriceDetails : Codable {
     let originalPrice: Double
     let salePrice: Double
     let savePrice: Double
     let isSpecial: Bool
 }
 
-struct SizeDetails : Decodable {
+struct SizeDetails : Codable {
     let cupPrice: Double?
     let cupMeasure: String?
     let volumeSize: String?
@@ -63,18 +155,6 @@ enum FetchError: Error {
     case badURL
     case badResponse
 }
-
-struct FailableDecodable<Base : Decodable> : Decodable, Identifiable {
-    let id = UUID()
-    let base: Base?
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.base = try? container.decode(Base.self)
-    }
-}
-
-
 
 class ProductsModel {
     func getProducts(searchTerm: String) async throws -> [Product] {
@@ -96,3 +176,4 @@ class ProductsModel {
         return filtered
     }
 }
+
