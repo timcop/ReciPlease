@@ -26,7 +26,6 @@ struct RecipeDetailView: View {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(alignment: .leading) {
                         PictureView(uiImage: UIImage(data: selectedRecipe.uiImage!.photo)!)
-                            .resizable()
                             .frame(width: 300, height:300)
                             .scaledToFit()
                             .cornerRadius(15)
