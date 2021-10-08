@@ -68,7 +68,6 @@ struct SearchProductsView: View {
                 if !searchText.isEmpty {
                     products = try! await productsModel.getProducts(searchTerm: searchText)
                     print(products[0].name)
-                
                 } else {
                     products = []
                 }

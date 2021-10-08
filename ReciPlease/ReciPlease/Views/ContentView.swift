@@ -69,6 +69,7 @@ struct ContentView: View {
                 }.offset(y:-20)
             }
             .navigationTitle("ReciPlease")
+            .ignoresSafeArea(.keyboard)
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(recipeModel)

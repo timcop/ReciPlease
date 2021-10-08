@@ -14,8 +14,11 @@ struct EditIngredientView: View {
     @State var isNewIngredient: Bool
     @State var selectedUnit: Unit = Unit.each
     @Environment(\.presentationMode) var presentation
+
     
     var body: some View {
+            
+        
         ZStack{
             Color.white
                 .onTapGesture {
@@ -28,9 +31,8 @@ struct EditIngredientView: View {
                 .opacity(0.01)
             VStack(spacing: 0){
                 Text("Item Details").padding(.top, 20)
-
+                
                 Form{
-    
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
 
                     Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
@@ -46,7 +48,23 @@ struct EditIngredientView: View {
                 
                     TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)
                         .keyboardType(.numberPad)
-
+                    
+                        
+               
+                    VStack{
+                if(currentRecipe.currentIngredient.product != nil){
+                    Text(currentRecipe.currentIngredient.product!.name.capitalized)
+                        .font(.headline).bold().italic()
+                        .frame(alignment: .center)
+                    
+                    if (currentRecipe.currentIngredient.product!.priceDetails.isSpecial) {
+                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")").strikethrough()
+                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.salePrice, specifier: "%.2f")").foregroundColor(.red)
+                        } else {
+                            Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")")
+                        }
+                }
+                    }
                 }
                 NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
                    Text("Search product")
@@ -93,15 +111,18 @@ struct EditIngredientView: View {
                 .shadow(color: .gray, radius: 5, x:-9, y: -9)
         }
         .environmentObject(currentRecipe)
+        .ignoresSafeArea(.keyboard)
 
     }
+    
+
 }
+
 
 //struct EditIngredientView_Previews: PreviewProvider {
 //    @State var editingIngredient = true
 //    static var previews: some View {
-//        EditIngredientView(editingIngredient: $editingIngredient,
-//                           currentRecipe: Recipe(),
-//                           currentIngredient: Ingredient())
+//        EditIngredientView(currentRecipe: Recipe(), editingIngredient: $editingIngredient,
+//                           isNewIngredient: Ingredient())
 //    }
 //}
