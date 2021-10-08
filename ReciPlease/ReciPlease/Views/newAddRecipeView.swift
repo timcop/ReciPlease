@@ -44,6 +44,7 @@ struct newAddRecipeView: View {
                                         .frame(width: 300, height:300)
                                         .scaledToFit()
                                         .cornerRadius(15)
+                                        .clipped()
                                         
                                 } else {
                                     Text("Tap to select a picture")

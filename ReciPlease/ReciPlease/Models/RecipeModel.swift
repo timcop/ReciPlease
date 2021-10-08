@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 //
 //enum Unit: String, CaseIterable, Identifiable {
@@ -61,7 +62,7 @@ import UIKit
 //}
 public struct SomeImage: Codable {
 
-    public let photo: Data
+    public var photo: Data
 
     public init(photo: UIImage) {
         self.photo = photo.pngData()!

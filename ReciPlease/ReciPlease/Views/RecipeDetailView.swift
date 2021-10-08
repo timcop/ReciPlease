@@ -10,6 +10,7 @@ import SwiftUI
 struct RecipeDetailView: View {
 //    let recipe: Recipe
     @EnvironmentObject var recipeModel: RecipeModel
+    @ObservedObject var currentRecipe: Recipe = Recipe()
     @StateObject var selectedRecipe: Recipe
     @State var isIngredient = true
     @State var editingStep = false
@@ -20,15 +21,24 @@ struct RecipeDetailView: View {
     @State var currentIngredient = Ingredient()
     @State var editingRecipe = false
     @State var showingDeleteConfirmation = false
+    @State private var showingImagePicker = false
+    @State var inputImage: UIImage? = UIImage(named: "recipe_default")
+
     
     var body: some View {
             ZStack {
                 ScrollView(.vertical, showsIndicators: true) {
-                    VStack(alignment: .leading) {
+                    VStack() {
                         PictureView(uiImage: UIImage(data: selectedRecipe.uiImage!.photo)!)
-                            .frame(width: 300, height:300)
-                            .scaledToFit()
-                            .cornerRadius(15)
+                            .onTapGesture{
+                                self.showingImagePicker=true
+                            }
+                        }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                            ImagePicker(image: self.$inputImage)
+                        }
+                    
+
+                    VStack(alignment: .leading){
                         Group {
                             // title
                             Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
@@ -162,9 +172,16 @@ struct RecipeDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                     .shadow(color: .gray, radius: 5, x:-9, y: -9)
                 }
-            }.environmentObject(selectedRecipe)    }
-    
+            }.environmentObject(selectedRecipe)
+    }
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        selectedRecipe.uiImage! = SomeImage(photo: inputImage)
+        selectedRecipe.uiImage!.photo = inputImage.pngData()!
+    }
 }
+    
+
 
 struct IngredientMethodToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {

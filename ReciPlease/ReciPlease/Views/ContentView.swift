@@ -16,6 +16,7 @@ struct ContentView: View {
     @State var searching = false
     @State var randomRecipeIdx: Int = 0
     @State var loadedRecipes: [Recipe] = []
+    @State var appeared: Bool
     
     var body: some View {
         NavigationView {
