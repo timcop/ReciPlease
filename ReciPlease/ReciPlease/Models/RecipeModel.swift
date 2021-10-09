@@ -102,7 +102,7 @@ class Recipe: ObservableObject, Identifiable, Codable {
 //    @Published var uiImage : SomeImage?
     @Published var uiImage: UIImage
     @Published var cookTime: String
-    @Published var numIngredients: String
+    @Published var servings: String
     @Published var currentIngredient: Ingredient
     
 //    init(uiImage:UIImage) {
@@ -115,7 +115,7 @@ class Recipe: ObservableObject, Identifiable, Codable {
         case ingredients
         case uiImage
         case cookTime
-        case numIngredients
+        case servings
         case currentIngredient
         case scale
     }
@@ -131,7 +131,7 @@ class Recipe: ObservableObject, Identifiable, Codable {
         let uiImage = try container.decode(UIImage.self, forKey: .uiImage)
         self.uiImage = UIImage(data:uiImage.pngData()!, scale:scale)!
         cookTime = try container.decode(String.self, forKey: .cookTime)
-        numIngredients = try container.decode(String.self, forKey: .numIngredients)
+        servings = try container.decode(String.self, forKey: .servings)
         currentIngredient = try container.decode(Ingredient.self, forKey: .currentIngredient)
     }
     
@@ -143,7 +143,7 @@ class Recipe: ObservableObject, Identifiable, Codable {
         try container.encode(ingredients, forKey: .ingredients)
         try container.encode(uiImage, forKey: .uiImage)
         try container.encode(cookTime, forKey: .cookTime)
-        try container.encode(numIngredients, forKey: .numIngredients)
+        try container.encode(servings, forKey: .servings)
         try container.encode(currentIngredient, forKey: .currentIngredient)
         try container.encode(self.uiImage, forKey: .uiImage)
         try container.encode(self.uiImage.scale, forKey: .scale)
@@ -154,8 +154,8 @@ class Recipe: ObservableObject, Identifiable, Codable {
         self.name = ""
         self.method = []
         self.ingredients = []
-        self.cookTime = "10 Min"
-        self.numIngredients = "10 Ingredients"
+        self.cookTime = ""
+        self.servings = ""
         self.currentIngredient = Ingredient()
 //        self.uiImage = SomeImage(photo: UIImage(named: "donut")!)
         self.uiImage = UIImage(named: "recipe_default")!

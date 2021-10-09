@@ -63,25 +63,37 @@ struct RecipeDetailView: View {
                                     selectedRecipe.name = newRecipeName
                                 })
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    //.focused($isTextFieldFocused)
                                     .font(.system(size: 22, weight: .bold))
                                     .padding()
-                            } else {
-                                Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
-                            }
-                            
-                            //info view
-                            HStack(spacing: 32) {
-                                HStack(spacing: 12) {
-                                    Image(systemName: "clock")
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "timer")
                                         .foregroundColor(.green)
-                                    
-                                    Text(selectedRecipe.cookTime)
-                                    Image(systemName:"pencil")
+                                    TextField("30 Mins", text: $selectedRecipe.cookTime)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        //.focused($isTextFieldFocused)
+                                    Spacer()
+                                    Image(systemName: "person.fill")
                                         .foregroundColor(.green)
-                                    Text(String(selectedRecipe.ingredients.count) + " ingredients")
+                                    TextField("4 Servings", text: $selectedRecipe.servings)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        //.focused($isTextFieldFocused)
+                                    Spacer()
                                 }
+                            } else {
+                                Text(selectedRecipe.name)
+                                    .font(.system(size: 22, weight: .bold))
+                                HStack {
+                                    Image(systemName: "timer")
+                                        .foregroundColor(.green)
+                                    Text(selectedRecipe.cookTime)
+                                    Image(systemName:"person.fill")
+                                        .foregroundColor(.green)
+                                    Text(selectedRecipe.servings)
+                                }
+                                .padding(.vertical)
                             }
-                            .padding(.vertical)
                         }
                         .padding(.horizontal)
                         // ingredient/step toggle view

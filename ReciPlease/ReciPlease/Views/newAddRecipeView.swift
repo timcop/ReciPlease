@@ -61,12 +61,32 @@ struct newAddRecipeView: View {
                         }
                         
                         Group {
-                            // title
-                            TextField("Recipe Name", text: $currentRecipe.name)
-                                .textFieldStyle(RoundedBorderTextFieldStyle()).padding()
-                                .focused($isTextFieldFocused)
+                            VStack {
+                                // title
+                                TextField("Recipe Name", text: $currentRecipe.name)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .font(.system(size: 22, weight: .bold))
+                                    .padding()
+                                    .focused($isTextFieldFocused)
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "timer")
+                                        .foregroundColor(.green)
+                                    TextField("30 Mins", text: $currentRecipe.cookTime)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .focused($isTextFieldFocused)
+                                    Spacer()
+                                    Image(systemName: "person.fill")
+                                        .foregroundColor(.green)
+                                    TextField("4 Servings", text: $currentRecipe.servings)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .focused($isTextFieldFocused)
+                                    Spacer()
+                                }
+                            }
                         }
                         .padding(.horizontal)
+                        .padding(.bottom)
                         
                         // ingredient/step toggle view
                         Toggle(isOn: $isIngredient, label: {})
@@ -136,8 +156,8 @@ struct newAddRecipeView: View {
                                     currentRecipe.ingredients = []
                                     currentRecipe.name = ""
                                     currentRecipe.method = []
-                                    currentRecipe.cookTime = "10 min"
-                                    currentRecipe.numIngredients = "10 ingredients"
+                                    currentRecipe.cookTime = ""
+                                    currentRecipe.servings = ""
                                     currentRecipe.currentIngredient = Ingredient()
                                     self.presentation.wrappedValue.dismiss()
                                 }
@@ -153,7 +173,10 @@ struct newAddRecipeView: View {
                                     self.presentation.wrappedValue.dismiss()
                                 }
                                 .buttonStyle(GrowingButton())
-                                .disabled(currentRecipe.ingredients.count < 1 || currentRecipe.name == "")
+                                .disabled(currentRecipe.ingredients.count < 1
+                                          || currentRecipe.cookTime == ""
+                                          || currentRecipe.servings == ""
+                                          || currentRecipe.name == "")
                                 Spacer()
                             }
                             .offset(y:30)
