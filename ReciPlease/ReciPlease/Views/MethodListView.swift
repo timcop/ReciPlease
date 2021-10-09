@@ -24,13 +24,18 @@ struct MethodListView: View {
                     Spacer()
                     HStack {
                         Image(systemName:"pencil")
+                            .resizable()
+                            .frame(width: 18, height: 18)
                             .foregroundColor(Color.green)
+                            .padding(.trailing, 18)
                             .onTapGesture {
                                 isNewStep = false
                                 currentStep = step
                                 editingStep.toggle()
                             }
                         Image(systemName:"xmark")
+                            .resizable()
+                            .frame(width: 18, height: 18)
                             .foregroundColor(Color.green)
                             .onTapGesture {
                                 if let index = currentRecipe.method.firstIndex(where: {$0.id == step.id}) {
