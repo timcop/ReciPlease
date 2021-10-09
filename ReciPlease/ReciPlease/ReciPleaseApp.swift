@@ -9,12 +9,19 @@ import SwiftUI
 
 @main
 struct ReciPleaseApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    
     @Environment(\.scenePhase) private var scenePhase
     @StateObject var recipeModel = RecipeModel()
 
     @State private var isLoaded: Bool = Bool()
-
+    
+    init() {
+        
+    }
     var body: some Scene {
+
         WindowGroup {
             Group {
                if (isLoaded) { ContentView().environmentObject(recipeModel) }
@@ -47,7 +54,21 @@ struct ReciPleaseApp: App {
         }
     }
 }
-    
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        #if targetEnvironment(simulator)
+        // Disable hardware keyboards.
+        let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
+        UITextInputMode.activeInputModes
+            // Filter `UIKeyboardInputMode`s.
+            .filter({ $0.responds(to: setHardwareLayout) })
+            .forEach { $0.perform(setHardwareLayout, with: nil) }
+        #endif
+        
+        return true
+    }
+}
+
 func completionHandler(value: @escaping (Bool) -> Void) {
     
     // some heavy work here!
