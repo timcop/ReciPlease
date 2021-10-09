@@ -20,7 +20,9 @@ struct PictureView: View {
 //        Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
         Image(uiImage: uiImage)
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: screenWidth, height: screenWidth)
+//            .aspectRatio(contentMode: .fit)
+            .frame(width: 300, height: 300)
+            .scaledToFit()
+            .cornerRadius(15)
     }
 }

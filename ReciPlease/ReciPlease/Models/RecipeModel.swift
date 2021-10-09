@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 //
 //enum Unit: String, CaseIterable, Identifiable {
@@ -59,9 +60,10 @@ import UIKit
 //        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
 //    }
 //}
+
 public struct SomeImage: Codable {
 
-    public let photo: Data
+    public var photo: Data
 
     public init(photo: UIImage) {
         self.photo = photo.pngData()!
@@ -97,11 +99,15 @@ class Recipe: ObservableObject, Identifiable, Codable {
     @Published var name: String
     @Published var method: [Step]
     @Published var ingredients: [Ingredient]
-    @Published var uiImage : SomeImage?
+//    @Published var uiImage : SomeImage?
+    @Published var uiImage: UIImage
     @Published var cookTime: String
     @Published var numIngredients: String
     @Published var currentIngredient: Ingredient
     
+//    init(uiImage:UIImage) {
+//            self.uiImage = uiImage
+//        }
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -111,6 +117,7 @@ class Recipe: ObservableObject, Identifiable, Codable {
         case cookTime
         case numIngredients
         case currentIngredient
+        case scale
     }
     
     required init(from decoder: Decoder) throws {
@@ -119,7 +126,10 @@ class Recipe: ObservableObject, Identifiable, Codable {
         name = try container.decode(String.self, forKey: .name)
         method = try container.decode([Step].self, forKey: .method)
         ingredients = try container.decode([Ingredient].self, forKey: .ingredients)
-        uiImage = try container.decode(SomeImage.self, forKey: .uiImage)
+//        uiImage = try container.decode(SomeImage.self, forKey: .uiImage)
+        let scale = try container.decode(CGFloat.self, forKey: .scale)
+        let uiImage = try container.decode(UIImage.self, forKey: .uiImage)
+        self.uiImage = UIImage(data:uiImage.pngData()!, scale:scale)!
         cookTime = try container.decode(String.self, forKey: .cookTime)
         numIngredients = try container.decode(String.self, forKey: .numIngredients)
         currentIngredient = try container.decode(Ingredient.self, forKey: .currentIngredient)
@@ -135,6 +145,8 @@ class Recipe: ObservableObject, Identifiable, Codable {
         try container.encode(cookTime, forKey: .cookTime)
         try container.encode(numIngredients, forKey: .numIngredients)
         try container.encode(currentIngredient, forKey: .currentIngredient)
+        try container.encode(self.uiImage, forKey: .uiImage)
+        try container.encode(self.uiImage.scale, forKey: .scale)
     }
     
     init(){
@@ -145,7 +157,8 @@ class Recipe: ObservableObject, Identifiable, Codable {
         self.cookTime = "10 Min"
         self.numIngredients = "10 Ingredients"
         self.currentIngredient = Ingredient()
-        self.uiImage = SomeImage(photo: UIImage(named: "donut")!)
+//        self.uiImage = SomeImage(photo: UIImage(named: "donut")!)
+        self.uiImage = UIImage(named: "recipe_default")!
     }
 }
 
@@ -166,8 +179,8 @@ class RecipeModel: ObservableObject, Codable {
     init() {
         self.recipes = [Recipe()]
         self.selectedRecipe = Recipe()
-        self.recipes[0].name = "A yummy donut"
-        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
+//        self.recipes[0].name = "A yummy donut"
+//        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -231,4 +244,53 @@ class RecipeModel: ObservableObject, Codable {
 //                print(error)
             }
         }
+}
+
+//struct Image: Codable {
+//    let image:UIImage
+//    init(image:UIImage) {
+//        self.image = image
+//    }
+//    enum CodingKeys: CodingKey {
+//        case image
+//        case scale
+//    }
+//    public init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        let scale = try container.decode(CGFloat.self, forKey: .scale)
+//        let image = try container.decode(UIImage.self, forKey: .image)
+//        self.image = UIImage(data:image.pngData()!, scale:scale)!
+//    }
+//    public func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(self.image, forKey: .image)
+//        try container.encode(self.image.scale, forKey: .scale)
+//    }
+//}
+
+extension KeyedEncodingContainer {
+    mutating func encode(_ value: UIImage, forKey key: Key) throws {
+        guard let data = value.pngData() else {
+            throw EncodingError.invalidValue(
+                value,
+                EncodingError.Context(codingPath: [key],
+                debugDescription: "Failed convert UIImage to data")
+            )
+        }
+        try encode(data, forKey: key)
+    }
+}
+
+extension KeyedDecodingContainer {
+    func decode(_ type: UIImage.Type, forKey key: Key) throws -> UIImage {
+        let imageData = try decode(Data.self, forKey: key)
+        if let image = UIImage(data: imageData) {
+            return image
+        } else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: [key],
+                debugDescription: "Failed load UIImage from decoded data")
+            )
+        }
+    }
 }

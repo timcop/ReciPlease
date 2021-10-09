@@ -44,6 +44,7 @@ struct newAddRecipeView: View {
                                         .frame(width: 300, height:300)
                                         .scaledToFit()
                                         .cornerRadius(15)
+                                        .clipped()
                                         
                                 } else {
                                     Text("Tap to select a picture")
@@ -141,7 +142,7 @@ struct newAddRecipeView: View {
                             Spacer()
                             
                             Button("Submit") {
-                                currentRecipe.uiImage = SomeImage(photo: inputImage!)
+                                currentRecipe.uiImage = inputImage!
                                 recipeModel.recipes.append(currentRecipe)
                                 // save to memory
                                 recipeModel.storeRecList(recs: recipeModel.recipes)
