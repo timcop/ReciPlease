@@ -21,7 +21,8 @@ struct IngredientListView: View {
                 VStack {
                     HStack {
                         Group {
-                            Text("• \(ingredient.quantity!)")
+                            Text(String(format: "• %.2f", ingredient.quantity!
+                                       ))
                                 .padding(.leading)
     //                            .padding(.vertical, 4.0)
                             if (ingredient.unit.id != "each") {
@@ -36,13 +37,18 @@ struct IngredientListView: View {
                         if (editingRecipe) {
                             HStack {
                                 Image(systemName:"pencil")
+                                    .resizable()
+                                    .frame(width: 18, height: 18)
                                     .foregroundColor(Color.green)
+                                    .padding(.trailing, 18)
                                     .onTapGesture {
                                         isNewIngredient = false
                                         currentRecipe.currentIngredient = ingredient
                                         editingIngredient.toggle()
                                     }
                                 Image(systemName:"xmark")
+                                    .resizable()
+                                    .frame(width: 18, height: 18)
                                     .foregroundColor(Color.green)
                                     .onTapGesture {
                                         if let index = currentRecipe.ingredients.firstIndex(where: {$0.id == ingredient.id}) {

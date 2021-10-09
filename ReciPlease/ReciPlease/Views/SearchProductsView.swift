@@ -12,6 +12,7 @@ struct SearchProductsView: View {
     @StateObject var currentRecipe: Recipe
     var productsModel = ProductsModel()
     @State private var products = [Product]()
+    @State var hasSearched = false
 //    @State private var products = [FailableDecodable<Product>]()
     @Binding var searchText: String
     @Environment(\.presentationMode) var presentation
@@ -19,6 +20,9 @@ struct SearchProductsView: View {
     
     var body: some View {
         NavigationView {
+            if products.count < 1 && hasSearched {
+                Text("No results")
+            }
             List(products) {prod in
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
@@ -64,10 +68,11 @@ struct SearchProductsView: View {
         }.navigationViewStyle(StackNavigationViewStyle())
         .searchable(text: $searchText)
         .onSubmit(of: .search) {
+            hasSearched = true
             Task {
                 if !searchText.isEmpty {
                     products = try! await productsModel.getProducts(searchTerm: searchText)
-                    print(products[0].name)
+                    //print(products[0].name)
                 } else {
                     products = []
                 }
