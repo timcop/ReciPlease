@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @AppStorage("recipeModel") var recipeModel = RecipeModel()
-//    @StateObject var recipeModel = RecipeModel()
     @EnvironmentObject var recipeModel:RecipeModel
-    @State var test: String = ""
     @State var searchText: String = ""
     @State var searching = false
     @State var randomRecipeIdx: Int = 0
@@ -99,7 +96,6 @@ struct RecipeCardScrollView: View {
                                 Text(recipe.name)
                                     .modifier(RecipeCardTextViewModifier())
                             }
-//                            HomeRecipeCardView(recipe: recipe)
                         }
                         .rotation3DEffect(Angle(degrees:
                             Double(geometry.frame(in: .global).minX - 40) / -10
@@ -148,19 +144,6 @@ extension Image {
     }
 }
 
-//struct HomeRecipeCardView: View {
-//    var recipe: Recipe
-//    var body: some View {
-//        ZStack {
-//            Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
-//                .RecipeCardImageModifier()
-//            Text(recipe.name)
-//                .modifier(RecipeCardTextViewModifier())
-//        }
-//        
-//    }
-//}
-
 struct GrowingButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
 
@@ -181,12 +164,12 @@ extension UIApplication {
       }
   }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            ContentView()
-//                .environmentObject(Recipe())
-//                .previewInterfaceOrientation(.portrait)
-//        }
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ContentView()
+                .environmentObject(Recipe())
+                .previewInterfaceOrientation(.portrait)
+        }
+    }
+}

@@ -9,67 +9,6 @@ import Foundation
 import UIKit
 import SwiftUI
 
-//
-//enum Unit: String, CaseIterable, Identifiable {
-//    case each
-//    case g
-//    case kg
-//    case ml
-//    case l
-//    case cup
-//    case Tbsp
-//    case tsp
-//
-//    var id: String {self.rawValue}
-//}
-//
-//struct Ingredient: Identifiable {
-//    var id = UUID()
-//
-//    var name:String = ""
-//    var unit: Unit = .each
-//    var quantity:String = ""
-//    var product: Product?
-//
-//}
-//
-//class Recipe: ObservableObject, Identifiable {
-//    let id = UUID()
-//    @Published var name: String = ""
-//    @Published var method: [Step] = []
-//    @Published var ingredients: [Ingredient] = []
-//    @Published var uiImage : SomeImage?
-//    @Published var cookTime: String = "10 min"
-//    @Published var numIngredients: String = "10 ingredients"
-//    @Published var currentIngredient = Ingredient()
-//}
-//
-//struct Step: Codable, Identifiable {
-//    var id = UUID()
-//    var string: String = ""
-//}
-//
-//class RecipeModel: ObservableObject {
-//    @Published var recipes: [Recipe]
-//    @Published var selectedRecipe: Recipe
-//
-//    init() {
-//        self.recipes = [Recipe()]
-//        self.selectedRecipe = Recipe()
-//        self.recipes[0].name = "A yummy donut"
-//        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
-//    }
-//}
-
-public struct SomeImage: Codable {
-
-    public var photo: Data
-
-    public init(photo: UIImage) {
-        self.photo = photo.pngData()!
-    }
-}
-
 
 enum Unit: String, CaseIterable, Identifiable, Codable {
     case each
@@ -179,8 +118,8 @@ class RecipeModel: ObservableObject, Codable {
     init() {
         self.recipes = [Recipe()]
         self.selectedRecipe = Recipe()
-//        self.recipes[0].name = "A yummy donut"
-//        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
+        self.recipes[0].name = "A yummy donut"
+        self.recipes[0].uiImage = UIImage(named: "donut")!
     }
     
     enum CodingKeys: String, CodingKey {
