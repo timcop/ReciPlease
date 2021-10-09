@@ -93,7 +93,13 @@ struct RecipeCardScrollView: View {
                 ForEach(recipeModel.recipes.filter {$0.name.contains(searchText) || searchText.isEmpty}) { recipe in
                     GeometryReader { geometry in
                         NavigationLink(destination: RecipeDetailView(selectedRecipe: recipe)) {
-                            HomeRecipeCardView(recipe: recipe)
+                            ZStack {
+                                Image(uiImage: recipe.uiImage)
+                                    .RecipeCardImageModifier()
+                                Text(recipe.name)
+                                    .modifier(RecipeCardTextViewModifier())
+                            }
+//                            HomeRecipeCardView(recipe: recipe)
                         }
                         .rotation3DEffect(Angle(degrees:
                             Double(geometry.frame(in: .global).minX - 40) / -10
@@ -142,18 +148,18 @@ extension Image {
     }
 }
 
-struct HomeRecipeCardView: View {
-    @State var recipe: Recipe
-    var body: some View {
-        ZStack {
-            Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
-                .RecipeCardImageModifier()
-            Text(recipe.name)
-                .modifier(RecipeCardTextViewModifier())
-        }
-        
-    }
-}
+//struct HomeRecipeCardView: View {
+//    var recipe: Recipe
+//    var body: some View {
+//        ZStack {
+//            Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
+//                .RecipeCardImageModifier()
+//            Text(recipe.name)
+//                .modifier(RecipeCardTextViewModifier())
+//        }
+//        
+//    }
+//}
 
 struct GrowingButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool

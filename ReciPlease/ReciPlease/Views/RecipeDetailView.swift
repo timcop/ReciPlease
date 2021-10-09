@@ -28,14 +28,18 @@ struct RecipeDetailView: View {
     var body: some View {
             ZStack {
                 ScrollView(.vertical, showsIndicators: true) {
-                    VStack() {
-                        PictureView(uiImage: UIImage(data: selectedRecipe.uiImage!.photo)!)
-                            .onTapGesture{
-                                self.showingImagePicker=true
+                    if (!editingRecipe) {
+                        PictureView(uiImage: selectedRecipe.uiImage)
+                    } else {
+                        VStack() {
+                            PictureView(uiImage: selectedRecipe.uiImage)
+                                .onTapGesture(){
+                                    self.showingImagePicker=true
+                                }
+                            }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                                ImagePicker(image: self.$inputImage)
                             }
-                        }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                            ImagePicker(image: self.$inputImage)
-                        }
+                    }
                     
 
                     VStack(alignment: .leading){
@@ -112,6 +116,11 @@ struct RecipeDetailView: View {
                             editingRecipe.toggle()
                             if (!editingRecipe) {
                                 // save
+//                                if let index = $recipeModel.recipes.firstIndex(where: {$0.id == selectedRecipe.id}) {
+//                                    recipeModel.recipes[index].uiImage = SomeImage(photo: inputImage!)
+//                                    recipeModel.recipes[index].name = "test"
+//                                }
+                                selectedRecipe.uiImage = inputImage!
                                 recipeModel.storeRecList(recs: recipeModel.recipes)
                             }
                         }) {
@@ -176,8 +185,8 @@ struct RecipeDetailView: View {
     }
     func loadImage() {
         guard let inputImage = inputImage else { return }
-        selectedRecipe.uiImage! = SomeImage(photo: inputImage)
-        selectedRecipe.uiImage!.photo = inputImage.pngData()!
+        selectedRecipe.uiImage = inputImage
+//        selectedRecipe.uiImage!.photo = inputImage.pngData()!
     }
 }
     
