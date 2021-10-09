@@ -20,6 +20,7 @@ struct RecipeDetailView: View {
     @State var isNewIngredient = false
     @State var currentIngredient = Ingredient()
     @State var editingRecipe = false
+    @State var newRecipeName = ""
     @State var showingDeleteConfirmation = false
     @State private var showingImagePicker = false
     @State var inputImage: UIImage? = UIImage(named: "recipe_default")
@@ -31,21 +32,39 @@ struct RecipeDetailView: View {
                     if (!editingRecipe) {
                         PictureView(uiImage: selectedRecipe.uiImage)
                     } else {
-                        VStack() {
-                            PictureView(uiImage: selectedRecipe.uiImage)
-                                .onTapGesture(){
-                                    self.showingImagePicker=true
-                                }
+                        ZStack {
+                            VStack() {
+                                PictureView(uiImage: selectedRecipe.uiImage)
+                                    .onTapGesture(){
+                                        self.showingImagePicker=true
+                                    }
                             }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                                 ImagePicker(image: self.$inputImage)
                             }
+                            Image(systemName: "pencil.circle.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .opacity(0.7)
+                                .onTapGesture(){
+                                    self.showingImagePicker=true
+                                }
+                        }
                     }
                     
 
                     VStack(alignment: .leading){
                         Group {
                             // title
-                            Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
+                            if (editingRecipe) {
+                                TextField("Recipe Name", text: $newRecipeName, onCommit: {
+                                    if newRecipeName.count < 1 {
+                                        newRecipeName = selectedRecipe.name
+                                    }
+                                    selectedRecipe.name = newRecipeName
+                                }).textFieldStyle(RoundedBorderTextFieldStyle()).padding()
+                            } else {
+                                Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
+                            }
                             
                             //info view
                             HStack(spacing: 32) {
@@ -122,6 +141,9 @@ struct RecipeDetailView: View {
 //                                }
                                 selectedRecipe.uiImage = inputImage!
                                 recipeModel.storeRecList(recs: recipeModel.recipes)
+                                selectedRecipe.name = newRecipeName
+                            } else {
+                                newRecipeName = selectedRecipe.name
                             }
                         }) {
                             Text(editingRecipe ? "Done" : "Edit")
