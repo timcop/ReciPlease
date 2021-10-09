@@ -61,7 +61,10 @@ struct RecipeDetailView: View {
                                         newRecipeName = selectedRecipe.name
                                     }
                                     selectedRecipe.name = newRecipeName
-                                }).textFieldStyle(RoundedBorderTextFieldStyle()).padding()
+                                })
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .font(.system(size: 22, weight: .bold))
+                                    .padding()
                             } else {
                                 Text(selectedRecipe.name).font(.system(size: 22, weight: .bold))
                             }
