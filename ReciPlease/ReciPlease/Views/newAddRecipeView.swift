@@ -28,6 +28,8 @@ struct newAddRecipeView: View {
     @State private var showingImagePicker = false
     @State var inputImage: UIImage? = UIImage(named: "recipe_default")
     @State var image: Image? = Image("recipe_default")
+    @FocusState private var isTextFieldFocused: Bool
+
 
     
     var body: some View {
@@ -62,6 +64,7 @@ struct newAddRecipeView: View {
                             // title
                             TextField("Recipe Name", text: $currentRecipe.name)
                                 .textFieldStyle(RoundedBorderTextFieldStyle()).padding()
+                                .focused($isTextFieldFocused)
                         }
                         .padding(.horizontal)
                         
@@ -125,34 +128,36 @@ struct newAddRecipeView: View {
                             .frame(width: screenWidth, height:100)
                             .offset(y:40)
                             .hidden()
-                        HStack {
-                            Spacer()
-                            Button("Cancel") {
-                                // work around, can't reinitialise currentIngredient how i wanted to
-                                currentRecipe.ingredients = []
-                                currentRecipe.name = ""
-                                currentRecipe.method = []
-                                currentRecipe.cookTime = "10 min"
-                                currentRecipe.numIngredients = "10 ingredients"
-                                currentRecipe.currentIngredient = Ingredient()
-                                self.presentation.wrappedValue.dismiss()
+                        if (!isTextFieldFocused) {
+                            HStack {
+                                Spacer()
+                                Button("Cancel") {
+                                    // work around, can't reinitialise currentIngredient how i wanted to
+                                    currentRecipe.ingredients = []
+                                    currentRecipe.name = ""
+                                    currentRecipe.method = []
+                                    currentRecipe.cookTime = "10 min"
+                                    currentRecipe.numIngredients = "10 ingredients"
+                                    currentRecipe.currentIngredient = Ingredient()
+                                    self.presentation.wrappedValue.dismiss()
+                                }
+                                .buttonStyle(GrowingButton())
+                                
+                                Spacer()
+                                
+                                Button("Submit") {
+                                    currentRecipe.uiImage = inputImage!
+                                    recipeModel.recipes.append(currentRecipe)
+                                    // save to memory
+                                    recipeModel.storeRecList(recs: recipeModel.recipes)
+                                    self.presentation.wrappedValue.dismiss()
+                                }
+                                .buttonStyle(GrowingButton())
+                                .disabled(currentRecipe.ingredients.count < 1 || currentRecipe.name == "")
+                                Spacer()
                             }
-                            .buttonStyle(GrowingButton())
-                            
-                            Spacer()
-                            
-                            Button("Submit") {
-                                currentRecipe.uiImage = inputImage!
-                                recipeModel.recipes.append(currentRecipe)
-                                // save to memory
-                                recipeModel.storeRecList(recs: recipeModel.recipes)
-                                self.presentation.wrappedValue.dismiss()
-                            }
-                            .buttonStyle(GrowingButton())
-                            .disabled(currentRecipe.ingredients.count < 1 || currentRecipe.name == "")
-                            Spacer()
+                            .offset(y:30)
                         }
-                        .offset(y:30)
                     }
                     Spacer()
                 }
