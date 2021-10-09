@@ -60,6 +60,7 @@ class ReciPleaseUITests: XCTestCase {
         
         app.buttons["Submit"].tap()
         
+        
        
     }
     
@@ -68,8 +69,7 @@ class ReciPleaseUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         app.buttons["Random recipe"].tap()
-        app.navigationBars["_TtGC7SwiftUI19UIHosting"].buttons["ReciPlease"].tap()
-        
+//        app.navigationBars["_TtGC7SwiftUI19UIHosting"].buttons["ReciPlease"].tap()
     }
 
 //    func testLaunchPerformance() throws {
