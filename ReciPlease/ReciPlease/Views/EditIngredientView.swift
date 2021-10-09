@@ -46,7 +46,7 @@ struct EditIngredientView: View {
                         Text("Teaspoon").tag(Unit.tsp)
                     }
                 
-                    TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)
+                    TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
 //                        .keyboardType(.numberPad)
                     
                         
@@ -102,7 +102,7 @@ struct EditIngredientView: View {
                         }
                     }
                     .buttonStyle(GrowingButton())
-                    .disabled(currentRecipe.currentIngredient.name == "" || currentRecipe.currentIngredient.quantity == "")
+                    .disabled(currentRecipe.currentIngredient.name == "" || currentRecipe.currentIngredient.quantity == 0 || currentRecipe.currentIngredient.quantity == nil)
                     .padding()
                 }
             }.frame(width:350, height:510)

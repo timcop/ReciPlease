@@ -89,7 +89,7 @@ struct Ingredient: Identifiable, Codable {
     
     var name:String = ""
     var unit: Unit = .each
-    var quantity:String = ""
+    var quantity: Double?
     var product: Product?
     
 }

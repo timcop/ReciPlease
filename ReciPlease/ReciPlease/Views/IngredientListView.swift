@@ -21,7 +21,7 @@ struct IngredientListView: View {
                 VStack {
                     HStack {
                         Group {
-                            Text("• \(ingredient.quantity)")
+                            Text("• \(ingredient.quantity!)")
                                 .padding(.leading)
     //                            .padding(.vertical, 4.0)
                             if (ingredient.unit.id != "each") {
