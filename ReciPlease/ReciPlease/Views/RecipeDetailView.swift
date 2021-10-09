@@ -24,7 +24,8 @@ struct RecipeDetailView: View {
     @State var showingDeleteConfirmation = false
     @State private var showingImagePicker = false
     @State var inputImage: UIImage? = UIImage(named: "recipe_default")
-
+    
+   
     
     var body: some View {
             ZStack {
@@ -154,7 +155,7 @@ struct RecipeDetailView: View {
 //                                    recipeModel.recipes[index].uiImage = SomeImage(photo: inputImage!)
 //                                    recipeModel.recipes[index].name = "test"
 //                                }
-                                selectedRecipe.uiImage = inputImage!
+//                           
                                 recipeModel.storeRecList(recs: recipeModel.recipes)
                                 selectedRecipe.name = newRecipeName
                             } else {
@@ -223,7 +224,6 @@ struct RecipeDetailView: View {
     func loadImage() {
         guard let inputImage = inputImage else { return }
         selectedRecipe.uiImage = inputImage
-//        selectedRecipe.uiImage!.photo = inputImage.pngData()!
     }
 }
     
@@ -271,11 +271,11 @@ struct IngredientMethodToggleStyle: ToggleStyle {
     }
 }
 
-struct RecipeDetailView_Previews: PreviewProvider {
-    @State static var isIngredient = true
-    static var previews: some View {
-        Group {
-            RecipeDetailView(selectedRecipe: Recipe())
-        }
-    }
-}
+//struct RecipeDetailView_Previews: PreviewProvider {
+//    @State static var isIngredient = true
+//    static var previews: some View {
+//        Group {
+//            RecipeDetailView(selectedRecipe: Recipe())
+//        }
+//    }
+//}
