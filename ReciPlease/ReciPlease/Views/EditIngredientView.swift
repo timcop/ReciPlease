@@ -47,7 +47,7 @@ struct EditIngredientView: View {
                     }
                 
                     TextField("Quantity", text:$currentRecipe.currentIngredient.quantity)
-                        .keyboardType(.numberPad)
+//                        .keyboardType(.numberPad)
                     
                         
                
