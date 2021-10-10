@@ -162,50 +162,27 @@ class RecipeModel: ObservableObject, Codable {
     
     public func storeRecList(recs: [Recipe]){
             
-            let manager = FileManager.default
-            
-            guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else{
-                return
-            }
-            
-            print(url.path)
-            
-            let encoder = JSONEncoder()
-            let recFolder = url.appendingPathComponent("Recipes")
-            let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
-            
-            do {
-                let data = try encoder.encode(recs)
-                try manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
-                try manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
-            }
-            catch{
-//                print(error)
-            }
+        let manager = FileManager.default
+        
+        guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else{
+            return
         }
+        
+        print(url.path)
+        
+        let encoder = JSONEncoder()
+        let recFolder = url.appendingPathComponent("Recipes")
+        let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
+        
+
+        let data = try? encoder.encode(recs)
+        if (data != nil) {
+            try! manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
+            manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
+        }
+    }
 }
 
-//struct Image: Codable {
-//    let image:UIImage
-//    init(image:UIImage) {
-//        self.image = image
-//    }
-//    enum CodingKeys: CodingKey {
-//        case image
-//        case scale
-//    }
-//    public init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        let scale = try container.decode(CGFloat.self, forKey: .scale)
-//        let image = try container.decode(UIImage.self, forKey: .image)
-//        self.image = UIImage(data:image.pngData()!, scale:scale)!
-//    }
-//    public func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(self.image, forKey: .image)
-//        try container.encode(self.image.scale, forKey: .scale)
-//    }
-//}
 
 extension KeyedEncodingContainer {
     mutating func encode(_ value: UIImage, forKey key: Key) throws {

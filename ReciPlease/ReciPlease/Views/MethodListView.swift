@@ -26,7 +26,7 @@ struct MethodListView: View {
                         Image(systemName:"pencil")
                             .resizable()
                             .frame(width: 18, height: 18)
-                            .foregroundColor(Color.green)
+                            .foregroundColor(Color.orange)
                             .padding(.trailing, 18)
                             .onTapGesture {
                                 isNewStep = false
@@ -36,7 +36,7 @@ struct MethodListView: View {
                         Image(systemName:"xmark")
                             .resizable()
                             .frame(width: 18, height: 18)
-                            .foregroundColor(Color.green)
+                            .foregroundColor(Color.orange)
                             .onTapGesture {
                                 if let index = currentRecipe.method.firstIndex(where: {$0.id == step.id}) {
                                     currentRecipe.method.remove(at: index)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
 //    let recipe: Recipe
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var recipeModel: RecipeModel
     @ObservedObject var currentRecipe: Recipe = Recipe()
     @StateObject var selectedRecipe: Recipe
@@ -98,9 +99,10 @@ struct RecipeDetailView: View {
                         }
                         .padding(.horizontal)
                         // ingredient/step toggle view
-                        Toggle(isOn: $isIngredient, label: {})
-                            .toggleStyle(IngredientMethodToggleStyle())
-                        
+//                        Toggle(isOn: $isIngredient, label: {})
+//                            .toggleStyle(IngredientMethodToggleStyle())
+//
+                        Divider()
                         if isIngredient {
                             // ingredient list
                             IngredientListView(currentRecipe: selectedRecipe,
@@ -150,13 +152,7 @@ struct RecipeDetailView: View {
                         Button(action: {
                             editingRecipe.toggle()
                             if (!editingRecipe) {
-                                // save
-//                                if let index = $recipeModel.recipes.firstIndex(where: {$0.id == selectedRecipe.id}) {
-//                                    recipeModel.recipes[index].uiImage = SomeImage(photo: inputImage!)
-//                                    recipeModel.recipes[index].name = "test"
-//                                }
-//                                print(selectedRecipe.uiImage.imageOrientation == UIImage.Orientation.up)
-                                recipeModel.storeRecList(recs: recipeModel.recipes)
+
                                 selectedRecipe.name = newRecipeName
                             } else {
                                 newRecipeName = selectedRecipe.name
@@ -203,7 +199,7 @@ struct RecipeDetailView: View {
                                 Button(action: {
                                     if let index = $recipeModel.recipes.firstIndex(where: {$0.id == selectedRecipe.id}) {
                                         recipeModel.recipes.remove(at: index)
-                                        recipeModel.storeRecList(recs: recipeModel.recipes)
+//                                        recipeModel.storeRecList(recs: recipeModel.recipes)
                                     }
                                 }) {
                                     Text("Delete")
@@ -219,6 +215,9 @@ struct RecipeDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                     .shadow(color: .gray, radius: 5, x:-9, y: -9)
                 }
+
+                Toggle(isOn: $isIngredient, label: {})
+                    .toggleStyle(ToolbarToggleStyle())
             }.environmentObject(selectedRecipe)
     }
     func loadImage() {
@@ -226,56 +225,77 @@ struct RecipeDetailView: View {
         selectedRecipe.uiImage = inputImage
     }
 }
-    
 
 
-struct IngredientMethodToggleStyle: ToggleStyle {
+struct ToolbarToggleStyle: ToggleStyle {
+    @Environment(\.colorScheme) var colorScheme
+
     func makeBody(configuration: Configuration) -> some View {
         return
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("INGREDIENTS")
-                        .font(.system(size:16, weight: configuration.isOn ? .bold : .regular))
-                        .frame(width: 110)
-                        .fixedSize()
-                        .padding(4)
-                        .padding(.leading, 12)
-                        .onTapGesture {
-                            withAnimation {
-                                configuration.isOn = true
-                            }
-                        }
-                    
-                    Text("METHOD")
-                        .font(.system(size:16, weight: configuration.isOn ? .regular : .bold))
-                        .padding(4)
-                        .onTapGesture {
-                            withAnimation {
-                                configuration.isOn = false
-                            }
-                        }
-                }
-                
-                ZStack(alignment: .leading) {
+            VStack{
+                Spacer()
+                ZStack {
                     Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(height: 3)
-                    
-                    Rectangle()
-                        .fill(Color.green)
-                        .frame(width: configuration.isOn ? 110:70, height: 3)
-                        .offset(x: configuration.isOn ? 16 : 140) 
-                    
+                        .fill((colorScheme == .dark) ? Color.black : Color.white)
+//                        .fill(Color.black)
+
+                        .frame(width: screenWidth, height: 105)
+                        .offset(y:10)
+                    VStack{
+                        HStack {
+                            Spacer()
+                            VStack{
+                                Image("ingredients")
+                                    .resizable()
+                                    .frame(width:30, height:30)
+                                Text("Ingredients")
+                                    .font(.system(size: 12, weight: configuration.isOn ? .bold : .regular))
+                            }
+                            .padding()
+                            .onTapGesture {
+                                withAnimation {
+                                    configuration.isOn = true
+                                }
+                            }
+                            Spacer()
+                            VStack{
+                                Image(systemName: "list.bullet")
+                                    .resizable()
+                                    .frame(width:23, height:23)
+                                Text("Method")
+                                    .font(.system(size: 12, weight: configuration.isOn ? .regular : .bold))
+                            }
+                            .padding()
+                            .offset(y:4)
+                            .onTapGesture {
+                                withAnimation {
+                                    configuration.isOn = false
+                                }
+                            }
+                            Spacer()
+
+                        }
+                        .offset(y:-10)
+                        Rectangle()
+                            .fill(Color.blue)
+                            .frame(width: 110, height: 3)
+                            .offset(x: configuration.isOn ? -(screenWidth)/5.2 : screenWidth/4.8, y:-25)
+
+
+                    }
                 }
             }
+            .edgesIgnoringSafeArea([.bottom])
     }
 }
 
-//struct RecipeDetailView_Previews: PreviewProvider {
-//    @State static var isIngredient = true
-//    static var previews: some View {
-//        Group {
-//            RecipeDetailView(selectedRecipe: Recipe())
-//        }
-//    }
-//}
+
+
+struct RecipeDetailView_Previews: PreviewProvider {
+    @State static var isIngredient = true
+    static var previews: some View {
+        Group {
+            RecipeDetailView(selectedRecipe: Recipe()).environmentObject(RecipeModel())
+        }
+    }
+}

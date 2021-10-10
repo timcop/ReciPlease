@@ -88,9 +88,6 @@ struct newAddRecipeView: View {
                         .padding(.horizontal)
                         .padding(.bottom)
                         
-                        // ingredient/step toggle view
-                        Toggle(isOn: $isIngredient, label: {})
-                            .toggleStyle(IngredientMethodToggleStyle())
                         
                         if isIngredient {
                             // ingredient list
@@ -129,64 +126,47 @@ struct newAddRecipeView: View {
                         Spacer()
                         Rectangle()
                             .fill(Color.white)
-                            .frame(width:screenWidth, height:300)
+                            .frame(width:screenWidth, height:100)
                             .hidden()
                     }
                     .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                         ImagePicker(image: self.$inputImage)
                     }
                 }
-            }
-            .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
-            .allowsHitTesting(!(addingIngredient || addingStep))
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ZStack{
-                        Rectangle()
-                            .frame(width: screenWidth, height:100)
-                            .offset(y:40)
-                            .hidden()
-                        if (!isTextFieldFocused) {
-                            HStack {
-                                Spacer()
-                                Button("Cancel") {
-                                    // work around, can't reinitialise currentIngredient how i wanted to
-                                    currentRecipe.ingredients = []
-                                    currentRecipe.name = ""
-                                    currentRecipe.method = []
-                                    currentRecipe.cookTime = ""
-                                    currentRecipe.servings = ""
-                                    currentRecipe.currentIngredient = Ingredient()
-                                    self.presentation.wrappedValue.dismiss()
-                                }
-                                .buttonStyle(GrowingButton())
-                                
-                                Spacer()
-                                
-                                Button("Submit") {
-                                    currentRecipe.uiImage = inputImage!
-                                    recipeModel.recipes.append(currentRecipe)
-                                    // save to memory
-                                    recipeModel.storeRecList(recs: recipeModel.recipes)
-                                    self.presentation.wrappedValue.dismiss()
-                                }
-                                .buttonStyle(GrowingButton())
-                                .disabled(currentRecipe.ingredients.count < 1
-                                          || currentRecipe.cookTime == ""
-                                          || currentRecipe.servings == ""
-                                          || currentRecipe.name == "")
-                                Spacer()
-                            }
-                            .offset(y:30)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(
+                    leading:
+                        Button(action: {
+                            currentRecipe.ingredients = []
+                            currentRecipe.name = ""
+                            currentRecipe.method = []
+                            currentRecipe.cookTime = ""
+                            currentRecipe.servings = ""
+                            currentRecipe.currentIngredient = Ingredient()
+                            self.presentation.wrappedValue.dismiss()
+                        }) {
+                            Text("Cancel")
+                                .foregroundColor(.red)
+                        },
+                    
+                    trailing:
+                        Button("Submit") {
+                            currentRecipe.uiImage = inputImage!
+                            recipeModel.recipes.append(currentRecipe)
+                            self.presentation.wrappedValue.dismiss()
                         }
-                    }
-                    Spacer()
-                }
+                        .disabled(currentRecipe.ingredients.count < 1
+                                  || currentRecipe.cookTime == ""
+                                  || currentRecipe.servings == ""
+                                  || currentRecipe.name == ""
+                                  || addingStep
+                                  || addingIngredient
+                                 )
+                    )
             }
             .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
             .allowsHitTesting(!(addingIngredient || addingStep))
+
             if addingIngredient {
                 EditIngredientView(editingIngredient: $addingIngredient,
                                    isNewIngredient: isNewIngredient)
@@ -199,7 +179,8 @@ struct newAddRecipeView: View {
                              isNewStep: isNewStep,
                              currentStep: $currentStep)
             }
-
+            Toggle(isOn: $isIngredient, label: {})
+                .toggleStyle(ToolbarToggleStyle())
         }
         .environmentObject(currentRecipe)
 
