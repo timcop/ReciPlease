@@ -139,8 +139,10 @@ extension Image {
     func RecipeCardImageModifier() -> some View {
         self
             .resizable()
-            .cornerRadius(15)
+            .scaledToFill()
             .frame(width:300, height:300)
+            .cornerRadius(15)
+            .clipped()
             .shadow(color: .gray, radius: 5, x:0, y: 3)
     }
 }
