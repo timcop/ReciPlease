@@ -23,6 +23,21 @@ class ReciPleaseTests: XCTestCase {
     func testSavingLoading() throws {
         let recipeModel = RecipeModel()
         recipeModel.recipes.append(Recipe())
+        
+        var ing = Ingredient()
+        ing.name = "Name"
+        ing.quantity = 2
+        recipeModel.recipes[0].ingredients.append(ing)
+        ing.quantity = 2.12
+        recipeModel.recipes[0].ingredients.append(ing)
+        var step = Step()
+        step.string = "Step 1"
+        recipeModel.recipes[0].method.append(step)
+        step.string = "Step 2"
+        recipeModel.recipes[0].method.append(step)
+
+        
+        
         recipeModel.storeRecList(recs: recipeModel.recipes)
         let recipeModel2 = RecipeModel()
         recipeModel2.recipes = recipeModel2.getRecList()

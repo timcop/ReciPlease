@@ -15,10 +15,7 @@ struct EditIngredientView: View {
     @State var selectedUnit: Unit = Unit.each
     @Environment(\.presentationMode) var presentation
 
-    
     var body: some View {
-            
-        
         ZStack{
             Color.white
                 .onTapGesture {
@@ -31,7 +28,6 @@ struct EditIngredientView: View {
                 .opacity(0.01)
             VStack(spacing: 0){
                 Text("Item Details").padding(.top, 20)
-                
                 Form{
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
                         .accessibilityIdentifier("IngredientNameField")
@@ -79,9 +75,6 @@ struct EditIngredientView: View {
                     .buttonStyle(GrowingButton())
                     .padding()
                     Button("Submit") {
-//                        if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
-//                            currentRecipe.currentIngredient.product = nil
-//                        }
                         if isNewIngredient {
                             currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {

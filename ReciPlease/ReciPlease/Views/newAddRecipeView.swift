@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-//let screenSize: CGRect = UIScreen.main.bounds
-//let screenWidth = screenSize.width
-//let screenHeight = screenSize.height
-
 struct newAddRecipeView: View {
     // Inherited
     @ObservedObject var currentRecipe: Recipe = Recipe()
@@ -19,7 +15,6 @@ struct newAddRecipeView: View {
     
     @State var isIngredient = true
     @State var addingIngredient = false
-//    @State var currentIngredient = Ingredient()
     @State var isNewIngredient = true
     @State var addingStep = false
     @State var currentStep = Step()
@@ -200,20 +195,6 @@ struct newAddRecipeView: View {
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
-    }
-}
-
-
-struct addIngredientCard: View {
-    var body: some View {
-        VStack{
-            Rectangle()
-                .fill(Color.black)
-                .frame(width: 200, height: 200)
-                .transition(.opacity)
-                .offset(y: 200)
-                .zIndex(2)
-        }.background(Color.gray)
     }
 }
 

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct MethodListView: View {
     @StateObject var currentRecipe: Recipe
-//    var method: [Step]
     @Binding var isNewStep: Bool
     @Binding var currentStep: Step
     @Binding var editingStep: Bool
     @Binding var editingRecipe: Bool
+    
     var body: some View {
         ForEach(currentRecipe.method) { step in
             HStack {
@@ -51,10 +51,3 @@ struct MethodListView: View {
         }
     }
 }
-
-//struct MethodListView_Previews: PreviewProvider {
-//    @State var editingStep = true
-//    static var previews: some View {
-//        MethodListView(recipe: Recipe())
-//    }
-//}

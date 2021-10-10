@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct SearchProductsView: View {
-    
     @StateObject var currentRecipe: Recipe
     var productsModel = ProductsModel()
     @State private var products = [Product]()
     @State var hasSearched = false
-//    @State private var products = [FailableDecodable<Product>]()
     @Binding var searchText: String
     @Environment(\.presentationMode) var presentation
-    
     
     var body: some View {
         NavigationView {
@@ -101,12 +98,3 @@ struct AsyncImageHack<Content> : View where Content : View {
         }
     }
 }
-
-//struct SearchProductsView_Previews: PreviewProvider {
-//
-//    @ObservedObject var currentRecipe: Recipe = Recipe()
-//
-//    static var previews: some View {
-//        SearchProductsView(recProds: $currentRecipe.products)
-//    }
-//}

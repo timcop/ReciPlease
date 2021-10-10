@@ -57,6 +57,9 @@ class ReciPleaseUITests: XCTestCase {
         app.buttons["Random recipe"].tap()
         app.buttons["MethodToggle"].firstMatch.tap()
         app.buttons["IngredientToggle"].firstMatch.tap()
+        app.navigationBars.buttons.element(boundBy: 1).tap()
+        sleep(2)
+
     }
 
 //    func testLaunchPerformance() throws {
