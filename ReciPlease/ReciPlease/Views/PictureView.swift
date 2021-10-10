@@ -19,10 +19,10 @@ struct PictureView: View {
         
         Image(uiImage: rotateImage(image: uiImage)!)
             .resizable()
-//            .aspectRatio(contentMode: .fit)
+            .scaledToFill()
             .frame(width: 300, height: 300)
-            .scaledToFit()
             .cornerRadius(15)
+            .clipped()
     }
 }
 
