@@ -18,11 +18,22 @@ struct PictureView: View {
     var body: some View {
         
 //        Image(uiImage: UIImage(data: recipe.uiImage!.photo)!)
-        Image(uiImage: uiImage)
+        Image(uiImage: rotateImage(image: uiImage)!)
             .resizable()
 //            .aspectRatio(contentMode: .fit)
             .frame(width: 300, height: 300)
             .scaledToFit()
             .cornerRadius(15)
     }
+}
+
+func rotateImage(image: UIImage) -> UIImage? {
+    if (image.imageOrientation == UIImage.Orientation.up ) {
+        return image
+    }
+    UIGraphicsBeginImageContext(image.size)
+    image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+    let copy = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return copy
 }

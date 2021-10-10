@@ -50,6 +50,7 @@ struct ContentView: View {
                     NavigationLink(destination: RandomRecipeView(recipes: recipeModel.recipes, idx: randomRecipeIdx)) {
                         Text("Random recipe")
                             .onAppear() {
+
                                 if recipeModel.recipes.count < 1 {
                                     return
                                 }

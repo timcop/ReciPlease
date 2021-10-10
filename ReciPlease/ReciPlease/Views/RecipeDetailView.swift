@@ -155,7 +155,7 @@ struct RecipeDetailView: View {
 //                                    recipeModel.recipes[index].uiImage = SomeImage(photo: inputImage!)
 //                                    recipeModel.recipes[index].name = "test"
 //                                }
-//                           
+//                                print(selectedRecipe.uiImage.imageOrientation == UIImage.Orientation.up)
                                 recipeModel.storeRecList(recs: recipeModel.recipes)
                                 selectedRecipe.name = newRecipeName
                             } else {
