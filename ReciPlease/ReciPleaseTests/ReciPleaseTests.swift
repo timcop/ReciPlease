@@ -6,7 +6,9 @@
 //
 
 import XCTest
+import SwiftUI
 @testable import ReciPlease
+//@testable import RecipeModel
 
 class ReciPleaseTests: XCTestCase {
 
@@ -18,9 +20,28 @@ class ReciPleaseTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testSavingLoading() throws {
+        let recipeModel = RecipeModel()
+        recipeModel.recipes.append(Recipe())
+        recipeModel.storeRecList(recs: recipeModel.recipes)
+        let recipeModel2 = RecipeModel()
+        recipeModel2.recipes = recipeModel2.getRecList()
+        XCTAssert(recipeModel.recipes.count == recipeModel2.recipes.count)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testApiCall() async throws {
+        let productsModel = ProductsModel()
+        
+        // Should show results
+        var products = try! await productsModel.getProducts(searchTerm: "banana")
+        XCTAssert(products.count != 0)
+        
+        //Should have no results
+        products = try! await productsModel.getProducts(searchTerm: "abcaouhdsa81313")
+        XCTAssert(products.count == 0)
+        
     }
 
     func testPerformanceExample() throws {

@@ -68,6 +68,8 @@ struct newAddRecipeView: View {
                                     .font(.system(size: 22, weight: .bold))
                                     .padding()
                                     .focused($isTextFieldFocused)
+                                    .accessibilityLabel("RecipeNameField")
+
                                 HStack {
                                     Spacer()
                                     Image(systemName: "timer")
@@ -75,12 +77,16 @@ struct newAddRecipeView: View {
                                     TextField("30 Mins", text: $currentRecipe.cookTime)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .focused($isTextFieldFocused)
+                                        .accessibilityLabel("RecipeTimeField")
+
                                     Spacer()
                                     Image(systemName: "person.fill")
                                         .foregroundColor(.green)
                                     TextField("4 Servings", text: $currentRecipe.servings)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .focused($isTextFieldFocused)
+                                        .accessibilityLabel("RecipeServingsField")
+
                                     Spacer()
                                 }
                             }
@@ -98,7 +104,9 @@ struct newAddRecipeView: View {
                                     withAnimation {
                                         addingIngredient.toggle()
                                     }
-                                }.buttonStyle(GrowingButton())
+                                }
+                                .buttonStyle(GrowingButton())
+                                .accessibilityLabel("AddIngredient")
                                 Spacer()
                             }.padding(.top)
                             IngredientListView( currentRecipe: currentRecipe,
@@ -114,7 +122,9 @@ struct newAddRecipeView: View {
                                     withAnimation {
                                         addingStep.toggle()
                                     }
-                                }.buttonStyle(GrowingButton())
+                                }
+                                .buttonStyle(GrowingButton())
+                                .accessibilityLabel("AddStep")
                                 Spacer()
                             }.padding(.top)
                             MethodListView(currentRecipe: currentRecipe,
@@ -146,6 +156,7 @@ struct newAddRecipeView: View {
                             self.presentation.wrappedValue.dismiss()
                         }) {
                             Text("Cancel")
+                                .accessibilityLabel("CancelRecipe")
                                 .foregroundColor(.red)
                         },
                     
@@ -155,6 +166,7 @@ struct newAddRecipeView: View {
                             recipeModel.recipes.append(currentRecipe)
                             self.presentation.wrappedValue.dismiss()
                         }
+                        .accessibilityLabel("SubmitRecipe")
                         .disabled(currentRecipe.ingredients.count < 1
                                   || currentRecipe.cookTime == ""
                                   || currentRecipe.servings == ""

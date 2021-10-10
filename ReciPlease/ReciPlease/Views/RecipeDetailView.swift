@@ -248,6 +248,7 @@ struct ToolbarToggleStyle: ToggleStyle {
                                 Image("ingredients")
                                     .resizable()
                                     .frame(width:30, height:30)
+
                                 Text("Ingredients")
                                     .font(.system(size: 12, weight: configuration.isOn ? .bold : .regular))
                             }
@@ -257,11 +258,14 @@ struct ToolbarToggleStyle: ToggleStyle {
                                     configuration.isOn = true
                                 }
                             }
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityIdentifier("IngredientToggle")
                             Spacer()
                             VStack{
                                 Image(systemName: "list.bullet")
                                     .resizable()
                                     .frame(width:23, height:23)
+
                                 Text("Method")
                                     .font(.system(size: 12, weight: configuration.isOn ? .regular : .bold))
                             }
@@ -272,6 +276,8 @@ struct ToolbarToggleStyle: ToggleStyle {
                                     configuration.isOn = false
                                 }
                             }
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityIdentifier("MethodToggle")
                             Spacer()
 
                         }

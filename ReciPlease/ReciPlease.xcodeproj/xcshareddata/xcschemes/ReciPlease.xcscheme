@@ -33,7 +33,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;if test `/usr/libexec/PlistBuddy -c &quot;Print DevicePreferences:${TARGET_DEVICE_IDENTIFIER}:ConnectHardwareKeyboard&quot; ~/Library/Preferences/com.apple.iphonesimulator.plist` == true; then &#10;osascript &lt;&lt;EOD&#10;  tell application &quot;Simulator&quot; to activate&#10;  tell application &quot;System Events&quot;&#10;      keystroke &quot;K&quot; using {command down, shift down}&#10;  end tell&#10;EOD&#10;fi&#10;">
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;killall &quot;Simulator&quot;; defaults write com.apple.iphonesimulator ConnectHardwareKeyboard 0;&#10;">
             </ActionContent>
          </ExecutionAction>
       </PreActions>

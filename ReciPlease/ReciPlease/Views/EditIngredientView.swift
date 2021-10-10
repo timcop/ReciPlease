@@ -34,6 +34,8 @@ struct EditIngredientView: View {
                 
                 Form{
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
+                        .accessibilityIdentifier("IngredientNameField")
+
 
                     Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
                         Text("Each").tag(Unit.each)
@@ -47,6 +49,8 @@ struct EditIngredientView: View {
                     }
                 
                     TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
+                        .accessibilityLabel("IngredientQuantityField")
+
 //                        .keyboardType(.numberPad)
                     
                         
@@ -77,6 +81,7 @@ struct EditIngredientView: View {
                             editingIngredient.toggle()
                         }
                     }
+                    .accessibilityIdentifier("IngredientCancel")
                     .buttonStyle(GrowingButton())
                     .padding()
                     Button("Submit") {
@@ -101,6 +106,7 @@ struct EditIngredientView: View {
                             editingIngredient.toggle()
                         }
                     }
+                    .accessibilityLabel("IngredientSubmitButton")
                     .buttonStyle(GrowingButton())
                     .disabled(currentRecipe.currentIngredient.name == "" || currentRecipe.currentIngredient.quantity == 0 || currentRecipe.currentIngredient.quantity == nil)
                     .padding()

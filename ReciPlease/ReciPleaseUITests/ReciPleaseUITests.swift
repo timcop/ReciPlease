@@ -6,11 +6,11 @@
 //
 
 import XCTest
-@testable import ReciPlease
+//@testable import ReciPlease
 class ReciPleaseUITests: XCTestCase {
 
     override func setUpWithError() throws {
-//        let recipeModel = RecipeModel()
+//        let recipeModel = RecipeModel() as RecipeModel
 //        recipeModel.storeRecList(recs: recipeModel.recipes)
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -29,47 +29,39 @@ class ReciPleaseUITests: XCTestCase {
 
 
     
-    func testNameIngredientRecipe() throws {
-//        #if targetEnvironment(simulator)
-//        // Disable hardware keyboards.
-//        let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
-//        UITextInputMode.activeInputModes
-//            // Filter `UIKeyboardInputMode`s.
-//            .filter({ $0.responds(to: setHardwareLayout) })
-//            .forEach { $0.perform(setHardwareLayout, with: nil) }
-//        #endif
-////        let recipeModel = RecipeModel()
-//        let app = XCUIApplication()
-//        app.launch()
-//
-//        let nKey = app/*@START_MENU_TOKEN@*/.keys["N"]/*[[".keyboards.keys[\"N\"]",".keys[\"N\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-//        let moreKey = app/*@START_MENU_TOKEN@*/.keys["more"]/*[[".keyboards",".keys[\"numbers\"]",".keys[\"more\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/
-//        let oneKey = app.keys["1"]
-//
-//        app.buttons["Add a recipe"].tap()
-//        app.scrollViews.otherElements.textFields["Recipe Name"].tap()
-//        nKey.tap()
-//        app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-//        let elementsQuery = app.scrollViews.otherElements
-//
-//        elementsQuery.buttons["Add ingredient"].tap()
-//        app.tables.textFields["Name"].tap()
-//        nKey.tap()
-//        app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-//
-//        app.tables.textFields["Quantity"].tap()
-//        moreKey.tap()
-//        oneKey.tap()
-//        app/*@START_MENU_TOKEN@*/.buttons["Return"]/*[[".keyboards",".buttons[\"return\"]",".buttons[\"Return\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-//
-//
-//        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .button).matching(identifier: "Submit").element(boundBy: 1).tap()
-//
-//
-//        app.buttons["Submit"].tap()
-//
+    func testAddRecipe() throws {
+
         
-       
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["AddRecipe"].tap()
+        
+        let keys = app.keys
+        let recipeName = app.textFields["RecipeNameField"]
+        recipeName.waitForExistence(timeout: 5)
+        recipeName.tap()
+        recipeName.typeText("Name")
+        
+        
+        let recipeTime = app.textFields["RecipeTimeField"]
+        recipeTime.waitForExistence(timeout: 5)
+        recipeTime.tap()
+        recipeTime.typeText("Name")
+        
+        let recipeServings = app.textFields["RecipeServingsField"]
+        recipeServings.waitForExistence(timeout: 5)
+        recipeServings.tap()
+        recipeServings.typeText("Name")
+        app.keyboards.buttons["return"].tap()
+        
+        app.buttons["AddIngredient"].tap()
+
+        
+        app.buttons["IngredientCancel"].tap()
+
+
+        app.buttons["CancelRecipe"].tap()
+
     }
     
     func testRandomButton() throws {
@@ -77,7 +69,8 @@ class ReciPleaseUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         app.buttons["Random recipe"].tap()
-//        app.navigationBars["_TtGC7SwiftUI19UIHosting"].buttons["ReciPlease"].tap()
+        app.buttons["MethodToggle"].firstMatch.tap()
+        app.buttons["IngredientToggle"].firstMatch.tap()
     }
 
 //    func testLaunchPerformance() throws {
@@ -88,4 +81,15 @@ class ReciPleaseUITests: XCTestCase {
 //            }
 //        }
 //    }
+}
+
+extension XCUIElement {
+    func typeTextAlt(_ text: String) {
+        // Solution for `Neither element nor any descendant has keyboard focus.`
+        if !(self.value(forKey: "hasKeyboardFocus") as? Bool ?? false) {
+            XCUIDevice.shared.press(XCUIDevice.Button.home)
+            XCUIApplication().activate()
+        }
+        self.typeText(text)
+    }
 }

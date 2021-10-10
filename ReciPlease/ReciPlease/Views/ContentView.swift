@@ -56,12 +56,14 @@ struct ContentView: View {
                                 }
                                 randomRecipeIdx = Int.random(in: 0..<recipeModel.recipes.count)
                             }
+                            .accessibilityIdentifier("RandomButton")
                     }
                     .buttonStyle(GrowingButton())
                     .disabled(recipeModel.recipes.count < 1)
                     Spacer()
                     NavigationLink(destination: newAddRecipeView()) {
                         Text("Add a recipe")
+                            .accessibilityLabel("AddRecipe")
                     }.buttonStyle(GrowingButton())
                     Spacer()
                 }.offset(y:-20)
