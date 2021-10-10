@@ -35,8 +35,6 @@ struct EditIngredientView: View {
                 Form{
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
                         .accessibilityIdentifier("IngredientNameField")
-
-
                     Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
                         Text("Each").tag(Unit.each)
                         Text("Grams").tag(Unit.g)
@@ -47,14 +45,9 @@ struct EditIngredientView: View {
                         Text("Tablespoon").tag(Unit.Tbsp)
                         Text("Teaspoon").tag(Unit.tsp)
                     }
-                
                     TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
                         .accessibilityLabel("IngredientQuantityField")
 
-//                        .keyboardType(.numberPad)
-                    
-                        
-               
                     VStack{
                 if(currentRecipe.currentIngredient.product != nil){
                     Text(currentRecipe.currentIngredient.product!.name.capitalized)
@@ -72,6 +65,7 @@ struct EditIngredientView: View {
                 }
                 NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
                    Text("Search product")
+                        .accessibilityIdentifier("SearchProduct")
                 }.buttonStyle(GrowingButton())
                 .environmentObject(currentRecipe)
                 HStack {
@@ -118,17 +112,5 @@ struct EditIngredientView: View {
         }
         .environmentObject(currentRecipe)
         .ignoresSafeArea(.keyboard)
-
     }
-    
-
 }
-
-
-//struct EditIngredientView_Previews: PreviewProvider {
-//    @State var editingIngredient = true
-//    static var previews: some View {
-//        EditIngredientView(currentRecipe: Recipe(), editingIngredient: $editingIngredient,
-//                           isNewIngredient: Ingredient())
-//    }
-//}

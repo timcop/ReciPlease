@@ -9,26 +9,7 @@ import XCTest
 //@testable import ReciPlease
 class ReciPleaseUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-//        let recipeModel = RecipeModel() as RecipeModel
-//        recipeModel.storeRecList(recs: recipeModel.recipes)
-        // Put setup code here. This method is called before the invocation of each test method in the class.
 
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-        
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//        let recipeModel = RecipeModel()
-//        recipeModel.storeRecList(recs: recipeModel.recipes)
-    }
-
-
-    
     func testAddRecipe() throws {
 
         
@@ -36,7 +17,6 @@ class ReciPleaseUITests: XCTestCase {
         app.launch()
         app.buttons["AddRecipe"].tap()
         
-        let keys = app.keys
         let recipeName = app.textFields["RecipeNameField"]
         recipeName.waitForExistence(timeout: 5)
         recipeName.tap()
@@ -55,11 +35,17 @@ class ReciPleaseUITests: XCTestCase {
         app.keyboards.buttons["return"].tap()
         
         app.buttons["AddIngredient"].tap()
+        app.buttons["SearchProduct"].tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
 
         
         app.buttons["IngredientCancel"].tap()
-
-
+        
+        app.buttons["MethodToggle"].firstMatch.tap()
+        sleep(2)
+        app.buttons["AddStep"].tap()
+        app.buttons["CancelStep"].tap()
+        
         app.buttons["CancelRecipe"].tap()
 
     }

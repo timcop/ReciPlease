@@ -51,6 +51,7 @@ struct EditStepView: View {
                             editingStep.toggle()
                         }
                     }
+                    .accessibilityIdentifier("CancelStep")
                     .buttonStyle(GrowingButton())
                     .padding()
                     Button("Submit") {
@@ -83,9 +84,3 @@ struct EditStepView: View {
         }
     }
 }
-
-//struct EditStepView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditStepView()
-//    }
-//}

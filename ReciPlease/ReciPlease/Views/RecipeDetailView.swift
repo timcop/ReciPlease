@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RecipeDetailView: View {
-//    let recipe: Recipe
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var recipeModel: RecipeModel
     @ObservedObject var currentRecipe: Recipe = Recipe()
@@ -25,8 +24,6 @@ struct RecipeDetailView: View {
     @State var showingDeleteConfirmation = false
     @State private var showingImagePicker = false
     @State var inputImage: UIImage? = UIImage(named: "recipe_default")
-    
-   
     
     var body: some View {
             ZStack {
@@ -53,7 +50,6 @@ struct RecipeDetailView: View {
                         }
                     }
                     
-
                     VStack(alignment: .leading){
                         Group {
                             // title
@@ -65,7 +61,6 @@ struct RecipeDetailView: View {
                                     selectedRecipe.name = newRecipeName
                                 })
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    //.focused($isTextFieldFocused)
                                     .font(.system(size: 22, weight: .bold))
                                     .padding()
                                 HStack {
@@ -74,13 +69,11 @@ struct RecipeDetailView: View {
                                         .foregroundColor(.green)
                                     TextField("30 Mins", text: $selectedRecipe.cookTime)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        //.focused($isTextFieldFocused)
                                     Spacer()
                                     Image(systemName: "person.fill")
                                         .foregroundColor(.green)
                                     TextField("4 Servings", text: $selectedRecipe.servings)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        //.focused($isTextFieldFocused)
                                     Spacer()
                                 }
                             } else {
@@ -99,10 +92,7 @@ struct RecipeDetailView: View {
                         }
                         .padding(.horizontal)
                         // ingredient/step toggle view
-//                        Toggle(isOn: $isIngredient, label: {})
-//                            .toggleStyle(IngredientMethodToggleStyle())
-//
-                        Divider()
+
                         if isIngredient {
                             // ingredient list
                             IngredientListView(currentRecipe: selectedRecipe,
@@ -199,7 +189,6 @@ struct RecipeDetailView: View {
                                 Button(action: {
                                     if let index = $recipeModel.recipes.firstIndex(where: {$0.id == selectedRecipe.id}) {
                                         recipeModel.recipes.remove(at: index)
-//                                        recipeModel.storeRecList(recs: recipeModel.recipes)
                                     }
                                 }) {
                                     Text("Delete")
@@ -237,8 +226,6 @@ struct ToolbarToggleStyle: ToggleStyle {
                 ZStack {
                     Rectangle()
                         .fill((colorScheme == .dark) ? Color.black : Color.white)
-//                        .fill(Color.black)
-
                         .frame(width: screenWidth, height: 105)
                         .offset(y:10)
                     VStack{
