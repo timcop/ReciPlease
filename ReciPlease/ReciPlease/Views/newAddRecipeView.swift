@@ -41,8 +41,8 @@ struct newAddRecipeView: View {
                                 if image != nil {
                                     image?
                                         .resizable()
+                                        .scaledToFill()
                                         .frame(width: 300, height:300)
-                                        .scaledToFit()
                                         .cornerRadius(15)
                                         .clipped()
                                         
