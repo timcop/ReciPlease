@@ -26,6 +26,10 @@ struct ProductRef:Codable {
     let items: [FailableDecodable<Product>]
 }
 
+
+/**
+ Countdown product struct which conforms to the JSON format of retrieved countdown products.
+ */
 struct Product:Identifiable, Codable {
     let id = UUID()
     
@@ -49,14 +53,18 @@ struct Product:Identifiable, Codable {
         case sizeDetails = "size"
     }
 }
-
+/**
+ struct to deal with product images.
+ */
 struct Img:Codable {
     let imageURL: String
     enum CodingKeys: String, CodingKey {
         case imageURL = "big"
     }
 }
-
+/**
+ Price details of product.
+ */
 struct PriceDetails : Codable {
     let originalPrice: Double
     let salePrice: Double
@@ -64,6 +72,9 @@ struct PriceDetails : Codable {
     let isSpecial: Bool
 }
 
+/**
+ Size details of product.
+ */
 struct SizeDetails : Codable {
     let cupPrice: Double?
     let cupMeasure: String?

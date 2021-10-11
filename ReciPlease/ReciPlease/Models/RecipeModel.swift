@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 import SwiftUI
 
-
+/**
+ Ingredient object that can be added to Recips.
+ */
 struct Ingredient: Identifiable, Codable {
     var id = UUID()
     
@@ -19,7 +21,9 @@ struct Ingredient: Identifiable, Codable {
     var product: Product?
     
 }
-                
+ /**
+  Recipe object that is displayed by the app.
+  */
 class Recipe: ObservableObject, Identifiable, Codable {
     @Published var id: UUID
     @Published var name: String
@@ -49,7 +53,6 @@ class Recipe: ObservableObject, Identifiable, Codable {
         name = try container.decode(String.self, forKey: .name)
         method = try container.decode([Step].self, forKey: .method)
         ingredients = try container.decode([Ingredient].self, forKey: .ingredients)
-//        uiImage = try container.decode(SomeImage.self, forKey: .uiImage)
         let scale = try container.decode(CGFloat.self, forKey: .scale)
         let uiImage = try container.decode(UIImage.self, forKey: .uiImage)
         self.uiImage = UIImage(data:uiImage.pngData()!, scale:scale)!
@@ -80,11 +83,12 @@ class Recipe: ObservableObject, Identifiable, Codable {
         self.cookTime = ""
         self.servings = ""
         self.currentIngredient = Ingredient()
-//        self.uiImage = SomeImage(photo: UIImage(named: "donut")!)
         self.uiImage = UIImage(named: "recipe_default")!
     }
 }
-
+/**
+ Step object that can be added to a Recipe.
+ */
 struct Step: Identifiable, Codable{
     var id: UUID
     var string: String
@@ -94,7 +98,9 @@ struct Step: Identifiable, Codable{
         self.id = UUID()
     }
 }
-
+/**
+ Recipe Model that contains all recipes and current selected recipe.
+ */
 class RecipeModel: ObservableObject, Codable {
     @Published var recipes: [Recipe]
     @Published var selectedRecipe: Recipe
@@ -167,7 +173,9 @@ class RecipeModel: ObservableObject, Codable {
     }
 }
 
-
+/**
+ Encodes images into data to store in Core Data.
+ */
 extension KeyedEncodingContainer {
     mutating func encode(_ value: UIImage, forKey key: Key) throws {
         guard let data = value.pngData() else {
@@ -181,6 +189,9 @@ extension KeyedEncodingContainer {
     }
 }
 
+/**
+ Decodes images from data to be used in the application.
+ */
 extension KeyedDecodingContainer {
     func decode(_ type: UIImage.Type, forKey key: Key) throws -> UIImage {
         let imageData = try decode(Data.self, forKey: key)

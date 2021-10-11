@@ -20,7 +20,6 @@ struct IngredientListView: View {
     var body: some View {
         VStack{
             ForEach(currentRecipe.ingredients) { ingredient in
-
                 VStack {
                     HStack {
                         Group {

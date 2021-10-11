@@ -6,7 +6,11 @@
 //
 
 import SwiftUI
-
+/**
+ Allows the user to select an image from their gallery to be presented as the Recipe imgage.
+ Controlled by a .onTapGesture that sets showingImagePicker to true,
+ in the newAddRecipeView and RecipeDetailView when editing.
+ */
 struct ImagePicker: UIViewControllerRepresentable {
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
@@ -15,6 +19,9 @@ struct ImagePicker: UIViewControllerRepresentable {
             self.parent = parent
         }
         
+        /**
+         Brings up the image picker for the user.
+         */
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
                 parent.image = uiImage.fixImageOrientation()
@@ -40,6 +47,11 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
     
 }
+
+/**
+ When Images as pngData are loaded out of Core Data, their orientations are wrong.
+ This method fixes the orientations of these images.
+ */
 extension UIImage {
     func fixImageOrientation() -> UIImage {
         UIGraphicsBeginImageContext(self.size)
