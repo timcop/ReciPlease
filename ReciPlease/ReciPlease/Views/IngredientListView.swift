@@ -24,7 +24,6 @@ struct IngredientListView: View {
                 VStack {
                     HStack {
                         Group {
-//                            Text(ingredient.quantity!)
                             if (floor(ingredient.quantity!) == ingredient.quantity!) {
                                 Text(String(format: "• %ld", Int(ingredient.quantity!)))
                                     .padding(.leading)
@@ -32,10 +31,7 @@ struct IngredientListView: View {
                                 Text(String(format: "• %.2f", ingredient.quantity!))
                                     .padding(.leading)
                             }
-//                            Text(String(format: (floor(ingredient.quantity!) == ingredient.quantity!) ? "• %ld" : "• %.2f" , (floor(ingredient.quantity!) == ingredient.quantity!) ? Int(exactly: ingredient.quantity!) : ingredient.quantity!)
-//                                       )
-//                                .padding(.leading)
- 
+
                             Text(ingredient.unit)
 
                             Text(ingredient.name)
@@ -81,8 +77,10 @@ struct IngredientListView: View {
                                 if (ingredient.product?.sizeDetails.cupMeasure != nil) {
                                     Text(ingredient.product?.sizeDetails.cupMeasure ?? "")
                                     
-                                } else {
+                                } else if (ingredient.product?.sizeDetails.volumeSize != nil) {
                                     Text(ingredient.product?.sizeDetails.volumeSize ?? "")
+                                } else {
+                                    Text(ingredient.product?.sizeDetails.packageType ?? "")
                                 }
                             }
                             .font(.system(size: 15))

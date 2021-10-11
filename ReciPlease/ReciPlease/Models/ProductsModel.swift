@@ -68,6 +68,7 @@ struct SizeDetails : Codable {
     let cupPrice: Double?
     let cupMeasure: String?
     let volumeSize: String?
+    let packageType: String?
 }
 
 enum FetchError: Error {
