@@ -44,7 +44,7 @@ jobs:
       with:
          inputs: "ReciPlease/ReciPlease"
          module-name: ReciPlease
-         minimum-access-level: private
+         minimum-access-level: internal
          output: "Documentation"
     - name: Upload Documentation to Wiki
       uses: SwiftDocOrg/github-wiki-publish-action@v1
