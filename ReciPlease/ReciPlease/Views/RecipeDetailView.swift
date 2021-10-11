@@ -28,7 +28,7 @@ struct RecipeDetailView: View {
     @State var newRecipeName = ""
     @State var showingDeleteConfirmation = false
     @State private var showingImagePicker = false
-    @State var inputImage: UIImage? = UIImage(named: "LogoNoWords")
+    @State var inputImage: UIImage? = UIImage(named: "defaultImage")
     
     var body: some View {
             ZStack {

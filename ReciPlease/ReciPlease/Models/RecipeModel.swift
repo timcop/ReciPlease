@@ -9,25 +9,25 @@ import Foundation
 import UIKit
 import SwiftUI
 
-
-enum Unit: String, CaseIterable, Identifiable, Codable {
-    case each
-    case g
-    case kg
-    case ml
-    case l
-    case cup
-    case Tbsp
-    case tsp
-    
-    var id: String {self.rawValue}
-}
+//
+//enum Unit: String, CaseIterable, Identifiable, Codable {
+//    case each
+//    case g
+//    case kg
+//    case ml
+//    case l
+//    case cup
+//    case Tbsp
+//    case tsp
+//
+//    var id: String {self.rawValue}
+//}
 
 struct Ingredient: Identifiable, Codable {
     var id = UUID()
     
     var name:String = ""
-    var unit: Unit = .each
+    var unit: String = ""
     var quantity: Double?
     var product: Product?
     

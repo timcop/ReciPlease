@@ -27,9 +27,9 @@ struct IngredientListView: View {
                             Text(String(format: (floor(ingredient.quantity!) == ingredient.quantity!) ? "• %u" : "• %.2f" , ingredient.quantity!
                                        ))
                                 .padding(.leading)
-                            if (ingredient.unit.id != "each") {
-                                Text(ingredient.unit.id)
-                            }
+ 
+                            Text(ingredient.unit)
+
                             Text(ingredient.name)
                                 .padding(.vertical, 3.0)
                         }

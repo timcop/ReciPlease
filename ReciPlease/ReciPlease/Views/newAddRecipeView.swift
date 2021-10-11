@@ -30,8 +30,8 @@ struct newAddRecipeView: View {
     @State var isNewStep = true
     @State var editingRecipe = true
     @State private var showingImagePicker = false
-    @State var inputImage: UIImage? = UIImage(named: "LogoNoWords")
-    @State var image: Image? = Image("LogoNoWords")
+    @State var inputImage: UIImage? = UIImage(named: "defaultImage")
+    @State var image: Image? = Image("defaultImage")
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {

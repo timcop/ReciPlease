@@ -15,7 +15,6 @@ struct EditIngredientView: View {
     @EnvironmentObject var currentRecipe: Recipe
     @Binding var editingIngredient: Bool
     @State var isNewIngredient: Bool
-    @State var selectedUnit: Unit = Unit.each
     @Environment(\.presentationMode) var presentation
 
     var body: some View {
@@ -34,16 +33,9 @@ struct EditIngredientView: View {
                 Form{
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
                         .accessibilityIdentifier("IngredientNameField")
-                    Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
-                        Text("Each").tag(Unit.each)
-                        Text("Grams").tag(Unit.g)
-                        Text("Kg").tag(Unit.kg)
-                        Text("mL").tag(Unit.ml)
-                        Text("L").tag(Unit.l)
-                        Text("Cup").tag(Unit.cup)
-                        Text("Tablespoon").tag(Unit.Tbsp)
-                        Text("Teaspoon").tag(Unit.tsp)
-                    }
+
+                    TextField("Unit", text: $currentRecipe.currentIngredient.unit)
+                        .accessibilityIdentifier("IngredientUnitField")
                     TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
                         .accessibilityLabel("IngredientQuantityField")
 
@@ -98,7 +90,11 @@ struct EditIngredientView: View {
                     }
                     .accessibilityLabel("IngredientSubmitButton")
                     .buttonStyle(GrowingButton())
-                    .disabled(currentRecipe.currentIngredient.name == "" || currentRecipe.currentIngredient.quantity == 0 || currentRecipe.currentIngredient.quantity == nil)
+                    .disabled(currentRecipe.currentIngredient.name == ""
+                              || currentRecipe.currentIngredient.quantity == 0
+                              || currentRecipe.currentIngredient.quantity == nil
+                              || currentRecipe.currentIngredient.unit == ""
+                    )
                     .padding()
                 }
             }.frame(width:350, height:510)
@@ -110,3 +106,11 @@ struct EditIngredientView: View {
         .ignoresSafeArea(.keyboard)
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
