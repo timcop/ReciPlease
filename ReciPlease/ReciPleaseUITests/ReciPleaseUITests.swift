@@ -19,18 +19,18 @@ class ReciPleaseUITests: XCTestCase {
         let recipeName = app.textFields["RecipeNameField"]
         XCTAssertTrue(recipeName.waitForExistence(timeout: 5))
         recipeName.tap()
-        recipeName.typeText("Name")
+        recipeName.typeText("Test")
         
         
         let recipeTime = app.textFields["RecipeTimeField"]
         XCTAssertTrue(recipeTime.waitForExistence(timeout: 5))
         recipeTime.tap()
-        recipeTime.typeText("Name")
+        recipeTime.typeText("Test")
         
         let recipeServings = app.textFields["RecipeServingsField"]
         XCTAssertTrue(recipeServings.waitForExistence(timeout: 5))
         recipeServings.tap()
-        recipeServings.typeText("Name")
+        recipeServings.typeText("Test")
         app.keyboards.buttons["return"].tap()
         
         app.buttons["AddIngredient"].tap()
@@ -40,17 +40,17 @@ class ReciPleaseUITests: XCTestCase {
         let ingredientName = app.textFields["IngredientNameField"]
         XCTAssertTrue(ingredientName.waitForExistence(timeout: 5))
         ingredientName.tap()
-        ingredientName.typeText("Name")
+        ingredientName.typeText("Test")
         
         let ingredientUnit = app.textFields["IngredientUnitField"]
         XCTAssertTrue(ingredientUnit.waitForExistence(timeout: 5))
         ingredientUnit.tap()
-        ingredientUnit.typeText("Name")
+        ingredientUnit.typeText("Test")
         
         let ingredientQuantity = app.textFields["IngredientQuantityField"]
         XCTAssertTrue(ingredientQuantity.waitForExistence(timeout: 5))
         ingredientQuantity.tap()
-        ingredientQuantity.typeText("Name")
+        ingredientQuantity.typeText("Test")
         app.keyboards.buttons["return"].tap()
         ingredientQuantity.tap()
         ingredientQuantity.typeText("1")
@@ -61,20 +61,116 @@ class ReciPleaseUITests: XCTestCase {
         
         app.buttons["IngredientSubmitButton"].tap()
         
-        app.buttons["Method"].tap()
+        app.buttons["MethodToggle"].firstMatch.tap()
         
-        app.buttons["AddStep"].tap()
-//        app.buttons["OutsideAddStep"].tap()
-//        app.buttons["AddStep"].tap()
-        
-       // app.switches["ingredients, List, Ingredients, Method"].tap()
         app.scrollViews.otherElements.buttons["AddStep"].tap()
         app.textViews["StepTextPlaceholder"].tap()
-        app.textViews["StepText"].typeText("Hello, world")
+        app.textViews["StepText"].typeText("Test")
         app.buttons["SubmitStep"].tap()
         
         app.buttons["SubmitRecipe"].tap()
         
+        
+    }
+    
+    func testEditRecipe() throws {
+        
+        let app = XCUIApplication()
+        app.launch()
+        let scrollViewsQuery = app.scrollViews
+        let elementsQuery = scrollViewsQuery.otherElements
+        elementsQuery.buttons["Recipe"].firstMatch.tap()
+        
+        app.navigationBars["_TtGC7SwiftUI19UIHosting"].buttons["Edit"].tap()
+        
+        let recipeNameTextField = elementsQuery.textFields["Recipe Name"]
+        recipeNameTextField.tap()
+        recipeNameTextField.typeText("Test")
+        
+        let cookTimeField = elementsQuery.textFields["30 Mins"]
+        cookTimeField.tap()
+        cookTimeField.typeText("Test")
+        
+        let servingsField = elementsQuery.textFields["4 Servings"]
+        servingsField.tap()
+        servingsField.typeText("Test")
+        
+        let editElementsQuery = scrollViewsQuery.otherElements.containing(.image, identifier:"Edit")
+        editElementsQuery.children(matching: .image).matching(identifier: "Edit").element(boundBy: 1).tap()
+        let ingredientName = app.textFields["IngredientNameField"]
+        XCTAssertTrue(ingredientName.waitForExistence(timeout: 5))
+        ingredientName.tap()
+        ingredientName.typeText("Test")
+        let ingredientUnit = app.textFields["IngredientUnitField"]
+        XCTAssertTrue(ingredientUnit.waitForExistence(timeout: 5))
+        ingredientUnit.tap()
+        ingredientUnit.typeText("Test")
+        let ingredientQuantity = app.textFields["IngredientQuantityField"]
+        XCTAssertTrue(ingredientQuantity.waitForExistence(timeout: 5))
+        ingredientQuantity.tap()
+        ingredientQuantity.typeText("Test")
+        app.keyboards.buttons["return"].tap()
+        ingredientQuantity.tap()
+        ingredientQuantity.typeText("1")
+        app.keyboards.buttons["return"].tap()
+        app.buttons["SearchProduct"].tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.buttons["IngredientSubmitButton"].tap()
+        
+        editElementsQuery.children(matching: .image).matching(identifier: "Trash").element(boundBy: 1).tap()
+        
+        app.buttons["Add Ingredient"].tap()
+        
+        XCTAssertTrue(ingredientName.waitForExistence(timeout: 5))
+        ingredientName.tap()
+        ingredientName.typeText("Test")
+        XCTAssertTrue(ingredientUnit.waitForExistence(timeout: 5))
+        ingredientUnit.tap()
+        ingredientUnit.typeText("Test")
+        XCTAssertTrue(ingredientQuantity.waitForExistence(timeout: 5))
+        ingredientQuantity.tap()
+        ingredientQuantity.typeText("Test")
+        app.keyboards.buttons["return"].tap()
+        ingredientQuantity.tap()
+        ingredientQuantity.typeText("1")
+        app.keyboards.buttons["return"].tap()
+        app.buttons["SearchProduct"].tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.buttons["IngredientSubmitButton"].tap()
+        
+        app.buttons["MethodToggle"].firstMatch.tap()
+        
+        editElementsQuery.children(matching: .image).matching(identifier: "Edit").element(boundBy: 1).tap()
+        app.textViews["StepText"].tap()
+        app.textViews["StepText"].typeText("Test")
+        app.buttons["SubmitStep"].tap()
+        
+        app.scrollViews.otherElements.buttons["Add Step"].tap()
+        app.textViews["StepTextPlaceholder"].tap()
+        app.textViews["StepText"].typeText("Test")
+        app.buttons["SubmitStep"].tap()
+        
+        
+        app.navigationBars["_TtGC7SwiftUI19UIHosting"].buttons["Done"].tap()
+        
+    }
+    
+    func testImagePicker() throws {
+        
+        let app = XCUIApplication()
+        app.launch()
+        let scrollViewsQuery = app.scrollViews
+        scrollViewsQuery.otherElements.buttons["Recipe"].firstMatch.tap()
+        
+        let ttgc7swiftui19uihostingNavigationBar = app.navigationBars["_TtGC7SwiftUI19UIHosting"]
+        ttgc7swiftui19uihostingNavigationBar.buttons["Edit"].tap()
+        
+        let editImage = scrollViewsQuery.otherElements.containing(.image, identifier:"Edit").children(matching: .image).matching(identifier: "Edit").element(boundBy: 0)
+        editImage.tap()
+        app.scrollViews.otherElements.images["Photo, March 31, 2018, 8:14 AM"].tap()
+        editImage.tap()
+        app.scrollViews.otherElements.images["Photo, August 09, 2012, 9:55 AM"].tap()
+        ttgc7swiftui19uihostingNavigationBar.buttons["Done"].tap()
         
     }
     
