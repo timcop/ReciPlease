@@ -146,7 +146,7 @@ class ReciPleaseUITests: XCTestCase {
         app.buttons["SubmitStep"].tap()
         
         app.scrollViews.otherElements.buttons["Add Step"].tap()
-        app.textViews["StepTextPlaceholder"].tap()
+        app.textViews["StepText"].tap()
         app.textViews["StepText"].typeText("Test")
         app.buttons["SubmitStep"].tap()
         
