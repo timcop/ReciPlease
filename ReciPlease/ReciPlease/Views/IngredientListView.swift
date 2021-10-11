@@ -39,17 +39,17 @@ struct IngredientListView: View {
                                 Image(systemName:"pencil")
                                     .resizable()
                                     .frame(width: 18, height: 18)
-                                    .foregroundColor(Color.green)
+                                    .foregroundColor(Color.orange)
                                     .padding(.trailing, 18)
                                     .onTapGesture {
                                         isNewIngredient = false
                                         currentRecipe.currentIngredient = ingredient
                                         editingIngredient.toggle()
                                     }
-                                Image(systemName:"xmark")
+                                Image(systemName:"trash")
                                     .resizable()
                                     .frame(width: 18, height: 18)
-                                    .foregroundColor(Color.green)
+                                    .foregroundColor(Color.red)
                                     .onTapGesture {
                                         if let index = currentRecipe.ingredients.firstIndex(where: {$0.id == ingredient.id}) {
                                             currentRecipe.ingredients.remove(at: index)

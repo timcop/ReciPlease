@@ -68,14 +68,14 @@ struct RecipeDetailView: View {
                                     .padding()
                                 HStack {
                                     Spacer()
-                                    Image(systemName: "timer")
-                                        .foregroundColor(.green)
+                                    Image(systemName: "clock.fill")
+                                        .foregroundColor(.orange)
                                     TextField("30 Mins", text: $selectedRecipe.cookTime)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         //.focused($isTextFieldFocused)
                                     Spacer()
-                                    Image(systemName: "person.fill")
-                                        .foregroundColor(.green)
+                                    Image(systemName: "person.circle.fill")
+                                        .foregroundColor(.orange)
                                     TextField("4 Servings", text: $selectedRecipe.servings)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         //.focused($isTextFieldFocused)
@@ -85,11 +85,11 @@ struct RecipeDetailView: View {
                                 Text(selectedRecipe.name)
                                     .font(.system(size: 22, weight: .bold))
                                 HStack {
-                                    Image(systemName: "timer")
-                                        .foregroundColor(.green)
+                                    Image(systemName: "clock.fill")
+                                        .foregroundColor(.orange)
                                     Text(selectedRecipe.cookTime)
-                                    Image(systemName:"person.fill")
-                                        .foregroundColor(.green)
+                                    Image(systemName:"person.circle.fill")
+                                        .foregroundColor(.orange)
                                     Text(selectedRecipe.servings)
                                 }
                                 .padding(.vertical)
@@ -262,7 +262,7 @@ struct IngredientMethodToggleStyle: ToggleStyle {
                         .frame(height: 3)
                     
                     Rectangle()
-                        .fill(Color.green)
+                        .fill(Color.orange)
                         .frame(width: configuration.isOn ? 110:70, height: 3)
                         .offset(x: configuration.isOn ? 16 : 140) 
                     
