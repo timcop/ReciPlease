@@ -119,7 +119,7 @@ struct RecipeDetailView: View {
                         Spacer(minLength: 30)
                         if isIngredient {
                             // add ingredient button
-                            Button("Add ingredient") {
+                            Button("Add Ingredient") {
                                 isNewIngredient = true
                                 withAnimation {
                                     editingIngredient.toggle()

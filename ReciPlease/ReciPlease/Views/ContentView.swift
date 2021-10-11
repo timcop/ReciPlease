@@ -118,6 +118,8 @@ struct RecipeCardScrollView: View {
                                     .modifier(RecipeCardTextViewModifier())
                             }
                         }
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityIdentifier("Recipe")
                         .rotation3DEffect(Angle(degrees:
                             Double(geometry.frame(in: .global).minX - 40) / -10
                                ), axis: (x: 0, y: 100.0, z: 0))

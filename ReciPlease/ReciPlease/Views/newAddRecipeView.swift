@@ -132,7 +132,7 @@ struct newAddRecipeView: View {
                                     }
                                 }
                                 .buttonStyle(GrowingButton())
-                                .accessibilityLabel("AddStep")
+                                .accessibilityIdentifier("AddStep")
                                 Spacer()
                             }.padding(.top)
                             MethodListView(currentRecipe: currentRecipe,
