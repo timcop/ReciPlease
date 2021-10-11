@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+/** This is the view for editing steps within the method,
+ Features a textEditor for inputing a step and buttons for cancel/submit.
+ */
 struct EditStepView: View {
     
     @EnvironmentObject var currentRecipe: Recipe
     @Binding var editingStep: Bool
     @State var isNewStep: Bool
     @Binding var currentStep: Step
-    @State var selectedUnit: Unit = Unit.each
+//    @State var selectedUnit: Unit = Unit.each
     @State var stepPlaceholder = "Preheat oven to 180ºC..."
     @Environment(\.presentationMode) var presentation
     
@@ -51,6 +54,7 @@ struct EditStepView: View {
                             editingStep.toggle()
                         }
                     }
+                    .accessibilityIdentifier("CancelStep")
                     .buttonStyle(GrowingButton())
                     .padding()
                     Button("Submit") {
@@ -83,9 +87,3 @@ struct EditStepView: View {
         }
     }
 }
-
-//struct EditStepView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditStepView()
-//    }
-//}

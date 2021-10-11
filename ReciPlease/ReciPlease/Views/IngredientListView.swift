@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+/** This is the view for displaying the ingredient information.
+ Displays the name and quantity of the ingredient in a list, as well as
+ the product it's linked to if it has been linked
+ */
 struct IngredientListView: View {
     @StateObject var currentRecipe: Recipe
-//    var ingredients: [Ingredient]
     @Binding var isNewIngredient: Bool
-//    @Binding var currentIngredient: Ingredient
     @Binding var editingIngredient: Bool
     @Binding var editingRecipe: Bool
+    
     var body: some View {
         VStack{
             ForEach(currentRecipe.ingredients) { ingredient in
@@ -21,18 +24,20 @@ struct IngredientListView: View {
                 VStack {
                     HStack {
                         Group {
-                            Text(String(format: "• %.2f", ingredient.quantity!
-                                       ))
-                                .padding(.leading)
-    //                            .padding(.vertical, 4.0)
-                            if (ingredient.unit.id != "each") {
-                                Text(ingredient.unit.id)
+                            if (floor(ingredient.quantity!) == ingredient.quantity!) {
+                                Text(String(format: "• %ld", Int(ingredient.quantity!)))
+                                    .padding(.leading)
+                            } else {
+                                Text(String(format: "• %.2f", ingredient.quantity!))
+                                    .padding(.leading)
                             }
+
+                            Text(ingredient.unit)
+
                             Text(ingredient.name)
                                 .padding(.vertical, 3.0)
-//                                .padding(.horizontal)
-//                                .font(Font.body.weight(.bold))
-                        }.font(Font.body.weight(.bold))
+                        }
+                        .font(Font.body.weight(.bold))
                         Spacer()
                         if (editingRecipe) {
                             HStack {
@@ -61,31 +66,32 @@ struct IngredientListView: View {
                     if (ingredient.product != nil) {
 
                         HStack{
-                            Text("-")
-                            if (ingredient.product?.sizeDetails.cupPrice != nil && ingredient.product?.sizeDetails.cupPrice != 0.0) {
-                                Text(String(format: "$%.2f", ingredient.product?.sizeDetails.cupPrice ?? ""))
-                            } else {
-                                Text(String(format: "$%.2f", ingredient.product?.priceDetails.salePrice ?? ""))
+                            Group {
+                                Text("-")
+                                if (ingredient.product?.sizeDetails.cupPrice != nil && ingredient.product?.sizeDetails.cupPrice != 0.0) {
+                                    Text(String(format: "$%.2f", ingredient.product?.sizeDetails.cupPrice ?? ""))
+                                } else {
+                                    Text(String(format: "$%.2f", ingredient.product?.priceDetails.salePrice ?? ""))
+                                }
+                                Text("/")
+                                if (ingredient.product?.sizeDetails.cupMeasure != nil) {
+                                    Text(ingredient.product?.sizeDetails.cupMeasure ?? "")
+                                    
+                                } else if (ingredient.product?.sizeDetails.volumeSize != nil) {
+                                    Text(ingredient.product?.sizeDetails.volumeSize ?? "")
+                                } else {
+                                    Text(ingredient.product?.sizeDetails.packageType ?? "")
+                                }
                             }
-                            Text("/")
-                            if (ingredient.product?.sizeDetails.cupMeasure != nil) {
-                                Text(ingredient.product?.sizeDetails.cupMeasure ?? "")
-                                
-                            } else {
-                                Text(ingredient.product?.sizeDetails.volumeSize ?? "")
-                            }
+                            .font(.system(size: 15))
                             Spacer()
                         }
+                        .padding(.leading, 20)
                     }
                 }
                 Divider()
+                    .hidden()
             }
         }
     }
 }
-
-//struct IngredientListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IngredientListView(ingredients: [])
-//    }
-//}

@@ -7,13 +7,18 @@
 
 import SwiftUI
 
+/** This view displays the steps within the method.
+ Each step has a bullet point followed by the string for the step.
+ Features two buttons next to each step if the view is in edit mode.
+ 
+ */
 struct MethodListView: View {
     @StateObject var currentRecipe: Recipe
-//    var method: [Step]
     @Binding var isNewStep: Bool
     @Binding var currentStep: Step
     @Binding var editingStep: Bool
     @Binding var editingRecipe: Bool
+    
     var body: some View {
         ForEach(currentRecipe.method) { step in
             HStack {
@@ -51,10 +56,3 @@ struct MethodListView: View {
         }
     }
 }
-
-//struct MethodListView_Previews: PreviewProvider {
-//    @State var editingStep = true
-//    static var previews: some View {
-//        MethodListView(recipe: Recipe())
-//    }
-//}

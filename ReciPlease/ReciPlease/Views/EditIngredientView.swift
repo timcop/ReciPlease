@@ -7,18 +7,17 @@
 
 import SwiftUI
 
+/** Displays the edit ingredient view which has fields: name, unit and quantity.
+ Features a button to search for a product and link it to the ingredient.
+ */
 struct EditIngredientView: View {
     
     @EnvironmentObject var currentRecipe: Recipe
     @Binding var editingIngredient: Bool
     @State var isNewIngredient: Bool
-    @State var selectedUnit: Unit = Unit.each
     @Environment(\.presentationMode) var presentation
 
-    
     var body: some View {
-            
-        
         ZStack{
             Color.white
                 .onTapGesture {
@@ -31,23 +30,27 @@ struct EditIngredientView: View {
                 .opacity(0.01)
             VStack(spacing: 0){
                // Text("Item Details").padding(.top, 20)
-                
                 Form{
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
+                        .accessibilityIdentifier("IngredientNameField")
 
-                    Picker(selection: $currentRecipe.currentIngredient.unit, label:Text("Unit")) {
-                        Text("Each").tag(Unit.each)
-                        Text("Grams").tag(Unit.g)
-                        Text("Kg").tag(Unit.kg)
-                        Text("mL").tag(Unit.ml)
-                        Text("L").tag(Unit.l)
-                        Text("Cup").tag(Unit.cup)
-                        Text("Tablespoon").tag(Unit.Tbsp)
-                        Text("Teaspoon").tag(Unit.tsp)
-                    }
-                
+                    TextField("Unit", text: $currentRecipe.currentIngredient.unit)
+                        .accessibilityIdentifier("IngredientUnitField")
                     TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
-//                        .keyboardType(.numberPad)
+                        .accessibilityLabel("IngredientQuantityField")
+
+                    VStack{
+                if(currentRecipe.currentIngredient.product != nil){
+                    Text(currentRecipe.currentIngredient.product!.name.capitalized)
+                        .font(.headline).bold().italic()
+                        .frame(alignment: .center)
+                    
+                    if (currentRecipe.currentIngredient.product!.priceDetails.isSpecial) {
+                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")").strikethrough()
+                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.salePrice, specifier: "%.2f")").foregroundColor(.red)
+                        } else {
+                            Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")")
+                        }
                 }
                 if(currentRecipe.currentIngredient.product != nil){
                     Group {
@@ -81,6 +84,11 @@ struct EditIngredientView: View {
                     .environmentObject(currentRecipe)
                     .padding()
                 }
+                NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
+                   Text("Search product")
+                        .accessibilityIdentifier("SearchProduct")
+                }.buttonStyle(GrowingButton())
+                .environmentObject(currentRecipe)
                 HStack {
                     Button("Cancel") {
                         currentRecipe.currentIngredient = Ingredient()
@@ -88,12 +96,10 @@ struct EditIngredientView: View {
                             editingIngredient.toggle()
                         }
                     }
+                    .accessibilityIdentifier("IngredientCancel")
                     .buttonStyle(GrowingButton())
                     .padding()
                     Button("Submit") {
-//                        if(currentRecipe.currentIngredient.name != currentRecipe.currentIngredient.product?.name){
-//                            currentRecipe.currentIngredient.product = nil
-//                        }
                         if isNewIngredient {
                             currentRecipe.ingredients.append(currentRecipe.currentIngredient)
                         } else {
@@ -112,8 +118,13 @@ struct EditIngredientView: View {
                             editingIngredient.toggle()
                         }
                     }
+                    .accessibilityLabel("IngredientSubmitButton")
                     .buttonStyle(GrowingButton())
-                    .disabled(currentRecipe.currentIngredient.name == "" || currentRecipe.currentIngredient.quantity == 0 || currentRecipe.currentIngredient.quantity == nil)
+                    .disabled(currentRecipe.currentIngredient.name == ""
+                              || currentRecipe.currentIngredient.quantity == 0
+                              || currentRecipe.currentIngredient.quantity == nil
+                              || currentRecipe.currentIngredient.unit == ""
+                    )
                     .padding()
                 }
             }.frame(width:350, height:380)
@@ -123,17 +134,13 @@ struct EditIngredientView: View {
         }
         .environmentObject(currentRecipe)
         .ignoresSafeArea(.keyboard)
-
     }
-    
-
 }
 
-
-//struct EditIngredientView_Previews: PreviewProvider {
-//    @State var editingIngredient = true
-//    static var previews: some View {
-//        EditIngredientView(currentRecipe: Recipe(), editingIngredient: $editingIngredient,
-//                           isNewIngredient: Ingredient())
-//    }
-//}
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif

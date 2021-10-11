@@ -13,6 +13,7 @@
 		326151022705C070003D2FBB /* EditStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326151012705C070003D2FBB /* EditStepView.swift */; };
 		72574C0B2708371F002093B8 /* PictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72574C0A2708371F002093B8 /* PictureView.swift */; };
 		728403C02704404200FE9828 /* newAddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728403BF2704404200FE9828 /* newAddRecipeView.swift */; };
+		72B2F5A82713206D00794573 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B2F5A72713206D00794573 /* Launch Screen.storyboard */; };
 		72E531652701E8E400B92677 /* ReciPleaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531642701E8E400B92677 /* ReciPleaseApp.swift */; };
 		72E531672701E8E400B92677 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E531662701E8E400B92677 /* ContentView.swift */; };
 		72E531692701E8E800B92677 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E531682701E8E800B92677 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		721C11E1270D7876009A1596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		72574C0A2708371F002093B8 /* PictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureView.swift; sourceTree = "<group>"; };
 		728403BF2704404200FE9828 /* newAddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAddRecipeView.swift; sourceTree = "<group>"; };
+		72B2F5A72713206D00794573 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		72E531612701E8E400B92677 /* ReciPlease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReciPlease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E531642701E8E400B92677 /* ReciPleaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReciPleaseApp.swift; sourceTree = "<group>"; };
 		72E531662701E8E400B92677 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				AAC691532706C66500AD146A /* SearchBar.swift */,
 				72E531902701E94F00B92677 /* SearchProductsView.swift */,
 				72E531982701E9B300B92677 /* RecipeDetailView.swift */,
+				72B2F5A72713206D00794573 /* Launch Screen.storyboard */,
 				AAC691512705C52700AD146A /* ImagePicker.swift */,
 				728403BF2704404200FE9828 /* newAddRecipeView.swift */,
 				326151012705C070003D2FBB /* EditStepView.swift */,
@@ -285,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B2F5A82713206D00794573 /* Launch Screen.storyboard in Resources */,
 				72E5316C2701E8E800B92677 /* Preview Assets.xcassets in Resources */,
 				72E531692701E8E800B92677 /* Assets.xcassets in Resources */,
 			);
@@ -459,6 +463,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -492,8 +497,11 @@
 				INFOPLIST_FILE = ReciPlease/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -519,12 +527,16 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ReciPlease/Preview Content\"";
 				DEVELOPMENT_TEAM = 4VNJQ732VB;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReciPlease/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -572,6 +584,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VNJQ732VB;
+				ENABLE_TESTABILITY = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -593,6 +606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VNJQ732VB;
@@ -617,9 +631,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4VNJQ732VB;
+				ENABLE_TESTABILITY = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

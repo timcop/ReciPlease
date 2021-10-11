@@ -9,12 +9,17 @@ import SwiftUI
 
 @main
 struct ReciPleaseApp: App {
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    
     @Environment(\.scenePhase) private var scenePhase
     @StateObject var recipeModel = RecipeModel()
 
     @State private var isLoaded: Bool = Bool()
+    
 
     var body: some Scene {
+
         WindowGroup {
             Group {
                if (isLoaded) { ContentView().environmentObject(recipeModel) }
@@ -38,16 +43,27 @@ struct ReciPleaseApp: App {
 
         }
         .onChange(of: scenePhase) { phase in
-            if phase == .background {
-                print("HERRREw")
+            
+            switch phase {
+               case .active:
+                   print("active")
+               case .inactive:
+                   print("inactive")
                 print(recipeModel.recipes)
                 recipeModel.storeRecList(recs: recipeModel.recipes)
-                
+               case .background:
+//                    print("HERRREw")
+                    print(recipeModel.recipes)
+                    recipeModel.storeRecList(recs: recipeModel.recipes)
+            @unknown default:
+                print("error")
             }
+
         }
     }
 }
-    
+
+
 func completionHandler(value: @escaping (Bool) -> Void) {
     
     // some heavy work here!
@@ -71,7 +87,7 @@ struct LoadingView: View {
                 .stroke(Color.blue, lineWidth: 3)
                 .frame(width: 30, height: 3)
                 .offset(x: isLoading ? 110 : -110, y: 0)
-                .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value:isLoading)
         }.onAppear {
             isLoading = true
         }

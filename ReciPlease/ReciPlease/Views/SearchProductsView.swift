@@ -7,24 +7,28 @@
 
 import SwiftUI
 
+/** Navigated to from EditIngredientView() with some searchText.
+ Searches the www.countdown.co.nz api for a product(s) containing the search text.
+ The returned products are then displayed as a List, with onTapGesture setting the currentIngredient.product
+ to the product tapped on.
+ */
 struct SearchProductsView: View {
-    
     @StateObject var currentRecipe: Recipe
     var productsModel = ProductsModel()
     @State private var products = [Product]()
     @State var hasSearched = false
-//    @State private var products = [FailableDecodable<Product>]()
     @Binding var searchText: String
     @Environment(\.presentationMode) var presentation
-    
     
     var body: some View {
         NavigationView {
             if products.count < 1 && hasSearched {
                 Text("No results")
             }
+            // List the products returned
             List(products) {prod in
                 HStack {
+                    // Name and price details of the product
                     VStack(alignment: .leading, spacing: 5) {
                         Text(prod.name.capitalized)
                             .font(.headline).bold().italic()
@@ -38,7 +42,10 @@ struct SearchProductsView: View {
                             }
                         }
                     }
+                    
                     Spacer()
+                    
+                    // Displays the image of the product
                     AsyncImageHack(url: URL(string: prod.img.imageURL)) { phase in
                         switch phase {
                         case .empty:
@@ -56,12 +63,9 @@ struct SearchProductsView: View {
                     }
                 }
                 .onTapGesture {
-                    // NAVIGATE TO NEW VIEW FROM HERE
                     currentRecipe.currentIngredient.product = prod
                     print(currentRecipe.currentIngredient.product?.img.imageURL as Any)
                     self.presentation.wrappedValue.dismiss()
-
-                    // SEND THE PRODUCT DETAIL
                 }
             }
             .navigationTitle("Products")
@@ -101,12 +105,3 @@ struct AsyncImageHack<Content> : View where Content : View {
         }
     }
 }
-
-//struct SearchProductsView_Previews: PreviewProvider {
-//
-//    @ObservedObject var currentRecipe: Recipe = Recipe()
-//
-//    static var previews: some View {
-//        SearchProductsView(recProds: $currentRecipe.products)
-//    }
-//}

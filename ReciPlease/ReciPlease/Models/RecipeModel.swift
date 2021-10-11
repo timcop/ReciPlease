@@ -9,86 +9,12 @@ import Foundation
 import UIKit
 import SwiftUI
 
-//
-//enum Unit: String, CaseIterable, Identifiable {
-//    case each
-//    case g
-//    case kg
-//    case ml
-//    case l
-//    case cup
-//    case Tbsp
-//    case tsp
-//
-//    var id: String {self.rawValue}
-//}
-//
-//struct Ingredient: Identifiable {
-//    var id = UUID()
-//
-//    var name:String = ""
-//    var unit: Unit = .each
-//    var quantity:String = ""
-//    var product: Product?
-//
-//}
-//
-//class Recipe: ObservableObject, Identifiable {
-//    let id = UUID()
-//    @Published var name: String = ""
-//    @Published var method: [Step] = []
-//    @Published var ingredients: [Ingredient] = []
-//    @Published var uiImage : SomeImage?
-//    @Published var cookTime: String = "10 min"
-//    @Published var numIngredients: String = "10 ingredients"
-//    @Published var currentIngredient = Ingredient()
-//}
-//
-//struct Step: Codable, Identifiable {
-//    var id = UUID()
-//    var string: String = ""
-//}
-//
-//class RecipeModel: ObservableObject {
-//    @Published var recipes: [Recipe]
-//    @Published var selectedRecipe: Recipe
-//
-//    init() {
-//        self.recipes = [Recipe()]
-//        self.selectedRecipe = Recipe()
-//        self.recipes[0].name = "A yummy donut"
-//        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
-//    }
-//}
-
-public struct SomeImage: Codable {
-
-    public var photo: Data
-
-    public init(photo: UIImage) {
-        self.photo = photo.pngData()!
-    }
-}
-
-
-enum Unit: String, CaseIterable, Identifiable, Codable {
-    case each
-    case g
-    case kg
-    case ml
-    case l
-    case cup
-    case Tbsp
-    case tsp
-    
-    var id: String {self.rawValue}
-}
 
 struct Ingredient: Identifiable, Codable {
     var id = UUID()
     
     var name:String = ""
-    var unit: Unit = .each
+    var unit: String = ""
     var quantity: Double?
     var product: Product?
     
@@ -99,15 +25,12 @@ class Recipe: ObservableObject, Identifiable, Codable {
     @Published var name: String
     @Published var method: [Step]
     @Published var ingredients: [Ingredient]
-//    @Published var uiImage : SomeImage?
     @Published var uiImage: UIImage
     @Published var cookTime: String
     @Published var servings: String
     @Published var currentIngredient: Ingredient
     
-//    init(uiImage:UIImage) {
-//            self.uiImage = uiImage
-//        }
+
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -179,8 +102,8 @@ class RecipeModel: ObservableObject, Codable {
     init() {
         self.recipes = [Recipe()]
         self.selectedRecipe = Recipe()
-//        self.recipes[0].name = "A yummy donut"
-//        self.recipes[0].uiImage = SomeImage(photo: UIImage(named: "donut")!)
+        self.recipes[0].name = "A yummy donut"
+        self.recipes[0].uiImage = UIImage(named: "donut")!
     }
     
     enum CodingKeys: String, CodingKey {
@@ -223,50 +146,27 @@ class RecipeModel: ObservableObject, Codable {
     
     public func storeRecList(recs: [Recipe]){
             
-            let manager = FileManager.default
-            
-            guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else{
-                return
-            }
-            
-            print(url.path)
-            
-            let encoder = JSONEncoder()
-            let recFolder = url.appendingPathComponent("Recipes")
-            let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
-            
-            do {
-                let data = try encoder.encode(recs)
-                try manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
-                try manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
-            }
-            catch{
-//                print(error)
-            }
+        let manager = FileManager.default
+        
+        guard let url  = manager.urls(for: .documentDirectory, in: .userDomainMask).first else{
+            return
         }
+        
+        print(url.path)
+        
+        let encoder = JSONEncoder()
+        let recFolder = url.appendingPathComponent("Recipes")
+        let recipeList = recFolder.appendingPathComponent("RecipeList.txt")
+        
+
+        let data = try? encoder.encode(recs)
+        if (data != nil) {
+            try! manager.createDirectory(at: recFolder, withIntermediateDirectories: true, attributes: [:])
+            manager.createFile(atPath: recipeList.path, contents: data, attributes: [:])
+        }
+    }
 }
 
-//struct Image: Codable {
-//    let image:UIImage
-//    init(image:UIImage) {
-//        self.image = image
-//    }
-//    enum CodingKeys: CodingKey {
-//        case image
-//        case scale
-//    }
-//    public init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        let scale = try container.decode(CGFloat.self, forKey: .scale)
-//        let image = try container.decode(UIImage.self, forKey: .image)
-//        self.image = UIImage(data:image.pngData()!, scale:scale)!
-//    }
-//    public func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(self.image, forKey: .image)
-//        try container.encode(self.image.scale, forKey: .scale)
-//    }
-//}
 
 extension KeyedEncodingContainer {
     mutating func encode(_ value: UIImage, forKey key: Key) throws {

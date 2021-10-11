@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-//let screenSize: CGRect = UIScreen.main.bounds
-//let screenWidth = screenSize.width
-//let screenHeight = screenSize.height
-
+/** newAddRecipeView creates a View for which to add recipes.
+ Lets users: Enter an image by calling ImagePicker, enter an ingredient/step
+ by calling EditIngredientView and EditStepView respectively, displays the
+ current ingredients and steps by calling IngredientListView and MethodListView respectively.
+ 
+ Features a toggleView ToolbarToggleStyle() at the bottom of the screen to switch between
+ ingredient and method.
+ 
+ */
 struct newAddRecipeView: View {
     // Inherited
     @ObservedObject var currentRecipe: Recipe = Recipe()
@@ -19,19 +24,16 @@ struct newAddRecipeView: View {
     
     @State var isIngredient = true
     @State var addingIngredient = false
-//    @State var currentIngredient = Ingredient()
     @State var isNewIngredient = true
     @State var addingStep = false
     @State var currentStep = Step()
     @State var isNewStep = true
     @State var editingRecipe = true
     @State private var showingImagePicker = false
-    @State var inputImage: UIImage? = UIImage(named: "recipe_default")
-    @State var image: Image? = Image("recipe_default")
+    @State var inputImage: UIImage? = UIImage(named: "defaultImage")
+    @State var image: Image? = Image("defaultImage")
     @FocusState private var isTextFieldFocused: Bool
 
-
-    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -43,8 +45,8 @@ struct newAddRecipeView: View {
                                 if image != nil {
                                     image?
                                         .resizable()
+                                        .scaledToFill()
                                         .frame(width: 300, height:300)
-                                        .scaledToFit()
                                         .cornerRadius(15)
                                         .clipped()
                                         
@@ -55,19 +57,30 @@ struct newAddRecipeView: View {
                                 }
                                 Spacer()
                             }
-                            
-                        }.onTapGesture{
-                            self.showingImagePicker=true
+                            // Tappable shows ImagePicker
+                            Image(systemName: "pencil.circle.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .opacity(0.7)
+                                .onTapGesture(){
+                                    self.showingImagePicker=true
+                                }
+//                        .onTapGesture{
+//                            self.showingImagePicker=true
                         }
                         
                         Group {
                             VStack {
-                                // title
+                                
+                                // title field
                                 TextField("Recipe Name", text: $currentRecipe.name)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                     .font(.system(size: 22, weight: .bold))
                                     .padding()
                                     .focused($isTextFieldFocused)
+                                    .accessibilityLabel("RecipeNameField")
+                                
+                                // timer and servings fields
                                 HStack {
                                     Spacer()
                                     Image(systemName: "clock.fill")
@@ -75,22 +88,22 @@ struct newAddRecipeView: View {
                                     TextField("30 Mins", text: $currentRecipe.cookTime)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .focused($isTextFieldFocused)
+                                        .accessibilityLabel("RecipeTimeField")
+
                                     Spacer()
                                     Image(systemName: "person.circle.fill")
                                         .foregroundColor(.orange)
                                     TextField("4 Servings", text: $currentRecipe.servings)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .focused($isTextFieldFocused)
+                                        .accessibilityLabel("RecipeServingsField")
+
                                     Spacer()
                                 }
                             }
                         }
                         .padding(.horizontal)
                         .padding(.bottom)
-                        
-                        // ingredient/step toggle view
-                        Toggle(isOn: $isIngredient, label: {})
-                            .toggleStyle(IngredientMethodToggleStyle())
                         
                         if isIngredient {
                             // ingredient list
@@ -101,7 +114,9 @@ struct newAddRecipeView: View {
                                     withAnimation {
                                         addingIngredient.toggle()
                                     }
-                                }.buttonStyle(GrowingButton())
+                                }
+                                .buttonStyle(GrowingButton())
+                                .accessibilityLabel("AddIngredient")
                                 Spacer()
                             }.padding(.top)
                             IngredientListView( currentRecipe: currentRecipe,
@@ -117,7 +132,9 @@ struct newAddRecipeView: View {
                                     withAnimation {
                                         addingStep.toggle()
                                     }
-                                }.buttonStyle(GrowingButton())
+                                }
+                                .buttonStyle(GrowingButton())
+                                .accessibilityLabel("AddStep")
                                 Spacer()
                             }.padding(.top)
                             MethodListView(currentRecipe: currentRecipe,
@@ -127,66 +144,57 @@ struct newAddRecipeView: View {
                                            editingRecipe: $editingRecipe)
                         }
                         Spacer()
+                        // Some more wiggle room at bottom of scroll view
                         Rectangle()
                             .fill(Color.white)
-                            .frame(width:screenWidth, height:300)
+                            .frame(width:screenWidth, height:100)
                             .hidden()
                     }
                     .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                         ImagePicker(image: self.$inputImage)
                     }
                 }
-            }
-            .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
-            .allowsHitTesting(!(addingIngredient || addingStep))
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ZStack{
-                        Rectangle()
-                            .frame(width: screenWidth, height:100)
-                            .offset(y:40)
-                            .hidden()
-                        if (!isTextFieldFocused) {
-                            HStack {
-                                Spacer()
-                                Button("Cancel") {
-                                    // work around, can't reinitialise currentIngredient how i wanted to
-                                    currentRecipe.ingredients = []
-                                    currentRecipe.name = ""
-                                    currentRecipe.method = []
-                                    currentRecipe.cookTime = ""
-                                    currentRecipe.servings = ""
-                                    currentRecipe.currentIngredient = Ingredient()
-                                    self.presentation.wrappedValue.dismiss()
-                                }
-                                .buttonStyle(GrowingButton())
-                                
-                                Spacer()
-                                
-                                Button("Submit") {
-                                    currentRecipe.uiImage = inputImage!
-                                    recipeModel.recipes.append(currentRecipe)
-                                    // save to memory
-                                    recipeModel.storeRecList(recs: recipeModel.recipes)
-                                    self.presentation.wrappedValue.dismiss()
-                                }
-                                .buttonStyle(GrowingButton())
-                                .disabled(currentRecipe.ingredients.count < 1
-                                          || currentRecipe.cookTime == ""
-                                          || currentRecipe.servings == ""
-                                          || currentRecipe.name == "")
-                                Spacer()
-                            }
-                            .offset(y:30)
+                // navigation buttons
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(
+                    leading:
+                        // Cancel button removes currentRecipe and navigates back to ContentView
+                        Button(action: {
+                            currentRecipe.ingredients = []
+                            currentRecipe.name = ""
+                            currentRecipe.method = []
+                            currentRecipe.cookTime = ""
+                            currentRecipe.servings = ""
+                            currentRecipe.currentIngredient = Ingredient()
+                            self.presentation.wrappedValue.dismiss()
+                        }) {
+                            Text("Cancel")
+                                .accessibilityLabel("CancelRecipe")
+                                .foregroundColor(.red)
+                        },
+                    
+                    trailing:
+                        // Submit button appends the currentRecipe to recipeModel.recipes
+                        Button("Submit") {
+                            currentRecipe.uiImage = inputImage!
+                            recipeModel.recipes.append(currentRecipe)
+                            self.presentation.wrappedValue.dismiss()
                         }
-                    }
-                    Spacer()
-                }
+                        .accessibilityLabel("SubmitRecipe")
+                        // Must meet these conditions before submitting
+                        .disabled(currentRecipe.ingredients.count < 1
+                                  || currentRecipe.cookTime == ""
+                                  || currentRecipe.servings == ""
+                                  || currentRecipe.name == ""
+                                  || addingStep
+                                  || addingIngredient
+                                 )
+                    )
             }
-            .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
+            .blur(radius: (addingIngredient || addingStep) ? 5 : 0) // blur background if addingIngredient/step
             .allowsHitTesting(!(addingIngredient || addingStep))
+            
+            // EditIngredientView()
             if addingIngredient {
                 EditIngredientView(editingIngredient: $addingIngredient,
                                    isNewIngredient: isNewIngredient)
@@ -194,12 +202,15 @@ struct newAddRecipeView: View {
 
             }
             
+            // EditStepView()
             if addingStep {
                 EditStepView(editingStep: $addingStep,
                              isNewStep: isNewStep,
                              currentStep: $currentStep)
             }
-
+            // Toggle ingredient/steps
+            Toggle(isOn: $isIngredient, label: {})
+                .toggleStyle(ToolbarToggleStyle())
         }
         .environmentObject(currentRecipe)
 
@@ -207,20 +218,6 @@ struct newAddRecipeView: View {
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
-    }
-}
-
-
-struct addIngredientCard: View {
-    var body: some View {
-        VStack{
-            Rectangle()
-                .fill(Color.black)
-                .frame(width: 200, height: 200)
-                .transition(.opacity)
-                .offset(y: 200)
-                .zIndex(2)
-        }.background(Color.gray)
     }
 }
 
