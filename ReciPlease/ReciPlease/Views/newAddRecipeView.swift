@@ -83,16 +83,16 @@ struct newAddRecipeView: View {
                                 // timer and servings fields
                                 HStack {
                                     Spacer()
-                                    Image(systemName: "timer")
-                                        .foregroundColor(.green)
+                                    Image(systemName: "clock.fill")
+                                        .foregroundColor(.orange)
                                     TextField("30 Mins", text: $currentRecipe.cookTime)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .focused($isTextFieldFocused)
                                         .accessibilityLabel("RecipeTimeField")
 
                                     Spacer()
-                                    Image(systemName: "person.fill")
-                                        .foregroundColor(.green)
+                                    Image(systemName: "person.circle.fill")
+                                        .foregroundColor(.orange)
                                     TextField("4 Servings", text: $currentRecipe.servings)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .focused($isTextFieldFocused)

@@ -29,7 +29,7 @@ struct EditIngredientView: View {
                 .ignoresSafeArea()
                 .opacity(0.01)
             VStack(spacing: 0){
-                Text("Item Details").padding(.top, 20)
+               // Text("Item Details").padding(.top, 20)
                 Form{
                     TextField("Name", text: $currentRecipe.currentIngredient.name)
                         .accessibilityIdentifier("IngredientNameField")
@@ -38,27 +38,40 @@ struct EditIngredientView: View {
                         .accessibilityIdentifier("IngredientUnitField")
                     TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
                         .accessibilityLabel("IngredientQuantityField")
-
-                    VStack{
+                }
                 if(currentRecipe.currentIngredient.product != nil){
-                    Text(currentRecipe.currentIngredient.product!.name.capitalized)
-                        .font(.headline).bold().italic()
-                        .frame(alignment: .center)
-                    
-                    if (currentRecipe.currentIngredient.product!.priceDetails.isSpecial) {
-                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")").strikethrough()
-                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.salePrice, specifier: "%.2f")").foregroundColor(.red)
-                        } else {
-                            Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")")
-                        }
-                }
+                    Group {
+                        ZStack {
+                            VStack{
+                                Text(currentRecipe.currentIngredient.product!.name.capitalized)
+                                    .font(.headline).bold()
+                                    .frame(alignment: .center)
+                                
+                                if (currentRecipe.currentIngredient.product!.priceDetails.isSpecial) {
+                                    Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")").strikethrough()
+                                    Text("$\(currentRecipe.currentIngredient.product!.priceDetails.salePrice, specifier: "%.2f")").foregroundColor(.red)
+                                    } else {
+                                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")")
+                                    }
+                            }.padding()
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                                .offset(x: 140, y: -32)
+                                .padding()
+                                .onTapGesture {
+                                    currentRecipe.currentIngredient.product = nil
+                                }
+                        }.frame(width:310, height:100).background(Color.white).clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
+                } else {
+                    NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
+                       Text("Search product")
+                    }.buttonStyle(GrowingButton())
+                    .accessibilityIdentifier("SearchProduct")
+                    .environmentObject(currentRecipe)
+                    .padding()
                 }
-                NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
-                   Text("Search product")
-                        .accessibilityIdentifier("SearchProduct")
-                }.buttonStyle(GrowingButton())
-                .environmentObject(currentRecipe)
                 HStack {
                     Button("Cancel") {
                         currentRecipe.currentIngredient = Ingredient()
@@ -97,7 +110,7 @@ struct EditIngredientView: View {
                     )
                     .padding()
                 }
-            }.frame(width:350, height:510)
+            }.frame(width:350, height:380)
                 .background(Color(.systemGroupedBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                 .shadow(color: .gray, radius: 5, x:-9, y: -9)
