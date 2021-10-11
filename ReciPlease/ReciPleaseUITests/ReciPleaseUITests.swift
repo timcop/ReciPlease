@@ -155,25 +155,6 @@ class ReciPleaseUITests: XCTestCase {
         
     }
     
-    func testImagePicker() throws {
-        
-        let app = XCUIApplication()
-        app.launch()
-        let scrollViewsQuery = app.scrollViews
-        scrollViewsQuery.otherElements.buttons["Recipe"].firstMatch.tap()
-        
-        let ttgc7swiftui19uihostingNavigationBar = app.navigationBars["_TtGC7SwiftUI19UIHosting"]
-        ttgc7swiftui19uihostingNavigationBar.buttons["Edit"].tap()
-        
-        let editImage = scrollViewsQuery.otherElements.containing(.image, identifier:"Edit").children(matching: .image).matching(identifier: "Edit").element(boundBy: 0)
-        editImage.tap()
-        app.scrollViews.otherElements.images["Photo, March 31, 2018, 8:14 AM"].tap()
-        editImage.tap()
-        app.scrollViews.otherElements.images["Photo, August 09, 2012, 9:55 AM"].tap()
-        ttgc7swiftui19uihostingNavigationBar.buttons["Done"].tap()
-        
-    }
-    
     func testRandomButton() throws {
         
         let app = XCUIApplication()
