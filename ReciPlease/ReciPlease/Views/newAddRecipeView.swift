@@ -65,8 +65,6 @@ struct newAddRecipeView: View {
                                 .onTapGesture(){
                                     self.showingImagePicker=true
                                 }
-//                        .onTapGesture{
-//                            self.showingImagePicker=true
                         }
                         
                         Group {
@@ -215,6 +213,8 @@ struct newAddRecipeView: View {
         .environmentObject(currentRecipe)
 
     }
+    /** When an image is selected, this selected
+     image is loaded into the slected recipes image field.*/
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)

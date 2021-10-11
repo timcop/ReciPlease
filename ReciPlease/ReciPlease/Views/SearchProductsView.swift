@@ -87,6 +87,8 @@ struct SearchProductsView: View {
 
 }
 
+
+/** Loads an image from a URL -  In the countdown website returns a URL for a certain product image*/
 struct AsyncImageHack<Content> : View where Content : View {
 
     let url: URL?

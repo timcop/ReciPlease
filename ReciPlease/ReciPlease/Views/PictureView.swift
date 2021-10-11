@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-import SwiftUI
-//
 let screenSize: CGRect = UIScreen.main.bounds
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
-//
+/**
+ View that easily fornats the images selected by the user.
+ */
 struct PictureView: View {
     var uiImage: UIImage
     var body: some View {
@@ -26,6 +26,11 @@ struct PictureView: View {
     }
 }
 
+
+/**
+ If an image is the wrong orientation when it is loaded from core date the
+  rotateImage function corrects the orientation.
+ */
 func rotateImage(image: UIImage) -> UIImage? {
     if (image.imageOrientation == UIImage.Orientation.up ) {
         return image

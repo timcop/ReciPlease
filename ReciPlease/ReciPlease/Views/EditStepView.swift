@@ -16,7 +16,6 @@ struct EditStepView: View {
     @Binding var editingStep: Bool
     @State var isNewStep: Bool
     @Binding var currentStep: Step
-//    @State var selectedUnit: Unit = Unit.each
     @State var stepPlaceholder = "Preheat oven to 180ºC..."
     @Environment(\.presentationMode) var presentation
     

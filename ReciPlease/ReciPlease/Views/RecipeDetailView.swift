@@ -40,9 +40,6 @@ struct RecipeDetailView: View {
                         ZStack {
                             VStack() {
                                 PictureView(uiImage: selectedRecipe.uiImage)
-//                                    .onTapGesture(){
-//                                        self.showingImagePicker=true
-//                                    }
                             }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                                 ImagePicker(image: self.$inputImage)
                             }
@@ -54,7 +51,6 @@ struct RecipeDetailView: View {
                                     self.showingImagePicker=true
                                 }
                                 .allowsHitTesting(!showingDeleteConfirmation)
-
                         }
                     }
                     
@@ -131,7 +127,6 @@ struct RecipeDetailView: View {
                             }
                             .buttonStyle(GrowingButton())
                             .allowsHitTesting(!showingDeleteConfirmation)
-
                         } else {
                             // add step button
                             Button("Add Step") {
@@ -148,7 +143,6 @@ struct RecipeDetailView: View {
                         .fill(Color.white)
                         .frame(width:screenWidth, height:100)
                         .hidden()
-
                 }
                 .blur(radius: showingDeleteConfirmation ? 5 : 0)
                 .navigationBarItems(trailing:
@@ -174,6 +168,8 @@ struct RecipeDetailView: View {
                         }
                     }
                 )
+                
+                
                 if editingIngredient {
                     // editIngredientView
                     EditIngredientView(editingIngredient:$editingIngredient,
@@ -181,6 +177,8 @@ struct RecipeDetailView: View {
                         .allowsHitTesting(!showingDeleteConfirmation)
 
                 }
+                
+                
                 if editingStep {
                     //editStepView
                     EditStepView(editingStep:$editingStep,
@@ -189,6 +187,8 @@ struct RecipeDetailView: View {
                         .allowsHitTesting(!showingDeleteConfirmation)
 
                 }
+                
+                
                 if showingDeleteConfirmation {
                     Color.white
                         .onTapGesture {
@@ -239,6 +239,10 @@ struct RecipeDetailView: View {
 
             }.environmentObject(selectedRecipe)
     }
+    
+    
+    /** When an image is selected, this selected
+     image is loaded into the slected recipes image field.*/
     func loadImage() {
         guard let inputImage = inputImage else { return }
         if (inputImage != UIImage(named: "defaultImage")) {
@@ -246,6 +250,8 @@ struct RecipeDetailView: View {
         }
     }
 }
+
+
 
 /** Has two buttons for ingredients and method.
  When either is pressed a horizontal bar moves below the button showing it's active,
