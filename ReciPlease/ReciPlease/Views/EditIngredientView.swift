@@ -28,6 +28,8 @@ struct EditIngredientView: View {
                 }
                 .ignoresSafeArea()
                 .opacity(0.01)
+                .accessibilityAddTraits(.isButton)
+                .accessibilityIdentifier("OutsideEditIngredient")
             VStack(spacing: 0){
                // Text("Item Details").padding(.top, 20)
                 Form{
@@ -101,7 +103,7 @@ struct EditIngredientView: View {
                             editingIngredient.toggle()
                         }
                     }
-                    .accessibilityLabel("IngredientSubmitButton")
+                    .accessibilityIdentifier("IngredientSubmitButton")
                     .buttonStyle(GrowingButton())
                     .disabled(currentRecipe.currentIngredient.name == ""
                               || currentRecipe.currentIngredient.quantity == 0

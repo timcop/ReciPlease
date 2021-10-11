@@ -12,42 +12,70 @@ class ReciPleaseUITests: XCTestCase {
 
     func testAddRecipe() throws {
 
-        
         let app = XCUIApplication()
         app.launch()
         app.buttons["AddRecipe"].tap()
         
         let recipeName = app.textFields["RecipeNameField"]
-        recipeName.waitForExistence(timeout: 5)
+        XCTAssertTrue(recipeName.waitForExistence(timeout: 5))
         recipeName.tap()
         recipeName.typeText("Name")
         
         
         let recipeTime = app.textFields["RecipeTimeField"]
-        recipeTime.waitForExistence(timeout: 5)
+        XCTAssertTrue(recipeTime.waitForExistence(timeout: 5))
         recipeTime.tap()
         recipeTime.typeText("Name")
         
         let recipeServings = app.textFields["RecipeServingsField"]
-        recipeServings.waitForExistence(timeout: 5)
+        XCTAssertTrue(recipeServings.waitForExistence(timeout: 5))
         recipeServings.tap()
         recipeServings.typeText("Name")
         app.keyboards.buttons["return"].tap()
         
         app.buttons["AddIngredient"].tap()
+//        app.buttons["OutsideEditIngredient"].tap()
+//        app.buttons["AddIngredient"].tap()
+        
+        let ingredientName = app.textFields["IngredientNameField"]
+        XCTAssertTrue(ingredientName.waitForExistence(timeout: 5))
+        ingredientName.tap()
+        ingredientName.typeText("Name")
+        
+        let ingredientUnit = app.textFields["IngredientUnitField"]
+        XCTAssertTrue(ingredientUnit.waitForExistence(timeout: 5))
+        ingredientUnit.tap()
+        ingredientUnit.typeText("Name")
+        
+        let ingredientQuantity = app.textFields["IngredientQuantityField"]
+        XCTAssertTrue(ingredientQuantity.waitForExistence(timeout: 5))
+        ingredientQuantity.tap()
+        ingredientQuantity.typeText("Name")
+        app.keyboards.buttons["return"].tap()
+        ingredientQuantity.tap()
+        ingredientQuantity.typeText("1")
+        app.keyboards.buttons["return"].tap()
+        
         app.buttons["SearchProduct"].tap()
         app.navigationBars.buttons.element(boundBy: 0).tap()
-
         
-        app.buttons["IngredientCancel"].tap()
+        app.buttons["IngredientSubmitButton"].tap()
         
-        app.buttons["MethodToggle"].firstMatch.tap()
-        sleep(2)
+        app.buttons["Method"].tap()
+        
         app.buttons["AddStep"].tap()
-        app.buttons["CancelStep"].tap()
+//        app.buttons["OutsideAddStep"].tap()
+//        app.buttons["AddStep"].tap()
         
-        app.buttons["CancelRecipe"].tap()
-
+       // app.switches["ingredients, List, Ingredients, Method"].tap()
+        app.scrollViews.otherElements.buttons["AddStep"].tap()
+        app.textViews["StepTextPlaceholder"].tap()
+        app.textViews["StepText"].typeText("Hello, world")
+        app.buttons["SubmitStep"].tap()
+        
+        app.buttons["SubmitRecipe"].tap()
+        
+        
     }
     
     func testRandomButton() throws {

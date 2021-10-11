@@ -288,7 +288,7 @@ struct ToolbarToggleStyle: ToggleStyle {
                                 }
                             }
                             .accessibilityAddTraits(.isButton)
-                            .accessibilityIdentifier("IngredientToggle")
+ //                           .accessibilityIdentifier("IngredientToggle")
                             Spacer()
                             VStack{
                                 Image(systemName: "list.bullet")
@@ -306,7 +306,7 @@ struct ToolbarToggleStyle: ToggleStyle {
                                 }
                             }
                             .accessibilityAddTraits(.isButton)
-                            .accessibilityIdentifier("MethodToggle")
+//                            .accessibilityIdentifier("MethodToggle")
                             Spacer()
 
                         }

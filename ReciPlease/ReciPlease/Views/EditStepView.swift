@@ -30,21 +30,25 @@ struct EditStepView: View {
                 }
                 .ignoresSafeArea()
                 .opacity(0.01)
+                .accessibilityAddTraits(.isButton)
+                .accessibilityIdentifier("OutsideEditStep")
             VStack(spacing: 20) {
                 ZStack {
-                if currentStep.string.isEmpty {
-                    TextEditor(text:$stepPlaceholder)
-                        .font(.body)
-                        .foregroundColor(.gray)
-                        .cornerRadius(8)
-                        .disabled(true)
-                        .padding()
+                    if currentStep.string.isEmpty {
+                        TextEditor(text:$stepPlaceholder)
+                            .font(.body)
+                            .foregroundColor(.gray)
+                            .cornerRadius(8)
+                            .disabled(true)
+                            .padding()
+                            .accessibilityIdentifier("StepTextPlaceholder")
                     }
                     TextEditor(text: $currentStep.string)
                         .font(.body)
                         .opacity(currentStep.string.isEmpty ? 0.25 : 1)
                         .cornerRadius(8)
                         .padding()
+                        .accessibilityIdentifier("StepText")
                 }
                 HStack {
                     Button("Cancel") {
@@ -76,6 +80,7 @@ struct EditStepView: View {
                         }
                     }
                     .disabled(currentStep.string.isEmpty)
+                    .accessibilityLabel("SubmitStep")
                     .buttonStyle(GrowingButton())
                     .padding()
                 }
