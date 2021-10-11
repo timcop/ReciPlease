@@ -224,7 +224,9 @@ struct RecipeDetailView: View {
     }
     func loadImage() {
         guard let inputImage = inputImage else { return }
-        selectedRecipe.uiImage = inputImage
+        if (inputImage != UIImage(named: "defaultImage")) {
+            selectedRecipe.uiImage = inputImage
+        }
     }
 }
 
