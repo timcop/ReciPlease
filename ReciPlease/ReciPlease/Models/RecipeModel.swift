@@ -9,19 +9,6 @@ import Foundation
 import UIKit
 import SwiftUI
 
-//
-//enum Unit: String, CaseIterable, Identifiable, Codable {
-//    case each
-//    case g
-//    case kg
-//    case ml
-//    case l
-//    case cup
-//    case Tbsp
-//    case tsp
-//
-//    var id: String {self.rawValue}
-//}
 
 struct Ingredient: Identifiable, Codable {
     var id = UUID()
@@ -38,15 +25,12 @@ class Recipe: ObservableObject, Identifiable, Codable {
     @Published var name: String
     @Published var method: [Step]
     @Published var ingredients: [Ingredient]
-//    @Published var uiImage : SomeImage?
     @Published var uiImage: UIImage
     @Published var cookTime: String
     @Published var servings: String
     @Published var currentIngredient: Ingredient
     
-//    init(uiImage:UIImage) {
-//            self.uiImage = uiImage
-//        }
+
     enum CodingKeys: String, CodingKey {
         case id
         case name

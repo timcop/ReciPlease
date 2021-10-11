@@ -24,9 +24,17 @@ struct IngredientListView: View {
                 VStack {
                     HStack {
                         Group {
-                            Text(String(format: (floor(ingredient.quantity!) == ingredient.quantity!) ? "• %u" : "• %.2f" , ingredient.quantity!
-                                       ))
-                                .padding(.leading)
+//                            Text(ingredient.quantity!)
+                            if (floor(ingredient.quantity!) == ingredient.quantity!) {
+                                Text(String(format: "• %ld", Int(ingredient.quantity!)))
+                                    .padding(.leading)
+                            } else {
+                                Text(String(format: "• %.2f", ingredient.quantity!))
+                                    .padding(.leading)
+                            }
+//                            Text(String(format: (floor(ingredient.quantity!) == ingredient.quantity!) ? "• %ld" : "• %.2f" , (floor(ingredient.quantity!) == ingredient.quantity!) ? Int(exactly: ingredient.quantity!) : ingredient.quantity!)
+//                                       )
+//                                .padding(.leading)
  
                             Text(ingredient.unit)
 
