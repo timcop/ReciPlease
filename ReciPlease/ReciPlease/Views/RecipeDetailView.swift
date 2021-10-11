@@ -40,9 +40,9 @@ struct RecipeDetailView: View {
                         ZStack {
                             VStack() {
                                 PictureView(uiImage: selectedRecipe.uiImage)
-                                    .onTapGesture(){
-                                        self.showingImagePicker=true
-                                    }
+//                                    .onTapGesture(){
+//                                        self.showingImagePicker=true
+//                                    }
                             }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                                 ImagePicker(image: self.$inputImage)
                             }
@@ -53,6 +53,8 @@ struct RecipeDetailView: View {
                                 .onTapGesture(){
                                     self.showingImagePicker=true
                                 }
+                                .allowsHitTesting(!showingDeleteConfirmation)
+
                         }
                     }
                     
@@ -126,7 +128,10 @@ struct RecipeDetailView: View {
                                 withAnimation {
                                     editingIngredient.toggle()
                                 }
-                            }.buttonStyle(GrowingButton())
+                            }
+                            .buttonStyle(GrowingButton())
+                            .allowsHitTesting(!showingDeleteConfirmation)
+
                         } else {
                             // add step button
                             Button("Add Step") {
@@ -134,7 +139,9 @@ struct RecipeDetailView: View {
                                 withAnimation {
                                     editingStep.toggle()
                                 }
-                            }.buttonStyle(GrowingButton())
+                            }
+                            .buttonStyle(GrowingButton())
+                            .allowsHitTesting(!showingDeleteConfirmation)
                         }
                     }
 
@@ -167,12 +174,16 @@ struct RecipeDetailView: View {
                     // editIngredientView
                     EditIngredientView(editingIngredient:$editingIngredient,
                                        isNewIngredient: isNewIngredient)
+                        .allowsHitTesting(!showingDeleteConfirmation)
+
                 }
                 if editingStep {
                     //editStepView
                     EditStepView(editingStep:$editingStep,
                                  isNewStep: isNewStep,
                                  currentStep: $currentStep)
+                        .allowsHitTesting(!showingDeleteConfirmation)
+
                 }
                 if showingDeleteConfirmation {
                     Color.white
@@ -220,6 +231,8 @@ struct RecipeDetailView: View {
 
                 Toggle(isOn: $isIngredient, label: {})
                     .toggleStyle(ToolbarToggleStyle())
+                    .allowsHitTesting(!showingDeleteConfirmation)
+
             }.environmentObject(selectedRecipe)
     }
     func loadImage() {
