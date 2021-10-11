@@ -38,19 +38,6 @@ struct EditIngredientView: View {
                         .accessibilityIdentifier("IngredientUnitField")
                     TextField("Quantity", value:$currentRecipe.currentIngredient.quantity, format: .number)
                         .accessibilityLabel("IngredientQuantityField")
-
-                    VStack{
-                if(currentRecipe.currentIngredient.product != nil){
-                    Text(currentRecipe.currentIngredient.product!.name.capitalized)
-                        .font(.headline).bold().italic()
-                        .frame(alignment: .center)
-                    
-                    if (currentRecipe.currentIngredient.product!.priceDetails.isSpecial) {
-                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")").strikethrough()
-                        Text("$\(currentRecipe.currentIngredient.product!.priceDetails.salePrice, specifier: "%.2f")").foregroundColor(.red)
-                        } else {
-                            Text("$\(currentRecipe.currentIngredient.product!.priceDetails.originalPrice, specifier: "%.2f")")
-                        }
                 }
                 if(currentRecipe.currentIngredient.product != nil){
                     Group {
@@ -84,11 +71,6 @@ struct EditIngredientView: View {
                     .environmentObject(currentRecipe)
                     .padding()
                 }
-                NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
-                   Text("Search product")
-                        .accessibilityIdentifier("SearchProduct")
-                }.buttonStyle(GrowingButton())
-                .environmentObject(currentRecipe)
                 HStack {
                     Button("Cancel") {
                         currentRecipe.currentIngredient = Ingredient()
