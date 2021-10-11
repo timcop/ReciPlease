@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/** This is the view for displaying the ingredient information.
+ Displays the name and quantity of the ingredient in a list, as well as
+ the product it's linked to if it has been linked
+ */
 struct IngredientListView: View {
     @StateObject var currentRecipe: Recipe
     @Binding var isNewIngredient: Bool

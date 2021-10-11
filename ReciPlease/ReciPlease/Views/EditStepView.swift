@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/** This is the view for editing steps within the method,
+ Features a textEditor for inputing a step and buttons for cancel/submit.
+ */
 struct EditStepView: View {
     
     @EnvironmentObject var currentRecipe: Recipe

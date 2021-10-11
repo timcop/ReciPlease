@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/** Displays the edit ingredient view which has fields: name, unit and quantity.
+ Features a button to search for a product and link it to the ingredient.
+ */
 struct EditIngredientView: View {
     
     @EnvironmentObject var currentRecipe: Recipe
