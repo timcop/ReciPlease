@@ -144,6 +144,10 @@ struct RecipeDetailView: View {
                             .allowsHitTesting(!showingDeleteConfirmation)
                         }
                     }
+                    Rectangle()
+                        .fill(Color.white)
+                        .frame(width:screenWidth, height:100)
+                        .hidden()
 
                 }
                 .blur(radius: showingDeleteConfirmation ? 5 : 0)
