@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/** Displays a detailed view of the current recipe.
+ Features an edit button where the user is able to change the fields for their recipe.
+ Ingredients are displayed with IngredientListView, method is displayed with MethodListView.
+ Features a toggle style at the bottom for toggling between ingredients/method.
+ */
 struct RecipeDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var recipeModel: RecipeModel
@@ -23,11 +28,12 @@ struct RecipeDetailView: View {
     @State var newRecipeName = ""
     @State var showingDeleteConfirmation = false
     @State private var showingImagePicker = false
-    @State var inputImage: UIImage? = UIImage(named: "recipe_default")
+    @State var inputImage: UIImage? = UIImage(named: "LogoNoWords")
     
     var body: some View {
             ZStack {
                 ScrollView(.vertical, showsIndicators: true) {
+                    // Picture
                     if (!editingRecipe) {
                         PictureView(uiImage: selectedRecipe.uiImage)
                     } else {
@@ -50,6 +56,7 @@ struct RecipeDetailView: View {
                         }
                     }
                     
+                    // Recipe name, time and servings fields
                     VStack(alignment: .leading){
                         Group {
                             // title
@@ -92,7 +99,8 @@ struct RecipeDetailView: View {
                         }
                         .padding(.horizontal)
                         // ingredient/step toggle view
-
+                        
+                        
                         if isIngredient {
                             // ingredient list
                             IngredientListView(currentRecipe: selectedRecipe,
@@ -100,17 +108,19 @@ struct RecipeDetailView: View {
                                                editingIngredient: $editingIngredient,
                                                editingRecipe: $editingRecipe)
                         } else {
+                            // method list
                             MethodListView(currentRecipe: selectedRecipe,
                                            isNewStep: $isNewStep,
                                            currentStep: $currentStep,
                                            editingStep: $editingStep,
                                            editingRecipe: $editingRecipe)
-                            // steps list
                         }
                     }
+                    
                     if (editingRecipe) {
                         Spacer(minLength: 30)
                         if isIngredient {
+                            // add ingredient button
                             Button("Add ingredient") {
                                 isNewIngredient = true
                                 withAnimation {
@@ -118,6 +128,7 @@ struct RecipeDetailView: View {
                                 }
                             }.buttonStyle(GrowingButton())
                         } else {
+                            // add step button
                             Button("Add Step") {
                                 isNewStep = true
                                 withAnimation {
@@ -153,10 +164,12 @@ struct RecipeDetailView: View {
                     }
                 )
                 if editingIngredient {
+                    // editIngredientView
                     EditIngredientView(editingIngredient:$editingIngredient,
                                        isNewIngredient: isNewIngredient)
                 }
                 if editingStep {
+                    //editStepView
                     EditStepView(editingStep:$editingStep,
                                  isNewStep: isNewStep,
                                  currentStep: $currentStep)
@@ -215,7 +228,11 @@ struct RecipeDetailView: View {
     }
 }
 
-
+/** Has two buttons for ingredients and method.
+ When either is pressed a horizontal bar moves below the button showing it's active,
+ the parent view listens to $isIngredient and displays either the IngredientListView or MethodListView
+ depending on it's value.
+ */
 struct ToolbarToggleStyle: ToggleStyle {
     @Environment(\.colorScheme) var colorScheme
 
@@ -273,8 +290,6 @@ struct ToolbarToggleStyle: ToggleStyle {
                             .fill(Color.blue)
                             .frame(width: 110, height: 3)
                             .offset(x: configuration.isOn ? -(screenWidth)/5.2 : screenWidth/4.8, y:-25)
-
-
                     }
                 }
             }

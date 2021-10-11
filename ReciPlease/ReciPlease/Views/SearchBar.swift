@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/** Custom search bar used within ContentView() */
 struct SearchBar: View {
     
     @Binding var searchText: String

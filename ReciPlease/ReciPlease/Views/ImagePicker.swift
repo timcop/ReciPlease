@@ -17,7 +17,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let uiImage = info[.originalImage] as? UIImage {
-//                uiImage.imageOrientation = UIImage.Orientation.up
                 parent.image = uiImage.fixImageOrientation()
             }
 

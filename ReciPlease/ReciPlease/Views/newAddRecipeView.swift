@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+/** newAddRecipeView creates a View for which to add recipes.
+ Lets users: Enter an image by calling ImagePicker, enter an ingredient/step
+ by calling EditIngredientView and EditStepView respectively, displays the
+ current ingredients and steps by calling IngredientListView and MethodListView respectively.
+ 
+ Features a toggleView ToolbarToggleStyle() at the bottom of the screen to switch between
+ ingredient and method.
+ 
+ */
 struct newAddRecipeView: View {
     // Inherited
     @ObservedObject var currentRecipe: Recipe = Recipe()
@@ -21,12 +30,10 @@ struct newAddRecipeView: View {
     @State var isNewStep = true
     @State var editingRecipe = true
     @State private var showingImagePicker = false
-    @State var inputImage: UIImage? = UIImage(named: "recipe_default")
-    @State var image: Image? = Image("recipe_default")
+    @State var inputImage: UIImage? = UIImage(named: "LogoNoWords")
+    @State var image: Image? = Image("LogoNoWords")
     @FocusState private var isTextFieldFocused: Bool
 
-
-    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -50,21 +57,30 @@ struct newAddRecipeView: View {
                                 }
                                 Spacer()
                             }
-                            
-                        }.onTapGesture{
-                            self.showingImagePicker=true
+                            // Tappable shows ImagePicker
+                            Image(systemName: "pencil.circle.fill")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .opacity(0.7)
+                                .onTapGesture(){
+                                    self.showingImagePicker=true
+                                }
+//                        .onTapGesture{
+//                            self.showingImagePicker=true
                         }
                         
                         Group {
                             VStack {
-                                // title
+                                
+                                // title field
                                 TextField("Recipe Name", text: $currentRecipe.name)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                     .font(.system(size: 22, weight: .bold))
                                     .padding()
                                     .focused($isTextFieldFocused)
                                     .accessibilityLabel("RecipeNameField")
-
+                                
+                                // timer and servings fields
                                 HStack {
                                     Spacer()
                                     Image(systemName: "timer")
@@ -88,7 +104,6 @@ struct newAddRecipeView: View {
                         }
                         .padding(.horizontal)
                         .padding(.bottom)
-                        
                         
                         if isIngredient {
                             // ingredient list
@@ -129,6 +144,7 @@ struct newAddRecipeView: View {
                                            editingRecipe: $editingRecipe)
                         }
                         Spacer()
+                        // Some more wiggle room at bottom of scroll view
                         Rectangle()
                             .fill(Color.white)
                             .frame(width:screenWidth, height:100)
@@ -138,9 +154,11 @@ struct newAddRecipeView: View {
                         ImagePicker(image: self.$inputImage)
                     }
                 }
+                // navigation buttons
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(
                     leading:
+                        // Cancel button removes currentRecipe and navigates back to ContentView
                         Button(action: {
                             currentRecipe.ingredients = []
                             currentRecipe.name = ""
@@ -156,12 +174,14 @@ struct newAddRecipeView: View {
                         },
                     
                     trailing:
+                        // Submit button appends the currentRecipe to recipeModel.recipes
                         Button("Submit") {
                             currentRecipe.uiImage = inputImage!
                             recipeModel.recipes.append(currentRecipe)
                             self.presentation.wrappedValue.dismiss()
                         }
                         .accessibilityLabel("SubmitRecipe")
+                        // Must meet these conditions before submitting
                         .disabled(currentRecipe.ingredients.count < 1
                                   || currentRecipe.cookTime == ""
                                   || currentRecipe.servings == ""
@@ -171,9 +191,10 @@ struct newAddRecipeView: View {
                                  )
                     )
             }
-            .blur(radius: (addingIngredient || addingStep) ? 5 : 0)
+            .blur(radius: (addingIngredient || addingStep) ? 5 : 0) // blur background if addingIngredient/step
             .allowsHitTesting(!(addingIngredient || addingStep))
-
+            
+            // EditIngredientView()
             if addingIngredient {
                 EditIngredientView(editingIngredient: $addingIngredient,
                                    isNewIngredient: isNewIngredient)
@@ -181,11 +202,13 @@ struct newAddRecipeView: View {
 
             }
             
+            // EditStepView()
             if addingStep {
                 EditStepView(editingStep: $addingStep,
                              isNewStep: isNewStep,
                              currentStep: $currentStep)
             }
+            // Toggle ingredient/steps
             Toggle(isOn: $isIngredient, label: {})
                 .toggleStyle(ToolbarToggleStyle())
         }
