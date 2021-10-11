@@ -68,6 +68,7 @@ struct EditIngredientView: View {
                     NavigationLink(destination: SearchProductsView(currentRecipe: currentRecipe, searchText: $currentRecipe.currentIngredient.name)) {
                        Text("Search product")
                     }.buttonStyle(GrowingButton())
+                    .accessibilityIdentifier("SearchProduct")
                     .environmentObject(currentRecipe)
                     .padding()
                 }
