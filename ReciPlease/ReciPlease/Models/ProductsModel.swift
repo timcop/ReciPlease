@@ -85,15 +85,21 @@ class ProductsModel {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue("OnlineShopping.WebApp", forHTTPHeaderField: "x-requested-with")
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {throw FetchError.badResponse}
-        
-        let maybeProductData = try JSONDecoder().decode(ProductsResponse.self, from: data)
-        let filtered = maybeProductData.products.items
-            .compactMap{$0.base}
+        do {
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                throw FetchError.badResponse
+            }
             
-        return filtered
+            let maybeProductData = try JSONDecoder().decode(ProductsResponse.self, from: data)
+            let filtered = maybeProductData.products.items
+                .compactMap{$0.base}
+                
+            return filtered
+        } catch {
+            return []
+        }
+
     }
 }
 
